@@ -14,8 +14,8 @@ def cpmNormalize(mat):
 
 @cpmNormalize.register
 def cpmNormalize_np(mat: np.ndarray):
-  return (mat / mat.sum(axis=0)) * 10e6
+  return (mat / mat.sum(axis=0)) * 1e6
 
 @cpmNormalize.register
 def cpmNormalize_pd(mat: pd.DataFrame):
-  return (mat / mat.sum(axis=0)) * 10e6
+  return (mat / mat.sum(axis=0)) * 1e6
