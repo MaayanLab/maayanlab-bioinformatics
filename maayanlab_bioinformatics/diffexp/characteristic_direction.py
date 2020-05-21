@@ -144,7 +144,7 @@ def characteristicDirection(controls_mat: pd.DataFrame, cases_mat: pd.DataFrame,
       sort=False,
       calculate_sig=calculate_sig,
     ),
-    columns=['CD-coefficient', 'Index'] if calculate_sig else ['CD-coefficient', 'Index', 'Significance'],
+    columns=['CD-coefficient', 'Index', 'Significance'] if calculate_sig else ['CD-coefficient', 'Index'],
   )
   results.index = results['Index']
   results.index.name = controls_mat.index.name
