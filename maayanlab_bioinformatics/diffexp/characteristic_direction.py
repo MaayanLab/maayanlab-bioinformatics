@@ -152,7 +152,7 @@ def characteristicDirection(controls_mat: pd.DataFrame, cases_mat: pd.DataFrame,
     results = results.sort_values('CD-coefficient')
   return results.drop('Index', axis=1)
 
-def upDownFromDiffExpression(expr: pd.DataFrame, top_n=600):
+def upDownFromCharacteristicDirection(expr: pd.DataFrame, top_n=600):
   ''' Using the output of `characteristicDirection`, we can extract the top n genes
   with the highest absolute characteristic direction coefficients and split them into `up` and `down`.
   '''
