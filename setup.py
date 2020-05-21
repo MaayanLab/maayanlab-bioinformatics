@@ -10,7 +10,8 @@ setup(
   license='Apache-2.0',
   install_requires=list(map(str.strip, open('requirements.txt', 'r').readlines())),
   extras_require={
-    'h5py': ["h5py"]
+    'h5py': ["h5py"],
+    'limma_voom': ["rpy2"],
   },
   packages=find_packages(),
   include_package_data=True,
