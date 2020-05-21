@@ -127,7 +127,7 @@ def characteristicDirection(controls_mat: pd.DataFrame, cases_mat: pd.DataFrame,
   gene_1|     ..         |     ..         |...
   gene_2|     ..         |     ..         |...
   '''
-  assert controls_mat.index == cases_mat.index, 'Index between controls and cases must be the same'
+  assert (controls_mat.index == cases_mat.index).all(), 'Index between controls and cases must be the same'
   n_genes = controls_mat.shape[0]
   # Compute characteristic direction
   results = pd.DataFrame(
