@@ -137,7 +137,7 @@ def characteristicDirection(controls_mat: pd.DataFrame, cases_mat: pd.DataFrame,
         [1]*controls_mat.shape[1] + [2]*cases_mat.shape[1]
       ),
       # genes
-      np.array(list(range(n_genes))),
+      np.array(list(controls_mat.index)),
       gamma=gamma,
       nnull=nnull,
       norm_vector=norm_vector,
