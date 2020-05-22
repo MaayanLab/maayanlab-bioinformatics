@@ -22,7 +22,9 @@ def test_quantile_normalization():
 def test_quantile_normalization_h5():
   import os
   import h5py
-  f = h5py.File(os.path.join(os.path.dirname(__file__), 'test_quantile.h5'), 'w')
+  import tempfile
+  fname = tempfile.mktemp('test_quantile.h5')
+  f = h5py.File(fname, 'w')
   given = f.create_dataset('given', data=np.array([
       [5, 4, 3],
       [2, 1, 4],
@@ -38,3 +40,4 @@ def test_quantile_normalization_h5():
     [4.67, 3.00, 5.67],
   ])
   assert np.allclose(norm[:], expectation, atol=1e-2)
+  os.unlink(fname)
