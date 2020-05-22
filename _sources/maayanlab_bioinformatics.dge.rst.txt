@@ -1,0 +1,30 @@
+maayanlab\_bioinformatics.dge package
+=====================================
+
+Submodules
+----------
+
+maayanlab\_bioinformatics.dge.characteristic\_direction module
+--------------------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.dge.characteristic_direction
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+maayanlab\_bioinformatics.dge.limma\_voom module
+------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.dge.limma_voom
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: maayanlab_bioinformatics.dge
+   :members:
+   :undoc-members:
+   :show-inheritance:

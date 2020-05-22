@@ -1,0 +1,30 @@
+maayanlab\_bioinformatics.utils package
+=======================================
+
+Submodules
+----------
+
+maayanlab\_bioinformatics.utils.fetch\_save\_read module
+--------------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.utils.fetch_save_read
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+maayanlab\_bioinformatics.utils.merge module
+--------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.utils.merge
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: maayanlab_bioinformatics.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

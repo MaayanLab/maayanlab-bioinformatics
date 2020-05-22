@@ -1,0 +1,30 @@
+maayanlab\_bioinformatics.parse package
+=======================================
+
+Submodules
+----------
+
+maayanlab\_bioinformatics.parse.gmt module
+------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.parse.gmt
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+maayanlab\_bioinformatics.parse.suerat module
+---------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.parse.suerat
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: maayanlab_bioinformatics.parse
+   :members:
+   :undoc-members:
+   :show-inheritance:

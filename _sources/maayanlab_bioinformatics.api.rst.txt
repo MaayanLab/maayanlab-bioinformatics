@@ -1,0 +1,22 @@
+maayanlab\_bioinformatics.api package
+=====================================
+
+Submodules
+----------
+
+maayanlab\_bioinformatics.api.enrichr module
+--------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.api.enrichr
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: maayanlab_bioinformatics.api
+   :members:
+   :undoc-members:
+   :show-inheritance:

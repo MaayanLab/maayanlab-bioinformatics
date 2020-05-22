@@ -1,0 +1,22 @@
+maayanlab\_bioinformatics.clustering package
+============================================
+
+Submodules
+----------
+
+maayanlab\_bioinformatics.clustering.silhouette\_analysis module
+----------------------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.clustering.silhouette_analysis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: maayanlab_bioinformatics.clustering
+   :members:
+   :undoc-members:
+   :show-inheritance:
