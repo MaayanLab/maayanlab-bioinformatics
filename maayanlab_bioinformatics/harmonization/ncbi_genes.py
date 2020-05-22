@@ -27,8 +27,7 @@ def fetch_ncbi_genes(organism='Mammalia/Homo_sapiens'):
 def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens'):
   ''' Return a lookup dictionary with synonyms as the keys, and official symbols as the values
   '''
-  if ncbi_genes is None:
-    ncbi_genes = ncbi_genes(organism=organism)
+  ncbi_genes = fetch_ncbi_genes(organism=organism)
   ncbi_lookup = {
     sym: row['Symbol']
     for _, row in ncbi_genes.iterrows()
