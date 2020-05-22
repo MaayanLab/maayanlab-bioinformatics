@@ -2,7 +2,7 @@ name: Deploy docs to gh-pages
 on:
   push:
     branches:
-      - github-action-patch
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
