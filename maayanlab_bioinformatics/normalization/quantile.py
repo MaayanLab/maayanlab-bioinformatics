@@ -5,16 +5,16 @@ from functools import singledispatch
 
 
 @singledispatch
-def quantileNormalize(mat):
+def quantile_normalize(mat):
   ''' Perform quantile normalization on the values of a matrix
   In the case of a pd.DataFrame, preserve the index on the output frame.
   See: https://en.wikipedia.org/wiki/Quantile_normalization
   '''
   logging.warn('Unrecognized type: ' + type(mat).__name__)
-  return quantileNormalize_np(mat)
+  return quantile_normalize_np(mat)
 
-@quantileNormalize.register
-def quantileNormalize_np(mat: np.ndarray):
+@quantile_normalize.register
+def quantile_normalize_np(mat: np.ndarray):
   # sort vector in np (reuse in np)
   sorted_vec = np.sort(mat, axis=0)
   # rank vector in np (no dict necessary)
@@ -27,15 +27,15 @@ def quantileNormalize_np(mat: np.ndarray):
     ] for c in range(mat.shape[1])
   ]).T
 
-@quantileNormalize.register
-def quantileNormalize_pd(mat: pd.DataFrame):
+@quantile_normalize.register
+def quantile_normalize_pd(mat: pd.DataFrame):
   return pd.DataFrame(
-    quantileNormalize_np(mat.values),
+    quantile_normalize_np(mat.values),
     index=mat.index,
     columns=mat.columns,
   )
 
-def quantileNormalize_h5(in_mat, out_mat, tmp=None):
+def quantile_normalize_h5(in_mat, out_mat, tmp=None):
   import os, tempfile, h5py
   '''
   Maximum memory required (3 * in_mat.shape[1] * sizeof(dtype))

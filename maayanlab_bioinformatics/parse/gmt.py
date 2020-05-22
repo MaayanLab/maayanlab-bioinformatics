@@ -17,7 +17,7 @@ def _parse_gene(gene):
   else:
     return { gene.strip(): 1 }
 
-def read_gmt(fh, parse_gene=_parse_gene):
+def gmt_read(fh, parse_gene=_parse_gene):
   ''' Read .gmt files into a dictionary of the form:
   {
     'term_1\tterm_2': {
@@ -45,7 +45,7 @@ def read_gmt(fh, parse_gene=_parse_gene):
       gmt[term].update(parsed_gene)
   return gmt
 
-def pd_read_gmt(fh, parse_gene=_parse_gene):
+def gmt_read_pd(fh, parse_gene=_parse_gene):
   ''' Read .gmt files directly into a data frame.
   '''
-  return pd.DataFrame(read_gmt(fh, parse_gene=parse_gene))
+  return pd.DataFrame(gmt_read(fh, parse_gene=parse_gene))

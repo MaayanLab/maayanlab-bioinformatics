@@ -62,7 +62,7 @@ def _lazy_load():
   R = r
   return R
 
-def limmaVoomDifferentialExpression(controls_mat, cases_mat, filter_genes=False, contrast=False):
+def limma_voom_differential_expression(controls_mat, cases_mat, filter_genes=False, contrast=False):
   r = _lazy_load()
   assert (controls_mat.index == cases_mat.index).all(), 'Index between controls and cases must be the same'
   # genes on rows, samples on cols
@@ -73,7 +73,7 @@ def limmaVoomDifferentialExpression(controls_mat, cases_mat, filter_genes=False,
   # return resulting frame
   return results.drop('gene_symbol', axis=1)
 
-def upDownFromLimmaVoom(expr, top_n=600):
+def up_down_from_limma_voom(expr, top_n=600):
   most_significant_expr = expr.sort_values('P.Value').iloc[:top_n]
   return type('UpDownGeneset', tuple(), dict(
     up=list(most_significant_expr[most_significant_expr['t'] > 0].dropna().index),

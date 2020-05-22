@@ -3,7 +3,7 @@ import pandas as pd
 import scipy.sparse as sp_sparse
 from maayanlab_bioinformatics.utils import merge
 
-def load_suerat_files(base_dir):
+def suerat_load(base_dir):
   ''' Files prepared for suerat are quite common, this function will load them
   given the directory that contains `barcodes.tsv.gz`, `features.tsv.gz`, and `matrix.tsv.gz`.
   '''
@@ -41,7 +41,7 @@ def load_suerat_files(base_dir):
   df_expression.columns = df_barcodes.index
   return df_features, df_barcodes, df_expression
 
-def load_multiple_suerat_files(base_dirs):
+def suerat_load_multiple(base_dirs):
   ''' Sets of suerat directories that are meant to be analyzed together are quite common,
   providing all those directories to this function (much like load_suerat_files) will load
   each individually and return a merged version that captures the filename in the barcodes.
@@ -50,8 +50,8 @@ def load_multiple_suerat_files(base_dirs):
   all_df_barcodes = []
   all_df_expression = []
   #
-  for ind, file in enumerate(files):
-    df_features, df_barcodes, df_expression = load_suerat_files(os.path.join(base_path, file))
+  for ind, base_dir in enumerate(base_dirs):
+    df_features, df_barcodes, df_expression = suerat_load(base_dir)
     df_barcodes['barcode'] = df_barcodes.index
     df_barcodes['file'] = f'File {ind}'
     df_barcodes.index = df_barcodes.index.map(lambda s, ind=ind: f'{ind}:{s}')

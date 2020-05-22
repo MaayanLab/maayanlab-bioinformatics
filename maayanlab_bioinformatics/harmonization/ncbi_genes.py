@@ -3,7 +3,7 @@ from functools import lru_cache
 from maayanlab_bioinformatics.utils import fetch_save_read, merge
 
 @lru_cache
-def fetch_ncbi_genes(organism='Mammalia/Homo_sapiens'):
+def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens'):
   ''' Fetch the current NCBI Human Gene Info database.
   See ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/ for the directory/file of the organism of interest.
   '''
@@ -26,7 +26,7 @@ def fetch_ncbi_genes(organism='Mammalia/Homo_sapiens'):
 def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens'):
   ''' Return a lookup dictionary with synonyms as the keys, and official symbols as the values
   '''
-  ncbi_genes = fetch_ncbi_genes(organism=organism)
+  ncbi_genes = ncbi_genes_fetch(organism=organism)
   ncbi_lookup = {
     sym: row['Symbol']
     for _, row in ncbi_genes.iterrows()

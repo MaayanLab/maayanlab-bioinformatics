@@ -113,7 +113,7 @@ def _chdir(data, sampleclass, genes, gamma=1., sort=True, calculate_sig=False, n
     else:
       return res
 
-def characteristicDirection(controls_mat: pd.DataFrame, cases_mat: pd.DataFrame, gamma=1., nnull=10, norm_vector=True, sort=True, calculate_sig=False):
+def characteristic_direction(controls_mat: pd.DataFrame, cases_mat: pd.DataFrame, gamma=1., nnull=10, norm_vector=True, sort=True, calculate_sig=False):
   ''' Given two separate dataframes (controls, cases) with a shared index (genes), we compute the characteristic direction coefficients for all genes.
   e.g.
 
@@ -152,8 +152,8 @@ def characteristicDirection(controls_mat: pd.DataFrame, cases_mat: pd.DataFrame,
     results = results.sort_values('CD-coefficient')
   return results.drop('Index', axis=1)
 
-def upDownFromCharacteristicDirection(expr: pd.DataFrame, top_n=600):
-  ''' Using the output of `characteristicDirection`, we can extract the top n genes
+def up_down_from_characteristic_direction(expr: pd.DataFrame, top_n=600):
+  ''' Using the output of `characteristic_direction`, we can extract the top n genes
   with the highest absolute characteristic direction coefficients and split them into `up` and `down`.
   '''
   highest_abs_expr = expr.loc[expr.abs().sort_values('CD-coefficient', ascending=False)[:top_n].index]

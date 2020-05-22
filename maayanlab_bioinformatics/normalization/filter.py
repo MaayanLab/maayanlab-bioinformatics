@@ -2,9 +2,10 @@ import logging
 import numpy as np
 import pandas as pd
 from functools import singledispatch
-from maayanlab_bioinformatics.normalization.cpm import cpmNormalize
+from maayanlab_bioinformatics.normalization.cpm import cpm_normalize
 
-def filterByVar(mat: pd.DataFrame, top_n=2500, axis=1):
+
+def filter_by_var(mat: pd.DataFrame, top_n=2500, axis=1):
   ''' Select rows with the most variable expression accross all samples.
   Takes a dataframe and returns a filtered dataframe in the same orientation.
   e.g.
@@ -20,7 +21,7 @@ def filterByVar(mat: pd.DataFrame, top_n=2500, axis=1):
   return mat.loc[mat.var(axis=1).sort_values(ascending=False).index[:top_n], :]
 
 
-def filterByExpr(mat, design: pd.Series=None, group: pd.DataFrame=None, min_count=10, min_total_count=15, large_n=10, min_prop=0.7, tol=1e-14):
+def filter_by_expr(mat, design: pd.Series=None, group: pd.DataFrame=None, min_count=10, min_total_count=15, large_n=10, min_prop=0.7, tol=1e-14):
   ''' Ported from R https://rdrr.io/bioc/edgeR/src/R/filterByExpr.R
   '''
   lib_size = mat.sum(axis=0)
@@ -39,7 +40,7 @@ def filterByExpr(mat, design: pd.Series=None, group: pd.DataFrame=None, min_coun
   # CPM cutoff
   median_lib_size = lib_size.median()
   cpm_cutoff = (min_count / median_lib_size) * 1e6
-  cpm = cpmNormalize(mat)
+  cpm = cpm_normalize(mat)
   keep_cpm = (cpm >= cpm_cutoff).sum(axis=1) >= (min_sample_size - tol)
   # Total count cutoff
   keep_total_count = mat.sum(axis=1) >= min_total_count - tol
