@@ -35,14 +35,55 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="maayanlab-bioinformatics-parse-gmt-module">
-<h2>maayanlab_bioinformatics.parse.gmt module<a class="headerlink" href="#maayanlab-bioinformatics-parse-gmt-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-maayanlab_bioinformatics.parse.gmt">
+<span id="maayanlab-bioinformatics-parse-gmt-module"></span><h2>maayanlab_bioinformatics.parse.gmt module<a class="headerlink" href="#module-maayanlab_bioinformatics.parse.gmt" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.parse.gmt.gmt_read">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read .gmt files into a dictionary of the form:
+{</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘term_1     term_2’: {</dt><dd><p>gene_1: weight or 1,
+…</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>}</p>
+<dl class="simple">
+<dt>If your genes are encoded in a weird way you can also provide your own <cite>parse_gene</cite> function,</dt><dd><p>the current one supports just gene names or gene names with weights separated by non-word/numeric characters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.parse.gmt.gmt_read_pd">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read_pd</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_pd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read .gmt files directly into a data frame.</p>
+</dd></dl>
+
 </div>
-<div class="section" id="maayanlab-bioinformatics-parse-suerat-module">
-<h2>maayanlab_bioinformatics.parse.suerat module<a class="headerlink" href="#maayanlab-bioinformatics-parse-suerat-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-maayanlab_bioinformatics.parse.suerat">
+<span id="maayanlab-bioinformatics-parse-suerat-module"></span><h2>maayanlab_bioinformatics.parse.suerat module<a class="headerlink" href="#module-maayanlab_bioinformatics.parse.suerat" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.parse.suerat.suerat_load">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.suerat.</code><code class="sig-name descname">suerat_load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_dir</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.suerat.suerat_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Files prepared for suerat are quite common, this function will load them
+given the directory that contains <cite>barcodes.tsv.gz</cite>, <cite>features.tsv.gz</cite>, and <cite>matrix.tsv.gz</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.parse.suerat.suerat_load_multiple">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.suerat.</code><code class="sig-name descname">suerat_load_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_dirs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.suerat.suerat_load_multiple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets of suerat directories that are meant to be analyzed together are quite common,
+providing all those directories to this function (much like load_suerat_files) will load
+each individually and return a merged version that captures the filename in the barcodes.</p>
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-maayanlab_bioinformatics.parse">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maayanlab_bioinformatics.parse" title="Permalink to this headline">¶</a></h2>
+<p>This module contains functions relating to file parsing into easier to ready-to-go formats.</p>
 </div>
 </div>
 

@@ -35,23 +35,155 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="maayanlab-bioinformatics-normalization-cpm-module">
-<h2>maayanlab_bioinformatics.normalization.cpm module<a class="headerlink" href="#maayanlab-bioinformatics-normalization-cpm-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-maayanlab_bioinformatics.normalization.cpm">
+<span id="maayanlab-bioinformatics-normalization-cpm-module"></span><h2>maayanlab_bioinformatics.normalization.cpm module<a class="headerlink" href="#module-maayanlab_bioinformatics.normalization.cpm" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.cpm.cpm_normalize">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.cpm.</code><code class="sig-name descname">cpm_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.cpm.cpm_normalize" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.cpm.</code><code class="sig-name descname">cpm_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.cpm.</code><code class="sig-name descname">cpm_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Compute counts-per-million value of counts
+Simple division of each column by the total sum of its counts and multiplying it by 10^6</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.cpm.cpm_normalize_np">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.cpm.</code><code class="sig-name descname">cpm_normalize_np</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.cpm.cpm_normalize_np" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.cpm.cpm_normalize_pd">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.cpm.</code><code class="sig-name descname">cpm_normalize_pd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.cpm.cpm_normalize_pd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
-<div class="section" id="maayanlab-bioinformatics-normalization-filter-module">
-<h2>maayanlab_bioinformatics.normalization.filter module<a class="headerlink" href="#maayanlab-bioinformatics-normalization-filter-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-maayanlab_bioinformatics.normalization.filter">
+<span id="maayanlab-bioinformatics-normalization-filter-module"></span><h2>maayanlab_bioinformatics.normalization.filter module<a class="headerlink" href="#module-maayanlab_bioinformatics.normalization.filter" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.filter.filter_by_expr">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.filter.</code><code class="sig-name descname">filter_by_expr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span></em>, <em class="sig-param"><span class="n">design</span><span class="p">:</span> <span class="n">pandas.core.series.Series</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">group</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_count</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">min_total_count</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="n">large_n</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">min_prop</span><span class="o">=</span><span class="default_value">0.7</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">1e-14</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.filter.filter_by_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ported from R <a class="reference external" href="https://rdrr.io/bioc/edgeR/src/R/filterByExpr.R">https://rdrr.io/bioc/edgeR/src/R/filterByExpr.R</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.filter.filter_by_var">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.filter.</code><code class="sig-name descname">filter_by_var</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">top_n</span><span class="o">=</span><span class="default_value">2500</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.filter.filter_by_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select rows with the most variable expression accross all samples.
+Takes a dataframe and returns a filtered dataframe in the same orientation.
+e.g.</p>
+<blockquote>
+<div><p><a href="#id1"><span class="problematic" id="id2">|condition_1|condition_2|</span></a></p>
+</div></blockquote>
+<p>gene_1|    1      |     1     |
+gene_2|    0      |    10     |</p>
+<p>gene_1 here is <em>not</em> variable at all,
+gene_2 here is <em>very</em> variable.</p>
+<p>gene_1 will be dropped, while gene_2 is kept.</p>
+</dd></dl>
+
 </div>
-<div class="section" id="maayanlab-bioinformatics-normalization-log-module">
-<h2>maayanlab_bioinformatics.normalization.log module<a class="headerlink" href="#maayanlab-bioinformatics-normalization-log-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-maayanlab_bioinformatics.normalization.log">
+<span id="maayanlab-bioinformatics-normalization-log-module"></span><h2>maayanlab_bioinformatics.normalization.log module<a class="headerlink" href="#module-maayanlab_bioinformatics.normalization.log" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.log.log2_normalize">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log2_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.log.log2_normalize" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log2_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log2_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Compute log normalization of matrix
+Simple <cite>log2(x + offset)</cite>, offset usually set to 1. because log(0) is undefined.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.log.log2_normalize_np">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log2_normalize_np</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.log.log2_normalize_np" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.log.log2_normalize_pd">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log2_normalize_pd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.log.log2_normalize_pd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
-<div class="section" id="maayanlab-bioinformatics-normalization-quantile-module">
-<h2>maayanlab_bioinformatics.normalization.quantile module<a class="headerlink" href="#maayanlab-bioinformatics-normalization-quantile-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-maayanlab_bioinformatics.normalization.quantile">
+<span id="maayanlab-bioinformatics-normalization-quantile-module"></span><h2>maayanlab_bioinformatics.normalization.quantile module<a class="headerlink" href="#module-maayanlab_bioinformatics.normalization.quantile" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.quantile.quantile_normalize">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.quantile.</code><code class="sig-name descname">quantile_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.quantile.quantile_normalize" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.quantile.</code><code class="sig-name descname">quantile_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.quantile.</code><code class="sig-name descname">quantile_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Perform quantile normalization on the values of a matrix
+In the case of a pd.DataFrame, preserve the index on the output frame.
+See: <a class="reference external" href="https://en.wikipedia.org/wiki/Quantile_normalization">https://en.wikipedia.org/wiki/Quantile_normalization</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.quantile.quantile_normalize_h5">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.quantile.</code><code class="sig-name descname">quantile_normalize_h5</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">in_mat</span></em>, <em class="sig-param"><span class="n">out_mat</span></em>, <em class="sig-param"><span class="n">tmp</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.quantile.quantile_normalize_h5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.quantile.quantile_normalize_np">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.quantile.</code><code class="sig-name descname">quantile_normalize_np</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.quantile.quantile_normalize_np" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.quantile.quantile_normalize_pd">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.quantile.</code><code class="sig-name descname">quantile_normalize_pd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.quantile.quantile_normalize_pd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
-<div class="section" id="maayanlab-bioinformatics-normalization-zscore-module">
-<h2>maayanlab_bioinformatics.normalization.zscore module<a class="headerlink" href="#maayanlab-bioinformatics-normalization-zscore-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-maayanlab_bioinformatics.normalization.zscore">
+<span id="maayanlab-bioinformatics-normalization-zscore-module"></span><h2>maayanlab_bioinformatics.normalization.zscore module<a class="headerlink" href="#module-maayanlab_bioinformatics.normalization.zscore" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.zscore.zscore_normalize">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.zscore.</code><code class="sig-name descname">zscore_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span></em>, <em class="sig-param"><span class="n">ddof</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.zscore.zscore_normalize" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.zscore.</code><code class="sig-name descname">zscore_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">ddof</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.zscore.</code><code class="sig-name descname">zscore_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">ddof</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Compute the z score of each value in the sample, relative to the sample mean and standard deviation.
+In the case of a pd.DataFrame, preserve the index on the output frame.
+e.g.</p>
+<blockquote>
+<div><p><a href="#id3"><span class="problematic" id="id4">|condition_1|condition_2|</span></a>…|condition_n|</p>
+</div></blockquote>
+<p>gene_1|    1      |     1     <a href="#id5"><span class="problematic" id="id6">|...|</span></a>    100    |
+gene_2|    1      |    100    <a href="#id7"><span class="problematic" id="id8">|...|</span></a>     1     |</p>
+<p>You’d get, approximately:</p>
+<blockquote>
+<div><p><a href="#id9"><span class="problematic" id="id10">|condition_1|condition_2|</span></a>…|condition_n|</p>
+</div></blockquote>
+<p>gene_1| -1 (&lt;mu)  |  -1 (&lt;mu) <a href="#id11"><span class="problematic" id="id12">|...|</span></a>  3 (&gt;&gt;mu) |
+gene_2| -1 (&lt;mu)  |  3 (&gt;&gt;mu) <a href="#id13"><span class="problematic" id="id14">|...|</span></a> -1 (&lt;mu)  |</p>
+<dl class="simple">
+<dt>That-is, samples disproportionately represented</dt><dd><p>in a specific condition become &gt;&gt; 0 and those
+disproportionately under-represented become &lt;&lt; 0.</p>
+</dd>
+<dt>If you were to plot any given sample’s distribution,</dt><dd><p>it should now be normal.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.zscore.zscore_normalize_np">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.zscore.</code><code class="sig-name descname">zscore_normalize_np</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">ddof</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.zscore.zscore_normalize_np" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.zscore.zscore_normalize_pd">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.zscore.</code><code class="sig-name descname">zscore_normalize_pd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">ddof</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.normalization.zscore.zscore_normalize_pd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-maayanlab_bioinformatics.normalization">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maayanlab_bioinformatics.normalization" title="Permalink to this headline">¶</a></h2>
+<p>This module contains functions relating to data normalization.</p>
 </div>
 </div>
 
