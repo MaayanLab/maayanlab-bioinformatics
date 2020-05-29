@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <title>maayanlab_bioinformatics.parse package &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -13,21 +13,24 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
   <div class="section" id="maayanlab-bioinformatics-parse-package">
@@ -39,31 +42,27 @@
 <span id="maayanlab-bioinformatics-parse-gmt-module"></span><h2>maayanlab_bioinformatics.parse.gmt module<a class="headerlink" href="#module-maayanlab_bioinformatics.parse.gmt" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.parse.gmt.gmt_read_dict">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read_dict</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read_dict</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#gmt_read_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read .gmt files into a dictionary of the form:
-{</p>
-<blockquote>
-<div><dl class="simple">
-<dt>‘term_1     term_2’: {</dt><dd><p>gene_1: weight or 1,
-…</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>}</p>
-<dl class="simple">
-<dt>If your genes are encoded in a weird way you can also provide your own <cite>parse_gene</cite> function,</dt><dd><p>the current one supports just gene names or gene names with weights separated by non-word/numeric characters.</p>
-</dd>
-</dl>
+{
+‘term_1     term_2’: {
+gene_1: weight or 1,
+…
+},
+…
+}</p>
+<p>If your genes are encoded in a weird way you can also provide your own <code class="docutils literal notranslate"><span class="pre">parse_gene</span></code> function,
+the current one supports just gene names or gene names with weights separated by non-word/numeric characters.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.parse.gmt.gmt_read_iter">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read_iter</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_iter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read_iter</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#gmt_read_iter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_iter" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.parse.gmt.gmt_read_pd">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read_pd</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_pd" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read_pd</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#gmt_read_pd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_pd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read .gmt files directly into a data frame.</p>
 </dd></dl>
 
@@ -72,14 +71,14 @@
 <span id="maayanlab-bioinformatics-parse-suerat-module"></span><h2>maayanlab_bioinformatics.parse.suerat module<a class="headerlink" href="#module-maayanlab_bioinformatics.parse.suerat" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.parse.suerat.suerat_load">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.suerat.</code><code class="sig-name descname">suerat_load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_dir</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.suerat.suerat_load" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.suerat.</code><code class="sig-name descname">suerat_load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/suerat.html#suerat_load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.suerat.suerat_load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Files prepared for suerat are quite common, this function will load them
-given the directory that contains <cite>barcodes.tsv.gz</cite>, <cite>features.tsv.gz</cite>, and <cite>matrix.tsv.gz</cite>.</p>
+given the directory that contains <code class="docutils literal notranslate"><span class="pre">barcodes.tsv.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">features.tsv.gz</span></code>, and <code class="docutils literal notranslate"><span class="pre">matrix.tsv.gz</span></code>.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.parse.suerat.suerat_load_multiple">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.suerat.</code><code class="sig-name descname">suerat_load_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_dirs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.suerat.suerat_load_multiple" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.suerat.</code><code class="sig-name descname">suerat_load_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_dirs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/suerat.html#suerat_load_multiple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.suerat.suerat_load_multiple" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets of suerat directories that are meant to be analyzed together are quite common,
 providing all those directories to this function (much like load_suerat_files) will load
 each individually and return a merged version that captures the filename in the barcodes.</p>
@@ -94,29 +93,28 @@ each individually and return a merged version that captures the filename in the 
 
 
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Ma'ayanlab Bioinformatics</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  </ul></li>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">maayanlab_bioinformatics.parse package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.parse.gmt">maayanlab_bioinformatics.parse.gmt module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.parse.suerat">maayanlab_bioinformatics.parse.suerat module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.parse">Module contents</a></li>
 </ul>
-</div>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/maayanlab_bioinformatics.parse.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -127,32 +125,25 @@ each individually and return a merged version that captures the filename in the 
     </div>
 </div>
 <script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2020, Ma'ayanlab.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/maayanlab_bioinformatics.parse.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Ma&#39;ayanlab.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+    </div>
   </body>
 </html>

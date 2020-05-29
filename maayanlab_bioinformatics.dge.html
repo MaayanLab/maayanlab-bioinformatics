@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <title>maayanlab_bioinformatics.dge package &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -13,21 +13,24 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
   <div class="section" id="maayanlab-bioinformatics-dge-package">
@@ -39,28 +42,24 @@
 <span id="maayanlab-bioinformatics-dge-characteristic-direction-module"></span><h2>maayanlab_bioinformatics.dge.characteristic_direction module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.characteristic_direction" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.dge.characteristic_direction.characteristic_direction">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.dge.characteristic_direction.</code><code class="sig-name descname">characteristic_direction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">controls_mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">cases_mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">gamma</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">nnull</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">norm_vector</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sort</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">calculate_sig</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.dge.characteristic_direction.characteristic_direction" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.dge.characteristic_direction.</code><code class="sig-name descname">characteristic_direction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">controls_mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">cases_mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">gamma</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">nnull</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">norm_vector</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sort</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">calculate_sig</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/characteristic_direction.html#characteristic_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.characteristic_direction.characteristic_direction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given two separate dataframes (controls, cases) with a shared index (genes), we compute the characteristic direction coefficients for all genes.
 e.g.</p>
-<dl class="simple">
-<dt>control_mat:</dt><dd><p><a href="#id5"><span class="problematic" id="id6">|control_replicate_1|control_replicate_2|</span></a>…</p>
-</dd>
-</dl>
-<p>gene_1|        ..         |        ..         <a href="#id7"><span class="problematic" id="id8">|...
+<p>control_mat:
+<a href="#id5"><span class="problematic" id="id6">|control_replicate_1|control_replicate_2|</span></a>…
+gene_1|        ..         |        ..         <a href="#id7"><span class="problematic" id="id8">|...
 gene_2|</span></a>        ..         |        ..         <a href="#id1"><span class="problematic" id="id2">|</span></a>…</p>
-<dl class="simple">
-<dt>cases_mat:</dt><dd><p><a href="#id9"><span class="problematic" id="id10">|case_replicate_1|case_replicate_2|</span></a>…</p>
-</dd>
-</dl>
-<p>gene_1|     ..         |     ..         <a href="#id11"><span class="problematic" id="id12">|...
+<p>cases_mat:
+<a href="#id9"><span class="problematic" id="id10">|case_replicate_1|case_replicate_2|</span></a>…
+gene_1|     ..         |     ..         <a href="#id11"><span class="problematic" id="id12">|...
 gene_2|</span></a>     ..         |     ..         <a href="#id3"><span class="problematic" id="id4">|</span></a>…</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.dge.characteristic_direction.up_down_from_characteristic_direction">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.dge.characteristic_direction.</code><code class="sig-name descname">up_down_from_characteristic_direction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">top_n</span><span class="o">=</span><span class="default_value">600</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.dge.characteristic_direction.up_down_from_characteristic_direction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Using the output of <cite>characteristic_direction</cite>, we can extract the top n genes
-with the highest absolute characteristic direction coefficients and split them into <cite>up</cite> and <cite>down</cite>.</p>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.dge.characteristic_direction.</code><code class="sig-name descname">up_down_from_characteristic_direction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">top_n</span><span class="o">=</span><span class="default_value">600</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/characteristic_direction.html#up_down_from_characteristic_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.characteristic_direction.up_down_from_characteristic_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Using the output of <code class="docutils literal notranslate"><span class="pre">characteristic_direction</span></code>, we can extract the top n genes
+with the highest absolute characteristic direction coefficients and split them into <code class="docutils literal notranslate"><span class="pre">up</span></code> and <code class="docutils literal notranslate"><span class="pre">down</span></code>.</p>
 </dd></dl>
 
 </div>
@@ -68,12 +67,12 @@ with the highest absolute characteristic direction coefficients and split them i
 <span id="maayanlab-bioinformatics-dge-limma-voom-module"></span><h2>maayanlab_bioinformatics.dge.limma_voom module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.limma_voom" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.dge.limma_voom.limma_voom_differential_expression">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.dge.limma_voom.</code><code class="sig-name descname">limma_voom_differential_expression</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">controls_mat</span></em>, <em class="sig-param"><span class="n">cases_mat</span></em>, <em class="sig-param"><span class="n">filter_genes</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">contrast</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.dge.limma_voom.limma_voom_differential_expression" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.dge.limma_voom.</code><code class="sig-name descname">limma_voom_differential_expression</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">controls_mat</span></em>, <em class="sig-param"><span class="n">cases_mat</span></em>, <em class="sig-param"><span class="n">filter_genes</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">contrast</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/limma_voom.html#limma_voom_differential_expression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.limma_voom.limma_voom_differential_expression" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.dge.limma_voom.up_down_from_limma_voom">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.dge.limma_voom.</code><code class="sig-name descname">up_down_from_limma_voom</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">top_n</span><span class="o">=</span><span class="default_value">600</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.dge.limma_voom.up_down_from_limma_voom" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.dge.limma_voom.</code><code class="sig-name descname">up_down_from_limma_voom</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">top_n</span><span class="o">=</span><span class="default_value">600</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/limma_voom.html#up_down_from_limma_voom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.limma_voom.up_down_from_limma_voom" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -85,29 +84,28 @@ with the highest absolute characteristic direction coefficients and split them i
 
 
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Ma'ayanlab Bioinformatics</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  </ul></li>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">maayanlab_bioinformatics.dge package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.characteristic_direction">maayanlab_bioinformatics.dge.characteristic_direction module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.limma_voom">maayanlab_bioinformatics.dge.limma_voom module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge">Module contents</a></li>
 </ul>
-</div>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/maayanlab_bioinformatics.dge.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -118,32 +116,25 @@ with the highest absolute characteristic direction coefficients and split them i
     </div>
 </div>
 <script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2020, Ma'ayanlab.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/maayanlab_bioinformatics.dge.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Ma&#39;ayanlab.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+    </div>
   </body>
 </html>

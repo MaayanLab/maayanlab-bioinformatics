@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>maayanlab_bioinformatics.dge.limma_voom &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for maayanlab_bioinformatics.dge.limma_voom</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">def</span> <span class="nf">_lazy_load</span><span class="p">():</span>
+  <span class="k">global</span> <span class="n">R</span>
+  <span class="k">if</span> <span class="n">R</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">R</span>
+  <span class="c1">#</span>
+  <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span><span class="p">,</span> <span class="n">numpy2ri</span><span class="p">,</span> <span class="n">pandas2ri</span>
+  <span class="n">numpy2ri</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+  <span class="n">pandas2ri</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+  <span class="c1">#</span>
+  <span class="n">r</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">  library(&quot;R.utils&quot;)</span>
+<span class="s1">  library(&quot;RCurl&quot;)</span>
+<span class="s1">  library(&quot;DESeq2&quot;)</span>
+<span class="s1">  library(&quot;limma&quot;)</span>
+<span class="s1">  library(&quot;statmod&quot;)</span>
+<span class="s1">  library(&quot;edgeR&quot;)</span>
+<span class="s1">  diffExpression &lt;- function(controls_mat, samples_mat, filter_genes=FALSE, contrast=FALSE, adjust=&quot;BH&quot;) {</span>
+<span class="s1">    controls &lt;- as.data.frame(controls_mat)</span>
+<span class="s1">    samples &lt;- as.data.frame(samples_mat)</span>
+<span class="s1">    # build a single expression matrix from controls and samples Nx(M+V)</span>
+<span class="s1">    expression = do.call(cbind, append(controls, samples))</span>
+<span class="s1">    # design matrix is used in linear regression model to define the controls and samples</span>
+<span class="s1">    # They can be more complicated in when there is other variables other than treatment and control</span>
+<span class="s1">    # here it will create an intercept and then also a 1 -1 vector to differentiate the samples</span>
+<span class="s1">    design = c(rep(1,length(controls)), rep(-1, length(samples)))</span>
+<span class="s1">    dm = model.matrix(~as.factor(design))</span>
+<span class="s1">    # turn count matrix into a expression object compatible with edgeR</span>
+<span class="s1">    dge &lt;- DGEList(counts=expression)</span>
+<span class="s1">    # filter genes</span>
+<span class="s1">    if (isTRUE(filter_genes)) {</span>
+<span class="s1">      keep &lt;- filterByExpr(dge, design)</span>
+<span class="s1">      dge &lt;- dge[keep,]</span>
+<span class="s1">    }</span>
+<span class="s1">    # calculate normalization factors, here the different library sizes per sample are accounted for</span>
+<span class="s1">    # the normalization factors are appended to the dge object and used in later steps</span>
+<span class="s1">    dge &lt;- calcNormFactors(dge)</span>
+<span class="s1">    # to be honest I am not sure what exactly happens here. Limma was developed for affymetrix chips that have</span>
+<span class="s1">    # values that follow different distributions than read counts. It will apply some sort of log transformation</span>
+<span class="s1">    # and make it compatible with lmFit</span>
+<span class="s1">    v &lt;- voom(dge, dm, plot=FALSE)</span>
+<span class="s1">    # this is basically just applying a linear fit. The test will calculate how much the differentiation between controls and samples</span>
+<span class="s1">    # improves the fit over the simplest possible model (average)</span>
+<span class="s1">    fit &lt;- lmFit(v, dm)</span>
+<span class="s1">    if (isTRUE(contrast)) {</span>
+<span class="s1">      cont.matrix &lt;- makeContrasts(de=B-A, levels=design)</span>
+<span class="s1">      fit &lt;- contrasts.fit(fit, cont.matrix)</span>
+<span class="s1">    }</span>
+<span class="s1">    # this will calculate moderated t-statistics using empirical bayes moderation of the standard errors towards a common value</span>
+<span class="s1">    fit &lt;- eBayes(fit)</span>
+<span class="s1">    # Get results</span>
+<span class="s1">    limma_dataframe &lt;- topTable(fit, adjust=adjust, number=nrow(expression))</span>
+<span class="s1">    limma_dataframe$gene_symbol &lt;- rownames(limma_dataframe)</span>
+<span class="s1">    #</span>
+<span class="s1">    return (limma_dataframe)</span>
+<span class="s1">  }</span>
+<span class="s1">  &#39;&#39;&#39;</span><span class="p">)</span>
+  <span class="n">R</span> <span class="o">=</span> <span class="n">r</span>
+  <span class="k">return</span> <span class="n">R</span>
+
+<div class="viewcode-block" id="limma_voom_differential_expression"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.dge.html#maayanlab_bioinformatics.dge.limma_voom.limma_voom_differential_expression">[docs]</a><span class="k">def</span> <span class="nf">limma_voom_differential_expression</span><span class="p">(</span><span class="n">controls_mat</span><span class="p">,</span> <span class="n">cases_mat</span><span class="p">,</span> <span class="n">filter_genes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">contrast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">_lazy_load</span><span class="p">()</span>
+  <span class="k">assert</span> <span class="p">(</span><span class="n">controls_mat</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">cases_mat</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="s1">&#39;Index between controls and cases must be the same&#39;</span>
+  <span class="c1"># genes on rows, samples on cols</span>
+  <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;diffExpression&#39;</span><span class="p">](</span><span class="n">controls_mat</span><span class="p">,</span> <span class="n">cases_mat</span><span class="p">,</span> <span class="n">filter_genes</span><span class="o">=</span><span class="n">filter_genes</span><span class="p">,</span> <span class="n">contrast</span><span class="o">=</span><span class="n">contrast</span><span class="p">))</span>
+  <span class="c1"># recover gene symbols</span>
+  <span class="n">ind_lookup</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">controls_mat</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">)}</span>
+  <span class="n">results</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;gene_symbol&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">ind_lookup</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+  <span class="c1"># return resulting frame</span>
+  <span class="k">return</span> <span class="n">results</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;gene_symbol&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="up_down_from_limma_voom"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.dge.html#maayanlab_bioinformatics.dge.limma_voom.up_down_from_limma_voom">[docs]</a><span class="k">def</span> <span class="nf">up_down_from_limma_voom</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">600</span><span class="p">):</span>
+  <span class="n">most_significant_expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;P.Value&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">top_n</span><span class="p">]</span>
+  <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="s1">&#39;UpDownGeneset&#39;</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(),</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">up</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">most_significant_expr</span><span class="p">[</span><span class="n">most_significant_expr</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>
+    <span class="n">down</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">most_significant_expr</span><span class="p">[</span><span class="n">most_significant_expr</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>
+  <span class="p">))</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Ma&#39;ayanlab.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+    </div>
+  </body>
+</html>

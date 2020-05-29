@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <title>maayanlab_bioinformatics.enrichment package &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -13,21 +13,24 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
   <div class="section" id="maayanlab-bioinformatics-enrichment-package">
@@ -39,7 +42,7 @@
 <span id="maayanlab-bioinformatics-enrichment-crisp-module"></span><h2>maayanlab_bioinformatics.enrichment.crisp module<a class="headerlink" href="#module-maayanlab_bioinformatics.enrichment.crisp" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="maayanlab_bioinformatics.enrichment.crisp.FisherOverlap">
-<em class="property">class </em><code class="sig-prename descclassname">maayanlab_bioinformatics.enrichment.crisp.</code><code class="sig-name descname">FisherOverlap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pvalue</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">odds_ratio</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">n_overlap</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">overlap</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>Set<span class="p">[</span>Hashable<span class="p">]</span><span class="p">, </span>NoneType<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.enrichment.crisp.FisherOverlap" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">maayanlab_bioinformatics.enrichment.crisp.</code><code class="sig-name descname">FisherOverlap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pvalue</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">odds_ratio</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">n_overlap</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">overlap</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>Set<span class="p">[</span>Hashable<span class="p">]</span><span class="p">, </span>NoneType<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/enrichment/crisp.html#FisherOverlap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.enrichment.crisp.FisherOverlap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt id="maayanlab_bioinformatics.enrichment.crisp.FisherOverlap.n_overlap">
@@ -65,7 +68,7 @@
 
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.enrichment.crisp.enrich_crisp">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.enrichment.crisp.</code><code class="sig-name descname">enrich_crisp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_signature</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>Dict<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">]</span><span class="p">, </span>Set<span class="p">[</span>Hashable<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">background_signatures</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>Dict<span class="p">[</span>Hashable<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">]</span><span class="p">, </span>Set<span class="p">[</span>Hashable<span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">, </span>Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">]</span><span class="p">, </span>Set<span class="p">[</span>Hashable<span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">n_background_entities</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">preserve_overlap</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span><a class="reference internal" href="#maayanlab_bioinformatics.enrichment.crisp.FisherOverlap" title="maayanlab_bioinformatics.enrichment.crisp.FisherOverlap">maayanlab_bioinformatics.enrichment.crisp.FisherOverlap</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#maayanlab_bioinformatics.enrichment.crisp.enrich_crisp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.enrichment.crisp.</code><code class="sig-name descname">enrich_crisp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_signature</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>Dict<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">]</span><span class="p">, </span>Set<span class="p">[</span>Hashable<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">background_signatures</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>Dict<span class="p">[</span>Hashable<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">]</span><span class="p">, </span>Set<span class="p">[</span>Hashable<span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">, </span>Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span>Any<span class="p">]</span><span class="p">]</span><span class="p">, </span>Set<span class="p">[</span>Hashable<span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">n_background_entities</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">preserve_overlap</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Iterable<span class="p">[</span>Tuple<span class="p">[</span>Hashable<span class="p">, </span><a class="reference internal" href="#maayanlab_bioinformatics.enrichment.crisp.FisherOverlap" title="maayanlab_bioinformatics.enrichment.crisp.FisherOverlap">maayanlab_bioinformatics.enrichment.crisp.FisherOverlap</a><span class="p">]</span><span class="p">]</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/enrichment/crisp.html#enrich_crisp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.enrichment.crisp.enrich_crisp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform crisp set enrichment analysis using fisher overlap.
 Eriches the signature in input_signature against signatures in background_signatures.</p>
 <dl class="field-list simple">
@@ -79,14 +82,14 @@ Eriches the signature in input_signature against signatures in background_signat
 
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.enrichment.crisp.fisher_overlap">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.enrichment.crisp.</code><code class="sig-name descname">fisher_overlap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_signature</span><span class="p">:</span> <span class="n">Set<span class="p">[</span>Hashable<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">background_signature</span><span class="p">:</span> <span class="n">Set<span class="p">[</span>Hashable<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">n_background_entities</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">preserve_overlap</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference internal" href="#maayanlab_bioinformatics.enrichment.crisp.FisherOverlap" title="maayanlab_bioinformatics.enrichment.crisp.FisherOverlap">maayanlab_bioinformatics.enrichment.crisp.FisherOverlap</a><span class="p">]</span><a class="headerlink" href="#maayanlab_bioinformatics.enrichment.crisp.fisher_overlap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.enrichment.crisp.</code><code class="sig-name descname">fisher_overlap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_signature</span><span class="p">:</span> <span class="n">Set<span class="p">[</span>Hashable<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">background_signature</span><span class="p">:</span> <span class="n">Set<span class="p">[</span>Hashable<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">n_background_entities</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">preserve_overlap</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference internal" href="#maayanlab_bioinformatics.enrichment.crisp.FisherOverlap" title="maayanlab_bioinformatics.enrichment.crisp.FisherOverlap">maayanlab_bioinformatics.enrichment.crisp.FisherOverlap</a><span class="p">]</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/enrichment/crisp.html#fisher_overlap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.enrichment.crisp.fisher_overlap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given input and background set, compute the overlap, fisher significance, and odds ratio.
 In the case of no overlap, will return None.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.enrichment.crisp.safe_odds_ratio">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.enrichment.crisp.</code><code class="sig-name descname">safe_odds_ratio</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.enrichment.crisp.safe_odds_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.enrichment.crisp.</code><code class="sig-name descname">safe_odds_ratio</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/enrichment/crisp.html#safe_odds_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.enrichment.crisp.safe_odds_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the odds ratio returning helpful answers in the case of division by zero issues..</p>
 </dd></dl>
 
@@ -99,29 +102,27 @@ In the case of no overlap, will return None.</p>
 
 
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Ma'ayanlab Bioinformatics</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  </ul></li>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">maayanlab_bioinformatics.enrichment package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.enrichment.crisp">maayanlab_bioinformatics.enrichment.crisp module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.enrichment">Module contents</a></li>
 </ul>
-</div>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/maayanlab_bioinformatics.enrichment.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -132,32 +133,25 @@ In the case of no overlap, will return None.</p>
     </div>
 </div>
 <script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2020, Ma'ayanlab.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/maayanlab_bioinformatics.enrichment.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Ma&#39;ayanlab.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+    </div>
   </body>
 </html>
