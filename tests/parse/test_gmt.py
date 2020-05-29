@@ -1,8 +1,8 @@
 import os
 
-def test_gmt_read():
-  from maayanlab_bioinformatics.parse.gmt import gmt_read
-  gmt = gmt_read(open(os.path.join(os.path.dirname(__file__), 'test_gmt.gmt'), 'r'))
+def test_gmt_read_dict():
+  from maayanlab_bioinformatics.parse.gmt import gmt_read_dict
+  gmt = gmt_read_dict(open(os.path.join(os.path.dirname(__file__), '..', 'test_gmt.gmt'), 'r'))
   assert 'ChIP-seq\ttest desc' in gmt
   assert gmt['ChIP-seq\ttest desc']['LRRC37A3'] == 2.0
   assert 'LRRC37A3' in gmt['ChIP-seq\ttest desc']
@@ -14,7 +14,7 @@ def test_gmt_read():
 
 def test_gmt_read_pd():
   from maayanlab_bioinformatics.parse.gmt import gmt_read_pd
-  gmt = gmt_read_pd(open(os.path.join(os.path.dirname(__file__), 'test_gmt.gmt'), 'r'))
+  gmt = gmt_read_pd(os.path.join(os.path.dirname(__file__), '..', 'test_gmt.gmt'))
   assert 'ChIP-seq\ttest desc' in gmt.columns
   assert 'LRRC37A3' in gmt.index
   assert 'TLE3' in gmt.index
