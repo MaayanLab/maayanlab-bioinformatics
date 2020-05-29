@@ -10,6 +10,7 @@ Subpackages
    maayanlab_bioinformatics.api
    maayanlab_bioinformatics.clustering
    maayanlab_bioinformatics.dge
+   maayanlab_bioinformatics.enrichment
    maayanlab_bioinformatics.harmonization
    maayanlab_bioinformatics.normalization
    maayanlab_bioinformatics.parse

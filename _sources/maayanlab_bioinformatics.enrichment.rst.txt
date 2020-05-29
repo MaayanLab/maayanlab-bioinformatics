@@ -1,0 +1,22 @@
+maayanlab\_bioinformatics.enrichment package
+============================================
+
+Submodules
+----------
+
+maayanlab\_bioinformatics.enrichment.crisp module
+-------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.enrichment.crisp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: maayanlab_bioinformatics.enrichment
+   :members:
+   :undoc-members:
+   :show-inheritance:

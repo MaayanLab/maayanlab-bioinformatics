@@ -38,8 +38,8 @@
 <div class="section" id="module-maayanlab_bioinformatics.parse.gmt">
 <span id="maayanlab-bioinformatics-parse-gmt-module"></span><h2>maayanlab_bioinformatics.parse.gmt module<a class="headerlink" href="#module-maayanlab_bioinformatics.parse.gmt" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="maayanlab_bioinformatics.parse.gmt.gmt_read">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read" title="Permalink to this definition">¶</a></dt>
+<dt id="maayanlab_bioinformatics.parse.gmt.gmt_read_dict">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read_dict</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read .gmt files into a dictionary of the form:
 {</p>
 <blockquote>
@@ -55,6 +55,11 @@
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.parse.gmt.gmt_read_iter">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.parse.gmt.</code><code class="sig-name descname">gmt_read_iter</code><span class="sig-paren">(</span><em class="sig-param">fh</em>, <em class="sig-param">parse_gene=&lt;function _parse_gene&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_iter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.parse.gmt.gmt_read_pd">
@@ -138,7 +143,7 @@ each individually and return a merged version that captures the filename in the 
       &copy;2020, Ma'ayanlab.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
