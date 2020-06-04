@@ -2,7 +2,7 @@ import pandas as pd
 from functools import lru_cache
 from maayanlab_bioinformatics.utils import fetch_save_read, merge
 
-@lru_cache
+@lru_cache()
 def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens'):
   ''' Fetch the current NCBI Human Gene Info database.
   See ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/ for the directory/file of the organism of interest.
@@ -22,7 +22,7 @@ def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens'):
   ncbi['Other_designations'] = ncbi['Other_designations'].apply(split_list)
   return ncbi
 
-@lru_cache
+@lru_cache()
 def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens'):
   ''' Return a lookup dictionary with synonyms as the keys, and official symbols as the values
   '''
