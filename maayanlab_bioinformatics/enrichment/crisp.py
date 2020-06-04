@@ -101,7 +101,6 @@ def enrich_crisp(
   Eriches the signature in input_signature against signatures in background_signatures.
 
   :param n_background_entities: should correspond to the approximate number of entities exist, in the case of Human Genes for instance this might be 21000.
-  :odds_ratio_if_inf: 
   '''
   input_signature = set(input_signature)
   for background_signature_term, background_signature in _dict_or_iterable_tuple(background_signatures):
