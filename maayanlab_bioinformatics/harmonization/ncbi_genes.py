@@ -25,6 +25,11 @@ def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens'):
 @lru_cache()
 def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens'):
   ''' Return a lookup dictionary with synonyms as the keys, and official symbols as the values
+  Usage:
+  ```python
+  ncbi_lookup = ncbi_genes_lookup('Mammalia/Homo_sapiens')
+  print(ncbi_lookup('STAT3')) # any alias will get converted into the official symbol
+  ```
   '''
   ncbi_genes = ncbi_genes_fetch(organism=organism)
   ncbi_lookup = {
