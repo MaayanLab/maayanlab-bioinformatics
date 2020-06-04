@@ -62,6 +62,11 @@
 <div class="viewcode-block" id="ncbi_genes_lookup"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_lookup">[docs]</a><span class="nd">@lru_cache</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">ncbi_genes_lookup</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">):</span>
   <span class="sd">&#39;&#39;&#39; Return a lookup dictionary with synonyms as the keys, and official symbols as the values</span>
+<span class="sd">  Usage:</span>
+<span class="sd">  ```python</span>
+<span class="sd">  ncbi_lookup = ncbi_genes_lookup(&#39;Mammalia/Homo_sapiens&#39;)</span>
+<span class="sd">  print(ncbi_lookup(&#39;STAT3&#39;)) # any alias will get converted into the official symbol</span>
+<span class="sd">  ```</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="n">ncbi_genes</span> <span class="o">=</span> <span class="n">ncbi_genes_fetch</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="n">organism</span><span class="p">)</span>
   <span class="n">ncbi_lookup</span> <span class="o">=</span> <span class="p">{</span>

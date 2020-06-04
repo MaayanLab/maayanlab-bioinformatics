@@ -50,7 +50,12 @@ See <a class="reference external" href="ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_IN
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_lookup">
 <code class="sig-prename descclassname">maayanlab_bioinformatics.harmonization.ncbi_genes.</code><code class="sig-name descname">ncbi_genes_lookup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">organism</span><span class="o">=</span><span class="default_value">'Mammalia/Homo_sapiens'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/ncbi_genes.html#ncbi_genes_lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_lookup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a lookup dictionary with synonyms as the keys, and official symbols as the values</p>
+<dd><p>Return a lookup dictionary with synonyms as the keys, and official symbols as the values
+Usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ncbi_lookup</span> <span class="o">=</span> <span class="n">ncbi_genes_lookup</span><span class="p">(</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ncbi_lookup</span><span class="p">(</span><span class="s1">&#39;STAT3&#39;</span><span class="p">))</span> <span class="c1"># any alias will get converted into the official symbol</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
