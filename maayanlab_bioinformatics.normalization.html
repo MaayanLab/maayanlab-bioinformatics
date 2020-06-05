@@ -88,6 +88,27 @@ gene_2 here is <em>very</em> variable.</p>
 <div class="section" id="module-maayanlab_bioinformatics.normalization.log">
 <span id="maayanlab-bioinformatics-normalization-log-module"></span><h2>maayanlab_bioinformatics.normalization.log module<a class="headerlink" href="#module-maayanlab_bioinformatics.normalization.log" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.log.log10_normalize">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log10_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/normalization/log.html#log10_normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.normalization.log.log10_normalize" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log10_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log10_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Compute log normalization of matrix
+Simple <code class="docutils literal notranslate"><span class="pre">log10(x</span> <span class="pre">+</span> <span class="pre">offset)</span></code>, offset usually set to 1. because log(0) is undefined.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.log.log10_normalize_np">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log10_normalize_np</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/normalization/log.html#log10_normalize_np"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.normalization.log.log10_normalize_np" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="maayanlab_bioinformatics.normalization.log.log10_normalize_pd">
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log10_normalize_pd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/normalization/log.html#log10_normalize_pd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.normalization.log.log10_normalize_pd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="maayanlab_bioinformatics.normalization.log.log2_normalize">
 <code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.log.</code><code class="sig-name descname">log2_normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/normalization/log.html#log2_normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.normalization.log.log2_normalize" title="Permalink to this definition">¶</a></dt>
 <dt>
