@@ -1,0 +1,1 @@
+Sample	Stage	cell typemelanocyte_1	primary melanocytes	normal melanocytesmelanocyte_2	primary melanocytes	normal melanocytesmelanocyte_3	primary melanocytes	normal melanocytesmelanoma_1	metastatic	melanoma cell linemelanoma_2	metastatic	melanoma cell linemelanoma_3	metastatic	melanoma cell line
