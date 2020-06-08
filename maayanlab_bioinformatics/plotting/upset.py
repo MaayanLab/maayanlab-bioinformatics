@@ -4,8 +4,12 @@ from typing import Dict, Set, Hashable
 
 def upset_from_dict_of_sets(inputs: Dict[Hashable, Set[Hashable]]):
   ''' Given a dictionary of sets, produce input ready for `upsetplot` python package
+
+  We produce this input by computing set intersections of all relevant combinations
+   of sets interacting with one another.
+
   Example:
-  ``python
+  ```python
   import upsetplot
   from maayanlab_bioinformatics.plotting import upset_from_dict_of_sets
   upsetplot.plot(upset_from_dict_of_sets({
@@ -13,7 +17,9 @@ def upset_from_dict_of_sets(inputs: Dict[Hashable, Set[Hashable]]):
     'B': {'b', 'c', 'd'},
     'C': {'d', 'e', 'f'},
   }))
-  ``
+  ```
+  :param inputs: (Dict[Hashable, Set[Hashable]]) Several named sets
+  :return: (pd.DataFrame) in a form ready for `upsetplot.plot`
   '''
   sets = []
   for n in range(1, len(inputs)+1):
