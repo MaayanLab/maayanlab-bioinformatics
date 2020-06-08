@@ -1,0 +1,30 @@
+maayanlab\_bioinformatics.plotting package
+==========================================
+
+Submodules
+----------
+
+maayanlab\_bioinformatics.plotting.bridge module
+------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.plotting.bridge
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+maayanlab\_bioinformatics.plotting.upset module
+-----------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.plotting.upset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: maayanlab_bioinformatics.plotting
+   :members:
+   :undoc-members:
+   :show-inheritance:
