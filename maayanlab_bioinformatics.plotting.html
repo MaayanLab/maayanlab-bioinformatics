@@ -72,8 +72,10 @@
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.plotting.upset.upset_from_dict_of_sets">
 <code class="sig-prename descclassname">maayanlab_bioinformatics.plotting.upset.</code><code class="sig-name descname">upset_from_dict_of_sets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputs</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>Hashable<span class="p">, </span>Set<span class="p">[</span>Hashable<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/plotting/upset.html#upset_from_dict_of_sets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.plotting.upset.upset_from_dict_of_sets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a dictionary of sets, produce input ready for <code class="docutils literal notranslate"><span class="pre">upsetplot</span></code> python package
-Example:</p>
+<dd><p>Given a dictionary of sets, produce input ready for <code class="docutils literal notranslate"><span class="pre">upsetplot</span></code> python package</p>
+<p>We produce this input by computing set intersections of all relevant combinations
+of sets interacting with one another.</p>
+<p>Example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">upsetplot</span>
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.plotting</span> <span class="kn">import</span> <span class="n">upset_from_dict_of_sets</span>
 <span class="n">upsetplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">upset_from_dict_of_sets</span><span class="p">({</span>
@@ -83,6 +85,8 @@ Example:</p>
 <span class="p">}))</span>
 </pre></div>
 </div>
+<p>:param inputs (Dict[Hashable, Set[Hashable]]) Several named sets
+:returns: (pd.DataFrame) in a form ready for <code class="docutils literal notranslate"><span class="pre">upsetplot.plot</span></code></p>
 </dd></dl>
 
 </div>
