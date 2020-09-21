@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>maayanlab_bioinformatics.plotting.bridge &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -50,7 +50,7 @@
 
 <span class="sd">  x, y = bridge_plot(select)</span>
 <span class="sd">  plt.plot(x, y)</span>
-<span class="sd">  plt.vlines(np.where(select, 1, 0), ymin=-1, ymax=0)</span>
+<span class="sd">  plt.vlines(np.argwhere(select.values)[:, 0], ymin=-1, ymax=0)</span>
 <span class="sd">  plt.show()</span>
 <span class="sd">  ```</span>
 
@@ -100,7 +100,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
     </div>
   </body>
 </html>

@@ -44,7 +44,6 @@ maayanlab\_bioinformatics.normalization.zscore module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

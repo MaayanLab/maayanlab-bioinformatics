@@ -12,7 +12,6 @@ maayanlab\_bioinformatics.clustering.silhouette\_analysis module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 
