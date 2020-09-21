@@ -11,7 +11,7 @@ def bridge_plot(select: pd.Series):
 
   x, y = bridge_plot(select)
   plt.plot(x, y)
-  plt.vlines(np.where(select, 1, 0), ymin=-1, ymax=0)
+  plt.vlines(np.argwhere(select.values)[:, 0], ymin=-1, ymax=0)
   plt.show()
   ```
 
