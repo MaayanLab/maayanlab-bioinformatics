@@ -12,6 +12,14 @@ maayanlab\_bioinformatics.plotting.bridge module
    :undoc-members:
    :show-inheritance:
 
+maayanlab\_bioinformatics.plotting.clustergrammer module
+--------------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.plotting.clustergrammer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 maayanlab\_bioinformatics.plotting.upset module
 -----------------------------------------------
 
