@@ -11,7 +11,7 @@ setup(
   install_requires=list(map(str.strip, open('requirements.txt', 'r').readlines())),
   extras_require={
     'h5py': ["h5py"],
-    'limma_voom': ["rpy2"],
+    'limma_voom': ["rpy2==3.3.6"],
   },
   packages=find_packages(),
   include_package_data=True,
