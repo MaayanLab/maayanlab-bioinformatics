@@ -23,7 +23,7 @@ def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens'):
   return ncbi
 
 @lru_cache()
-def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens'):
+def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncbi['type_of_gene']=='protein-coding'):
   ''' Return a lookup dictionary with synonyms as the keys, and official symbols as the values
   Usage:
   ```python
@@ -34,7 +34,7 @@ def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens'):
   ncbi_genes = ncbi_genes_fetch(organism=organism)
   ncbi_lookup = {
     sym: row['Symbol']
-    for _, row in ncbi_genes.iterrows()
+    for _, row in (ncbi_genes[filters(ncbi_genes)] if callable(filters) else ncbi_genes).iterrows()
     for sym in [row['Symbol']] + row['Synonyms']
   }
   return ncbi_lookup.get

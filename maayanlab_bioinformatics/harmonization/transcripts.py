@@ -19,6 +19,7 @@ def transcripts_to_genes(df_expression: pd.DataFrame, df_features: pd.DataFrame=
   # construct df_features if not provided
   if df_features is None:
     df_features = pd.Series(df_expression.index).to_frame('symbol')
+    df_features.index = df_expression.index
   # uppercase genes if necessary
   if uppercasegenes:
     df_features['symbol'] = df_features['symbol'].apply(str.upper)
@@ -26,7 +27,7 @@ def transcripts_to_genes(df_expression: pd.DataFrame, df_features: pd.DataFrame=
   #  corresponds to the same set of genes
   df_transcript_genes = merge(
     df_expression.var(axis=1).to_frame('var'),
-    df_features[['symbol']].applymap(lambda s: lookup_dict.get(s))
+    df_features[['symbol']].applymap(lambda s: lookup_dict(s))
   ).groupby('symbol')['var'].idxmax().reset_index()
   df_transcript_genes.index = df_transcript_genes['var']
   df_transcript_genes = df_transcript_genes.drop('var', axis=1)
