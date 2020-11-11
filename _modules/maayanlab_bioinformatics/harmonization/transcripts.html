@@ -6,8 +6,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>maayanlab_bioinformatics.harmonization.transcripts &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
@@ -58,6 +58,7 @@
   <span class="c1"># construct df_features if not provided</span>
   <span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">df_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">df_expression</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">)</span>
+    <span class="n">df_features</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df_expression</span><span class="o">.</span><span class="n">index</span>
   <span class="c1"># uppercase genes if necessary</span>
   <span class="k">if</span> <span class="n">uppercasegenes</span><span class="p">:</span>
     <span class="n">df_features</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_features</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>
@@ -65,7 +66,7 @@
   <span class="c1">#  corresponds to the same set of genes</span>
   <span class="n">df_transcript_genes</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span>
     <span class="n">df_expression</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">),</span>
-    <span class="n">df_features</span><span class="p">[[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">lookup_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+    <span class="n">df_features</span><span class="p">[[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">lookup_dict</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
   <span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">)[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
   <span class="n">df_transcript_genes</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df_transcript_genes</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span>
   <span class="n">df_transcript_genes</span> <span class="o">=</span> <span class="n">df_transcript_genes</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -111,7 +112,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.0.
     </div>
   </body>
 </html>

@@ -6,8 +6,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>maayanlab_bioinformatics.harmonization.ncbi_genes &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
@@ -62,7 +62,7 @@
   <span class="k">return</span> <span class="n">ncbi</span></div>
 
 <div class="viewcode-block" id="ncbi_genes_lookup"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_lookup">[docs]</a><span class="nd">@lru_cache</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">ncbi_genes_lookup</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">ncbi_genes_lookup</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ncbi</span><span class="p">:</span> <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;type_of_gene&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;protein-coding&#39;</span><span class="p">):</span>
   <span class="sd">&#39;&#39;&#39; Return a lookup dictionary with synonyms as the keys, and official symbols as the values</span>
 <span class="sd">  Usage:</span>
 <span class="sd">  ```python</span>
@@ -73,7 +73,7 @@
   <span class="n">ncbi_genes</span> <span class="o">=</span> <span class="n">ncbi_genes_fetch</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="n">organism</span><span class="p">)</span>
   <span class="n">ncbi_lookup</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">sym</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Symbol&#39;</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">ncbi_genes</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ncbi_genes</span><span class="p">[</span><span class="n">filters</span><span class="p">(</span><span class="n">ncbi_genes</span><span class="p">)]</span> <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span> <span class="k">else</span> <span class="n">ncbi_genes</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">sym</span> <span class="ow">in</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Symbol&#39;</span><span class="p">]]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Synonyms&#39;</span><span class="p">]</span>
   <span class="p">}</span>
   <span class="k">return</span> <span class="n">ncbi_lookup</span><span class="o">.</span><span class="n">get</span></div>
@@ -115,7 +115,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.0.
     </div>
   </body>
 </html>
