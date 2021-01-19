@@ -12,7 +12,6 @@
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -43,7 +42,7 @@
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.harmonization.ncbi_genes</span> <span class="kn">import</span> <span class="n">ncbi_genes_lookup</span>
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.utils.merge</span> <span class="kn">import</span> <span class="n">merge</span>
 
-<div class="viewcode-block" id="transcripts_to_genes"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes">[docs]</a><span class="k">def</span> <span class="nf">transcripts_to_genes</span><span class="p">(</span><span class="n">df_expression</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">df_features</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">,</span> <span class="n">uppercasegenes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lookup_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="n">ncbi_genes_lookup</span><span class="p">):</span>
+<div class="viewcode-block" id="transcripts_to_genes"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes">[docs]</a><span class="k">def</span> <span class="nf">transcripts_to_genes</span><span class="p">(</span><span class="n">df_expression</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">df_features</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">,</span> <span class="n">uppercasegenes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lookup_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="n">ncbi_genes_lookup</span><span class="p">):</span>
   <span class="sd">&#39;&#39;&#39; Map genes to transcripts given a matrix with transcripts using `ncbi_genes_lookup`</span>
 <span class="sd">  We take a matrix with genes on the rows.</span>
 <span class="sd">  In the case of multiple transcript to gene mappings, we keep the one with the highest variance.</span>
@@ -112,7 +111,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
     </div>
   </body>
 </html>

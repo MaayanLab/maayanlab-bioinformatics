@@ -12,7 +12,6 @@
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -42,23 +41,47 @@
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.utils</span> <span class="kn">import</span> <span class="n">fetch_save_read</span><span class="p">,</span> <span class="n">merge</span>
 
 <div class="viewcode-block" id="ncbi_genes_fetch"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch">[docs]</a><span class="nd">@lru_cache</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">ncbi_genes_fetch</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">ncbi_genes_fetch</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ncbi</span><span class="p">:</span> <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;type_of_gene&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;protein-coding&#39;</span><span class="p">):</span>
   <span class="sd">&#39;&#39;&#39; Fetch the current NCBI Human Gene Info database.</span>
 <span class="sd">  See ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/ for the directory/file of the organism of interest.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
+  <span class="k">def</span> <span class="nf">maybe_split</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; NCBI Stores Nulls as &#39;-&#39; and lists &#39;|&#39; delimited</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">record</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">}:</span>
+      <span class="k">return</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">))</span>
+  <span class="c1">#</span>
+  <span class="k">def</span> <span class="nf">supplement_dbXref_prefix_omitted</span><span class="p">(</span><span class="n">ids</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; NCBI Stores external IDS with Foreign:ID while most datasets just use the ID</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
+      <span class="c1"># add original id</span>
+      <span class="k">yield</span> <span class="nb">id</span>
+      <span class="c1"># also add id *without* prefix</span>
+      <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="nb">id</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="nb">id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+  <span class="c1">#</span>
   <span class="n">ncbi</span> <span class="o">=</span> <span class="n">fetch_save_read</span><span class="p">(</span>
     <span class="s1">&#39;ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/</span><span class="si">{}</span><span class="s1">.gene_info.gz&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">organism</span><span class="p">),</span>
     <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.gene_info.tsv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">organism</span><span class="p">),</span>
     <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span>
   <span class="p">)</span>
-  <span class="c1"># Ensure nulls are treated as such</span>
-  <span class="n">ncbi</span> <span class="o">=</span> <span class="n">ncbi</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span> <span class="k">else</span> <span class="n">v</span><span class="p">)</span>
-  <span class="c1"># Break up lists</span>
-  <span class="n">split_list</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="k">else</span> <span class="p">[]</span>
-  <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;dbXrefs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;dbXrefs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">split_list</span><span class="p">)</span>
-  <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;Synonyms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;Synonyms&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">split_list</span><span class="p">)</span>
-  <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;LocusTag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;LocusTag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">split_list</span><span class="p">)</span>
-  <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;Other_designations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;Other_designations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">split_list</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">filters</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="n">filters</span><span class="p">):</span>
+    <span class="n">ncbi</span> <span class="o">=</span> <span class="n">ncbi</span><span class="p">[</span><span class="n">filters</span><span class="p">(</span><span class="n">ncbi</span><span class="p">)]</span>
+  <span class="c1">#</span>
+  <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;All_synonyms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span>
+      <span class="n">maybe_split</span><span class="p">(</span><span class="n">gene_info</span><span class="p">[</span><span class="s1">&#39;Symbol&#39;</span><span class="p">]),</span>
+      <span class="n">maybe_split</span><span class="p">(</span><span class="n">gene_info</span><span class="p">[</span><span class="s1">&#39;Symbol_from_nomenclature_authority&#39;</span><span class="p">]),</span>
+      <span class="n">maybe_split</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">gene_info</span><span class="p">[</span><span class="s1">&#39;GeneID&#39;</span><span class="p">])),</span>
+      <span class="n">maybe_split</span><span class="p">(</span><span class="n">gene_info</span><span class="p">[</span><span class="s1">&#39;Synonyms&#39;</span><span class="p">]),</span>
+      <span class="n">maybe_split</span><span class="p">(</span><span class="n">gene_info</span><span class="p">[</span><span class="s1">&#39;Other_designations&#39;</span><span class="p">]),</span>
+      <span class="n">maybe_split</span><span class="p">(</span><span class="n">gene_info</span><span class="p">[</span><span class="s1">&#39;LocusTag&#39;</span><span class="p">]),</span>
+      <span class="nb">set</span><span class="p">(</span><span class="n">supplement_dbXref_prefix_omitted</span><span class="p">(</span><span class="n">maybe_split</span><span class="p">(</span><span class="n">gene_info</span><span class="p">[</span><span class="s1">&#39;dbXrefs&#39;</span><span class="p">]))),</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">gene_info</span> <span class="ow">in</span> <span class="n">ncbi</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()</span>
+  <span class="p">]</span>
   <span class="k">return</span> <span class="n">ncbi</span></div>
 
 <div class="viewcode-block" id="ncbi_genes_lookup"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_lookup">[docs]</a><span class="nd">@lru_cache</span><span class="p">()</span>
@@ -71,12 +94,15 @@
 <span class="sd">  ```</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="n">ncbi_genes</span> <span class="o">=</span> <span class="n">ncbi_genes_fetch</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="n">organism</span><span class="p">)</span>
-  <span class="n">ncbi_lookup</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">sym</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Symbol&#39;</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ncbi_genes</span><span class="p">[</span><span class="n">filters</span><span class="p">(</span><span class="n">ncbi_genes</span><span class="p">)]</span> <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span> <span class="k">else</span> <span class="n">ncbi_genes</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">sym</span> <span class="ow">in</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Symbol&#39;</span><span class="p">]]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Synonyms&#39;</span><span class="p">]</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">ncbi_lookup</span><span class="o">.</span><span class="n">get</span></div>
+  <span class="n">synonyms</span><span class="p">,</span> <span class="n">symbols</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">{</span>
+    <span class="p">(</span><span class="n">synonym</span><span class="p">,</span> <span class="n">gene_info</span><span class="p">[</span><span class="s1">&#39;Symbol&#39;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">gene_info</span> <span class="ow">in</span> <span class="n">ncbi_genes</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">synonym</span> <span class="ow">in</span> <span class="n">gene_info</span><span class="p">[</span><span class="s1">&#39;All_synonyms&#39;</span><span class="p">]</span>
+  <span class="p">})</span>
+  <span class="n">ncbi_lookup</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">synonyms</span><span class="p">)</span>
+  <span class="n">index_values</span> <span class="o">=</span> <span class="n">ncbi_lookup</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+  <span class="n">ncbi_lookup_disambiguated</span> <span class="o">=</span> <span class="n">ncbi_lookup</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index_values</span><span class="p">[</span><span class="n">index_values</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">ncbi_lookup_disambiguated</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span><span class="o">.</span><span class="n">get</span></div>
 </pre></div>
 
             <div class="clearer"></div>
@@ -115,7 +141,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
     </div>
   </body>
 </html>

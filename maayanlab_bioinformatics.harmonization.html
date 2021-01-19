@@ -12,7 +12,6 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
@@ -44,7 +43,7 @@
 <span id="maayanlab-bioinformatics-harmonization-ncbi-genes-module"></span><h2>maayanlab_bioinformatics.harmonization.ncbi_genes module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.ncbi_genes" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.harmonization.ncbi_genes.</code><code class="sig-name descname">ncbi_genes_fetch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">organism</span><span class="o">=</span><span class="default_value">'Mammalia/Homo_sapiens'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/ncbi_genes.html#ncbi_genes_fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.harmonization.ncbi_genes.</code><code class="sig-name descname">ncbi_genes_fetch</code><span class="sig-paren">(</span><em class="sig-param">organism='Mammalia/Homo_sapiens'</em>, <em class="sig-param">filters=&lt;function &lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/ncbi_genes.html#ncbi_genes_fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch the current NCBI Human Gene Info database.
 See <a class="reference external" href="ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/">ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/</a> for the directory/file of the organism of interest.</p>
 </dd></dl>
@@ -65,7 +64,7 @@ Usage:</p>
 <span id="maayanlab-bioinformatics-harmonization-transcripts-module"></span><h2>maayanlab_bioinformatics.harmonization.transcripts module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.transcripts" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.harmonization.transcripts.</code><code class="sig-name descname">transcripts_to_genes</code><span class="sig-paren">(</span><em class="sig-param">df_expression: pandas.core.frame.DataFrame</em>, <em class="sig-param">df_features: pandas.core.frame.DataFrame = None</em>, <em class="sig-param">organism='Mammalia/Homo_sapiens'</em>, <em class="sig-param">uppercasegenes=True</em>, <em class="sig-param">lookup_dict: Dict[str</em>, <em class="sig-param">str] = &lt;functools._lru_cache_wrapper object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/transcripts.html#transcripts_to_genes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.harmonization.transcripts.</code><code class="sig-name descname">transcripts_to_genes</code><span class="sig-paren">(</span><em class="sig-param">df_expression: pandas.core.frame.DataFrame</em>, <em class="sig-param">df_features: Optional[pandas.core.frame.DataFrame] = None</em>, <em class="sig-param">organism='Mammalia/Homo_sapiens'</em>, <em class="sig-param">uppercasegenes=False</em>, <em class="sig-param">lookup_dict: Dict[str</em>, <em class="sig-param">str] = &lt;functools._lru_cache_wrapper object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/transcripts.html#transcripts_to_genes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map genes to transcripts given a matrix with transcripts using <code class="docutils literal notranslate"><span class="pre">ncbi_genes_lookup</span></code>
 We take a matrix with genes on the rows.
 In the case of multiple transcript to gene mappings, we keep the one with the highest variance.
@@ -136,7 +135,7 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
     </div>
   </body>
 </html>

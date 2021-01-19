@@ -12,7 +12,6 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
@@ -68,7 +67,7 @@ Simple division of each column by the total sum of its counts and multiplying it
 <span id="maayanlab-bioinformatics-normalization-filter-module"></span><h2>maayanlab_bioinformatics.normalization.filter module<a class="headerlink" href="#module-maayanlab_bioinformatics.normalization.filter" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="maayanlab_bioinformatics.normalization.filter.filter_by_expr">
-<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.filter.</code><code class="sig-name descname">filter_by_expr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span></em>, <em class="sig-param"><span class="n">design</span><span class="p">:</span> <span class="n">pandas.core.series.Series</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">group</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_count</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">min_total_count</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="n">large_n</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">min_prop</span><span class="o">=</span><span class="default_value">0.7</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">1e-14</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/normalization/filter.html#filter_by_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.normalization.filter.filter_by_expr" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">maayanlab_bioinformatics.normalization.filter.</code><code class="sig-name descname">filter_by_expr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span></em>, <em class="sig-param"><span class="n">design</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>pandas.core.series.Series<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">group</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>pandas.core.frame.DataFrame<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_count</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">min_total_count</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="n">large_n</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">min_prop</span><span class="o">=</span><span class="default_value">0.7</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">1e-14</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/normalization/filter.html#filter_by_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maayanlab_bioinformatics.normalization.filter.filter_by_expr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ported from R <a class="reference external" href="https://rdrr.io/bioc/edgeR/src/R/filterByExpr.R">https://rdrr.io/bioc/edgeR/src/R/filterByExpr.R</a></p>
 </dd></dl>
 
@@ -264,7 +263,7 @@ it should now be normal.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
     </div>
   </body>
 </html>
