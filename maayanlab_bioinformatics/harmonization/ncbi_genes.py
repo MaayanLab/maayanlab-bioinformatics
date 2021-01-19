@@ -3,23 +3,47 @@ from functools import lru_cache
 from maayanlab_bioinformatics.utils import fetch_save_read, merge
 
 @lru_cache()
-def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens'):
+def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncbi['type_of_gene']=='protein-coding'):
   ''' Fetch the current NCBI Human Gene Info database.
   See ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/ for the directory/file of the organism of interest.
   '''
+  def maybe_split(record):
+    ''' NCBI Stores Nulls as '-' and lists '|' delimited
+    '''
+    if record in {'', '-'}:
+      return set()
+    return set(record.split('|'))
+  #
+  def supplement_dbXref_prefix_omitted(ids):
+    ''' NCBI Stores external IDS with Foreign:ID while most datasets just use the ID
+    '''
+    for id in ids:
+      # add original id
+      yield id
+      # also add id *without* prefix
+      if ':' in id:
+        yield id.split(':', maxsplit=1)[1]
+  #
   ncbi = fetch_save_read(
     'ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/{}.gene_info.gz'.format(organism),
     '{}.gene_info.tsv'.format(organism),
     sep='\t',
   )
-  # Ensure nulls are treated as such
-  ncbi = ncbi.applymap(lambda v: float('nan') if type(v) == str and v == '-' else v)
-  # Break up lists
-  split_list = lambda v: v.split('|') if type(v) == str else []
-  ncbi['dbXrefs'] = ncbi['dbXrefs'].apply(split_list)
-  ncbi['Synonyms'] = ncbi['Synonyms'].apply(split_list)
-  ncbi['LocusTag'] = ncbi['LocusTag'].apply(split_list)
-  ncbi['Other_designations'] = ncbi['Other_designations'].apply(split_list)
+  if filters and callable(filters):
+    ncbi = ncbi[filters(ncbi)]
+  #
+  ncbi['All_synonyms'] = [
+    set.union(
+      maybe_split(gene_info['Symbol']),
+      maybe_split(gene_info['Symbol_from_nomenclature_authority']),
+      maybe_split(str(gene_info['GeneID'])),
+      maybe_split(gene_info['Synonyms']),
+      maybe_split(gene_info['Other_designations']),
+      maybe_split(gene_info['LocusTag']),
+      set(supplement_dbXref_prefix_omitted(maybe_split(gene_info['dbXrefs']))),
+    )
+    for _, gene_info in ncbi.iterrows()
+  ]
   return ncbi
 
 @lru_cache()
@@ -32,9 +56,12 @@ def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncb
   ```
   '''
   ncbi_genes = ncbi_genes_fetch(organism=organism)
-  ncbi_lookup = {
-    sym: row['Symbol']
-    for _, row in (ncbi_genes[filters(ncbi_genes)] if callable(filters) else ncbi_genes).iterrows()
-    for sym in [row['Symbol']] + row['Synonyms']
-  }
-  return ncbi_lookup.get
+  synonyms, symbols = zip(*{
+    (synonym, gene_info['Symbol'])
+    for _, gene_info in ncbi_genes.iterrows()
+    for synonym in gene_info['All_synonyms']
+  })
+  ncbi_lookup = pd.Series(symbols, index=synonyms)
+  index_values = ncbi_lookup.index.value_counts()
+  ncbi_lookup_disambiguated = ncbi_lookup.drop(index_values[index_values > 1].index)
+  return ncbi_lookup_disambiguated.to_dict().get

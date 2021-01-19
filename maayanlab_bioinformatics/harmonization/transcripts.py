@@ -4,7 +4,7 @@ from typing import Dict
 from maayanlab_bioinformatics.harmonization.ncbi_genes import ncbi_genes_lookup
 from maayanlab_bioinformatics.utils.merge import merge
 
-def transcripts_to_genes(df_expression: pd.DataFrame, df_features: pd.DataFrame=None, organism='Mammalia/Homo_sapiens', uppercasegenes=True, lookup_dict: Dict[str, str]=ncbi_genes_lookup):
+def transcripts_to_genes(df_expression: pd.DataFrame, df_features: pd.DataFrame=None, organism='Mammalia/Homo_sapiens', uppercasegenes=False, lookup_dict: Dict[str, str]=ncbi_genes_lookup):
   ''' Map genes to transcripts given a matrix with transcripts using `ncbi_genes_lookup`
   We take a matrix with genes on the rows.
   In the case of multiple transcript to gene mappings, we keep the one with the highest variance.
