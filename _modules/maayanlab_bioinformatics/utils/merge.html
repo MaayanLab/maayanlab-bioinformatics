@@ -40,6 +40,7 @@
 
 <div class="viewcode-block" id="merge"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.merge.merge">[docs]</a><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="o">*</span><span class="n">dfs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
   <span class="sd">&#39;&#39;&#39; Helper function for many trivial (index based) joins</span>
+<span class="sd">  Deprecated: Use `pd.concat([dfs], axis=1)` instead</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="k">if</span> <span class="ow">not</span> <span class="n">dfs</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>

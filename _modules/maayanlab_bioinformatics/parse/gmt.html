@@ -47,7 +47,7 @@
   <span class="k">except</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">s</span>
 
-<span class="n">_gene_parser</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^([\w\d]+)[^\w\d]+(.+)$&#39;</span><span class="p">)</span>
+<span class="n">_gene_parser</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^([\w\d_-]+)[^\w\d_-]+(.+)$&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">_parse_gene</span><span class="p">(</span><span class="n">gene</span><span class="p">):</span>
   <span class="n">match</span> <span class="o">=</span> <span class="n">_gene_parser</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">gene</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
   <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
@@ -85,7 +85,7 @@
 <span class="sd">   the current one supports just gene names or gene names with weights separated by non-word/numeric characters.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="n">gmt</span> <span class="o">=</span> <span class="p">{}</span>
-  <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">geneset</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gmt_read_iter</span><span class="p">(</span><span class="n">fh</span><span class="p">)):</span>
+  <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">geneset</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gmt_read_iter</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">parse_gene</span><span class="p">)):</span>
     <span class="k">if</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">gmt</span><span class="p">:</span>
       <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Duplicate term: </span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">, merging&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">term</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
