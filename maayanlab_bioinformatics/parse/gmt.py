@@ -47,7 +47,7 @@ def gmt_read_dict(fh, parse_gene=_parse_gene):
    the current one supports just gene names or gene names with weights separated by non-word/numeric characters.
   '''
   gmt = {}
-  for n, (term, geneset) in enumerate(gmt_read_iter(fh)):
+  for n, (term, geneset) in enumerate(gmt_read_iter(fh, parse_gene=parse_gene)):
     if term in gmt:
       logging.warn('Duplicate term: {}:{}, merging'.format(n, term))
     else:
