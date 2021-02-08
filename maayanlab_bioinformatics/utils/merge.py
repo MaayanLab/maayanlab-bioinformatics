@@ -2,6 +2,7 @@ import pandas as pd
 
 def merge(*dfs, **kwargs):
   ''' Helper function for many trivial (index based) joins
+  Deprecated: Use `pd.concat([dfs], axis=1)` instead
   '''
   if not dfs:
     return pd.DataFrame()
