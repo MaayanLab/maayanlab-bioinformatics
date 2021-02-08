@@ -9,7 +9,7 @@ def _try_json_loads(s):
   except:
     return s
 
-_gene_parser = re.compile(r'^([\w\d]+)[^\w\d]+(.+)$')
+_gene_parser = re.compile(r'^([\w\d_-]+)[^\w\d_-]+(.+)$')
 def _parse_gene(gene):
   match = _gene_parser.match(gene.strip())
   if match:
