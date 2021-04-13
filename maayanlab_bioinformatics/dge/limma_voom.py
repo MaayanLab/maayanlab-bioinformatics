@@ -9,9 +9,7 @@ def _lazy_load():
   if R is not None:
     return R
   #
-  from rpy2.robjects import r, numpy2ri, pandas2ri
-  numpy2ri.activate()
-  pandas2ri.activate()
+  from rpy2.robjects import r
   #
   r('''
   library("R.utils")
@@ -102,6 +100,9 @@ def limma_voom_differential_expression(
   :param voom_design: (bool) Whether to give R's voom function the design matrix (supervised)
   :return: A data frame with the results
   '''
+  import rpy2.robjects as ro
+  from rpy2.robjects import pandas2ri
+  from rpy2.robjects.conversion import localconverter
   r = _lazy_load()
   # ensure genes match
   assert (controls_mat.index == cases_mat.index).all(), 'Index between controls and cases must be the same'
@@ -110,7 +111,15 @@ def limma_voom_differential_expression(
   # transform input into expression/design ready for R functions
   expression, design = _control_case_data_to_expression_design(controls_mat, cases_mat, all_data_mat=all_data_mat)
   # genes on rows, samples on cols
-  return pd.DataFrame(r['diffExpression'](expression, design, filter_genes=filter_genes, voom_design=voom_design))
+  with localconverter(ro.default_converter + pandas2ri.converter):
+    return ro.conversion.rpy2py(
+      r['diffExpression'](
+        ro.conversion.py2rpy(expression),
+        ro.conversion.py2rpy(design),
+        filter_genes=filter_genes,
+        voom_design=voom_design,
+      )
+    )
 
 def up_down_from_limma_voom(expr: pd.DataFrame, top_n: int = 600):
   ''' Given limma_voom_differential_expression output, produce a discrete up/down geneset
