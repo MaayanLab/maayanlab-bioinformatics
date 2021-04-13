@@ -171,22 +171,7 @@ See: <a class="reference external" href="https://en.wikipedia.org/wiki/Quantile_
 <dt>
 <code class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.normalization.zscore.</span></code><code class="sig-name descname"><span class="pre">zscore_normalize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Compute the z score of each value in the sample, relative to the sample mean and standard deviation.
-In the case of a pd.DataFrame, preserve the index on the output frame.
-e.g.
-<a href="#id3"><span class="problematic" id="id4">|condition_1|condition_2|</span></a>…|condition_n|
-gene_1|    1      |     1     <a href="#id5"><span class="problematic" id="id6">|...|</span></a>    100    |
-gene_2|    1      |    100    <a href="#id7"><span class="problematic" id="id8">|...|</span></a>     1     |</p>
-<p>You’d get, approximately:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span><span class="n">condition_1</span><span class="o">|</span><span class="n">condition_2</span><span class="o">|...|</span><span class="n">condition_n</span><span class="o">|</span>
-</pre></div>
-</div>
-<p>gene_1| -1 (&lt;mu)  |  -1 (&lt;mu) <a href="#id9"><span class="problematic" id="id10">|...|</span></a>  3 (&gt;&gt;mu) |
-gene_2| -1 (&lt;mu)  |  3 (&gt;&gt;mu) <a href="#id11"><span class="problematic" id="id12">|...|</span></a> -1 (&lt;mu)  |</p>
-<p>That-is, samples disproportionately represented
-in a specific condition become &gt;&gt; 0 and those
-disproportionately under-represented become &lt;&lt; 0.</p>
-<p>If you were to plot any given sample’s distribution,
-it should now be normal.</p>
+In the case of a pd.DataFrame, preserve the index on the output frame.</p>
 </dd></dl>
 
 <dl class="py function">

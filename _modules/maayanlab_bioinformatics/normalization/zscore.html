@@ -47,23 +47,6 @@
 <span class="k">def</span> <span class="nf">zscore_normalize</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
   <span class="sd">&#39;&#39;&#39; Compute the z score of each value in the sample, relative to the sample mean and standard deviation.</span>
 <span class="sd">  In the case of a pd.DataFrame, preserve the index on the output frame.</span>
-<span class="sd">  e.g.</span>
-<span class="sd">        |condition_1|condition_2|...|condition_n|</span>
-<span class="sd">  gene_1|    1      |     1     |...|    100    |</span>
-<span class="sd">  gene_2|    1      |    100    |...|     1     |</span>
-
-<span class="sd">  You&#39;d get, approximately:</span>
-
-<span class="sd">        |condition_1|condition_2|...|condition_n|</span>
-<span class="sd">  gene_1| -1 (&lt;mu)  |  -1 (&lt;mu) |...|  3 (&gt;&gt;mu) |</span>
-<span class="sd">  gene_2| -1 (&lt;mu)  |  3 (&gt;&gt;mu) |...| -1 (&lt;mu)  |</span>
-
-<span class="sd">  That-is, samples disproportionately represented</span>
-<span class="sd">   in a specific condition become &gt;&gt; 0 and those</span>
-<span class="sd">   disproportionately under-represented become &lt;&lt; 0.</span>
-
-<span class="sd">  If you were to plot any given sample&#39;s distribution,</span>
-<span class="sd">   it should now be normal.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Unrecognized type: &#39;</span> <span class="o">+</span> <span class="nb">type</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
   <span class="k">return</span> <span class="n">zscore_normalize_np</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="n">ddof</span><span class="p">)</span></div>
