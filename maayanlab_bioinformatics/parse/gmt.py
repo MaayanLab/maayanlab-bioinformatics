@@ -1,5 +1,6 @@
 import re
 import json
+import math as m
 import pandas as pd
 import logging
 
@@ -8,6 +9,10 @@ def _try_json_loads(s):
     return json.loads(s)
   except:
     return s
+
+def _ensure_fp(fp, mode):
+  if type(fp) == str: return open(fp, mode)
+  else: return fp
 
 _gene_parser = re.compile(r'^(.+?)([,:;](.+))?$')
 def _parse_gene(gene):
@@ -18,8 +23,7 @@ def _parse_gene(gene):
     return gene.strip(), 1
 
 def gmt_read_iter(fh, parse_gene=_parse_gene):
-  if type(fh) == str:
-    fh = open(fh, 'r')
+  fh = _ensure_fp(fh, 'r')
   for n, line in enumerate(fh):
     try:
       term1, term2, genes_str = line.strip().split('\t', maxsplit=2)
@@ -59,3 +63,34 @@ def gmt_read_pd(fh, parse_gene=_parse_gene):
   ''' Read .gmt files directly into a data frame.
   '''
   return pd.DataFrame(gmt_read_dict(fh, parse_gene=parse_gene))
+
+
+def _serialize_gene_weight_pair(gene, weight):
+  if m.isclose(weight, 1.): return gene
+  elif m.isclose(weight, 0.) or m.isnan(weight): return None
+  else: return '{},{}'.format(gene, weight)
+
+def gmt_write_dict(gmt, fh, serialize_gene_weight_pair=_serialize_gene_weight_pair):
+  ''' Opposite of gmt_read_dict, write a dictionary to a file pointer
+  serialize_gene_weight_pair can be used to customize serialization when dealing with weights.
+    - it should return the serialized gene,weight pair or None if it should be removed
+  By default, 0/nans are dropped, 1s result in a gene (crisp), and everything else uses gene,weight.
+  '''
+  fh = _ensure_fp(fh, 'w')
+  for term, geneset in gmt.items():
+    if '\t' not in term: serialized_term = term + '\t'
+    else: serialized_term = term
+    serialized_geneset = '\t'.join(filter(None, (
+      serialize_gene_weight_pair(gene, weight)
+      for gene, weight in geneset.items()
+    )))
+    if not serialized_geneset:
+      logging.warn('Ignoring term {} because its geneset seems empty'.format(term))
+      continue
+    print(serialized_term, serialized_geneset, sep='\t', file=fh)
+
+def gmt_write_pd(df, fh, serialize_gene_weight_pair=_serialize_gene_weight_pair):
+  ''' Write a pandas dataframe as a gmt, where rows are genes and columns are terms.
+  See gmt_write_dict for more information.
+  '''
+  gmt_write_dict(df.to_dict(), fh, serialize_gene_weight_pair=serialize_gene_weight_pair)
