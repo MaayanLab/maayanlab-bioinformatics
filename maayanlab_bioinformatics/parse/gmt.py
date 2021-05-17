@@ -9,11 +9,11 @@ def _try_json_loads(s):
   except:
     return s
 
-_gene_parser = re.compile(r'^([\w\d_-]+)[^\w\d_-]+(.+)$')
+_gene_parser = re.compile(r'^(.+?)([,:;](.+))?$')
 def _parse_gene(gene):
   match = _gene_parser.match(gene.strip())
-  if match:
-    return match.group(1), _try_json_loads(match.group(2))
+  if match and match.group(3):
+    return match.group(1), _try_json_loads(match.group(3))
   else:
     return gene.strip(), 1
 
