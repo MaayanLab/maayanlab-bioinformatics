@@ -20,6 +20,9 @@ def bridge_plot(select: pd.Series):
   '''
   up = (~select).sum() / select.shape[0]
   dn = -(1-up)
-  x = np.arange(select.shape[0])
-  y = np.cumsum(select.apply(lambda s: up if s else dn))
+  x = np.arange(select.shape[0]+1)
+  y = np.concatenate([
+    np.zeros(1),
+    np.cumsum(select.apply(lambda s: up if s else dn)),
+  ])
   return x, y
