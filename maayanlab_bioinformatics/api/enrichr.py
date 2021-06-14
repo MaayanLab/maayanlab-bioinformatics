@@ -2,7 +2,7 @@ import time
 import requests
 import pandas as pd
 
-def enrichr_link_from_genes(genes, description='', enrichr_link='https://amp.pharm.mssm.edu/Enrichr', sleep=1):
+def enrichr_link_from_genes(genes, description='', enrichr_link='https://maayanlab.cloud/Enrichr', sleep=1):
   ''' Functional access to Enrichr API
   '''
   if sleep:
@@ -19,7 +19,7 @@ def enrichr_link_from_genes(genes, description='', enrichr_link='https://amp.pha
   result = resp.json()
   return dict(result, link=enrichr_link + '/enrich?dataset=' + resp.json()['shortId'])
 
-def enrichr_get_top_results(userListId, bg, enrichr_link='https://amp.pharm.mssm.edu/Enrichr', sleep=1):
+def enrichr_get_top_results(userListId, bg, enrichr_link='https://maayanlab.cloud/Enrichr', sleep=1):
   if sleep:
     time.sleep(sleep)
   resp = requests.get(enrichr_link + '/enrich?userListId={}&backgroundType={}'.format(userListId, bg))
@@ -32,7 +32,7 @@ def enrichr_get_top_results(userListId, bg, enrichr_link='https://amp.pharm.mssm
     'rank', 'term', 'pvalue', 'zscore', 'combinedscore', 'overlapping_genes', 'adjusted_pvalue', '', ''
   ])
 
-def enrichr_term_genes(bg, terms, enrichr_link='https://amp.pharm.mssm.edu/Enrichr', sleep=1):
+def enrichr_term_genes(bg, terms, enrichr_link='https://maayanlab.cloud/Enrichr', sleep=1):
   if sleep:
     time.sleep(sleep)
   resp = requests.get(enrichr_link + '/geneSetLibrary?mode=json&libraryName={}&term={}'.format(
