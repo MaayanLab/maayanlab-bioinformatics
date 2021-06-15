@@ -36,6 +36,14 @@ maayanlab\_bioinformatics.normalization.quantile module
    :undoc-members:
    :show-inheritance:
 
+maayanlab\_bioinformatics.normalization.quantile\_legacy module
+---------------------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.normalization.quantile_legacy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 maayanlab\_bioinformatics.normalization.zscore module
 -----------------------------------------------------
 
