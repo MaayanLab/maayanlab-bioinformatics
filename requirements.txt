@@ -1,6 +1,7 @@
 fisher
 numpy
 pandas
+qnorm
 requests
 scipy
 sklearn
