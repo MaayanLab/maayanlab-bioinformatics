@@ -12,9 +12,9 @@ def test_quantile_normalization():
     [4, 2, 8],
   ])
   expectation = np.array([
-    [5.67, 4.67, 2.00],
+    [5.67, 5.17, 2.00],
     [2.00, 2.00, 3.00],
-    [3.00, 4.67, 4.67],
+    [3.00, 5.17, 4.67],
     [4.67, 3.00, 5.67],
   ])
   assert np.allclose(quantile_normalize(given), expectation, atol=1e-2)

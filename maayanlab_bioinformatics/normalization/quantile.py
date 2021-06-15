@@ -1,6 +1,7 @@
 import logging
 import numpy as np
 import pandas as pd
+from scipy.stats import rankdata
 from functools import singledispatch
 
 
@@ -15,17 +16,17 @@ def quantile_normalize(mat):
 
 @quantile_normalize.register
 def quantile_normalize_np(mat: np.ndarray):
-  # sort vector in np (reuse in np)
   sorted_vec = np.sort(mat, axis=0)
-  # rank vector in np (no dict necessary)
   rank = sorted_vec.mean(axis=1)
-  # construct quantile normalized matrix
+  min_rank_mat = rankdata(mat, axis=0, method='min')
+  max_rank_mat = rankdata(mat, axis=0, method='max')
   return np.array([
     [
-      rank[i]
-      for i in np.searchsorted(sorted_vec[:, c], mat[:, c])
-    ] for c in range(mat.shape[1])
-  ]).T
+      np.mean(rank[min_rank-1:max_rank])
+      for min_rank, max_rank in zip(min_ranks, max_ranks)
+    ]
+    for min_ranks, max_ranks in zip(min_rank_mat, max_rank_mat)
+  ])
 
 @quantile_normalize.register
 def quantile_normalize_pd(mat: pd.DataFrame):
