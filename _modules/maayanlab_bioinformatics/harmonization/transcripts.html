@@ -37,12 +37,19 @@
             
   <h1>Source code for maayanlab_bioinformatics.harmonization.transcripts</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.harmonization.ncbi_genes</span> <span class="kn">import</span> <span class="n">ncbi_genes_lookup</span>
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.utils.merge</span> <span class="kn">import</span> <span class="n">merge</span>
 
-<div class="viewcode-block" id="transcripts_to_genes"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes">[docs]</a><span class="k">def</span> <span class="nf">transcripts_to_genes</span><span class="p">(</span><span class="n">df_expression</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">df_features</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">,</span> <span class="n">uppercasegenes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lookup_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="n">ncbi_genes_lookup</span><span class="p">):</span>
+<div class="viewcode-block" id="transcripts_to_genes"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes">[docs]</a><span class="k">def</span> <span class="nf">transcripts_to_genes</span><span class="p">(</span>
+  <span class="n">df_expression</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+  <span class="n">df_features</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+  <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;var&#39;</span><span class="p">,</span>
+  <span class="n">uppercasegenes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+  <span class="n">lookup_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+  <span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">,</span>
+<span class="p">):</span>
   <span class="sd">&#39;&#39;&#39; Map genes to transcripts given a matrix with transcripts using `ncbi_genes_lookup`</span>
 <span class="sd">  We take a matrix with genes on the rows.</span>
 <span class="sd">  In the case of multiple transcript to gene mappings, we keep the one with the highest variance.</span>
@@ -50,9 +57,13 @@
 <span class="sd">   otherwise we will use the df_expression index column.</span>
 <span class="sd">  The resulting matrix will naturally have fewer samples, corresponding to gene symbols in the</span>
 <span class="sd">   `lookup_dict` which defaults to official ncbi_gene symbols for homo sapiens.</span>
+<span class="sd">  </span>
+<span class="sd">  :param strategy: (&#39;var&#39;|&#39;sum&#39;) collision strategy (select one with highest variance, or sum counts)</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="c1"># resolve lookup_dict if necessary</span>
-  <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">lookup_dict</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">lookup_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">lookup_dict</span> <span class="o">=</span> <span class="n">ncbi_genes_lookup</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="n">organism</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="n">lookup_dict</span><span class="p">):</span>
     <span class="n">lookup_dict</span> <span class="o">=</span> <span class="n">lookup_dict</span><span class="p">()</span>
   <span class="c1"># construct df_features if not provided</span>
   <span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -63,15 +74,23 @@
     <span class="n">df_features</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_features</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>
   <span class="c1"># get df_expression but only the highest variance transcript that</span>
   <span class="c1">#  corresponds to the same set of genes</span>
-  <span class="n">df_transcript_genes</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span>
-    <span class="n">df_expression</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">),</span>
-    <span class="n">df_features</span><span class="p">[[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">lookup_dict</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-  <span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">)[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-  <span class="n">df_transcript_genes</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df_transcript_genes</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span>
-  <span class="n">df_transcript_genes</span> <span class="o">=</span> <span class="n">df_transcript_genes</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-  <span class="c1"># perform the actual mapping</span>
-  <span class="n">df_gene_expression</span> <span class="o">=</span> <span class="n">df_expression</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_transcript_genes</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
-  <span class="n">df_gene_expression</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df_transcript_genes</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span>
+  <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s1">&#39;var&#39;</span><span class="p">:</span>
+    <span class="n">df_transcript_genes</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span>
+      <span class="n">df_expression</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">),</span>
+      <span class="n">df_features</span><span class="p">[[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">lookup_dict</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">)[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df_transcript_genes</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df_transcript_genes</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span>
+    <span class="n">df_transcript_genes</span> <span class="o">=</span> <span class="n">df_transcript_genes</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># perform the actual mapping</span>
+    <span class="n">df_gene_expression</span> <span class="o">=</span> <span class="n">df_expression</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_transcript_genes</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+    <span class="n">df_gene_expression</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df_transcript_genes</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span>
+  <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s1">&#39;sum&#39;</span><span class="p">:</span>
+    <span class="n">df_gene_expression</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span>
+      <span class="n">df_expression</span><span class="p">,</span>
+      <span class="n">df_features</span><span class="p">[[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">lookup_dict</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
   <span class="k">return</span> <span class="n">df_gene_expression</span></div>
 </pre></div>
 
