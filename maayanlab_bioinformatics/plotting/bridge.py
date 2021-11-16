@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-def bridge_plot(select: pd.Series):
+def bridge_plot(select: pd.Series, weights: pd.Series = None):
   ''' Use the filter to construct a bridge plot.
 
   ```python
@@ -15,14 +15,18 @@ def bridge_plot(select: pd.Series):
   plt.show()
   ```
 
-  :param select: (pd.Series) selection of hits (i.e. `df['gene'] == 'my_target'`)
+  :param select: (pd.Series) selection of hits (i.e. `df['gene'] == 'my_target'`) in ranked order
+  :param weights: (pd.Series) optional weights for each hit in the same order
   :return: (Tuple[np.array, np.array]) x and y arrays ready to be plotted.
   '''
-  up = (~select).sum() / select.shape[0]
-  dn = -(1-up)
+  if weights is None:
+    weights = pd.Series(np.ones(select.shape[0]), index=select.index)
+  max_es = weights[select].abs().sum() # maximum enrichment score if we were to hit everything (positively)
+  up = select * weights / max_es # go up/dn by normalized weight on each hit
+  dn = - (1 - select) * up.sum() / (~select).sum()
   x = np.arange(select.shape[0]+1)
   y = np.concatenate([
     np.zeros(1),
-    np.cumsum(select.apply(lambda s: up if s else dn)),
+    np.cumsum(up + dn),
   ])
   return x, y
