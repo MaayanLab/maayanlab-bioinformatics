@@ -83,7 +83,7 @@ def fisher_overlap(
     raise Exception('The total population cannot be smaller than the current overlap..')
   #
   # pvalue = fisher.pvalue(a, b, c, d).right_tail
-  pvalue = scipy.stats.fisher_exact([[a, b] [c, d]], 'greater')[1]
+  pvalue = scipy.stats.fisher_exact([[a, b], [c, d]], 'greater')[1]
   odds_ratio = safe_odds_ratio(a, b, c, d)
   #
   return FisherOverlap(
