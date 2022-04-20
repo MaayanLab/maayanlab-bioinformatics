@@ -42,6 +42,47 @@
 </section>
 <section id="module-maayanlab_bioinformatics.api.enrichr">
 <span id="maayanlab-bioinformatics-api-enrichr-module"></span><h2>maayanlab_bioinformatics.api.enrichr module<a class="headerlink" href="#module-maayanlab_bioinformatics.api.enrichr" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.api.enrichr.EnrichrUserList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.api.enrichr.</span></span><span class="sig-name descname"><span class="pre">EnrichrUserList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enrichr_link</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://maayanlab.cloud/Enrichr'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/api/enrichr.html#EnrichrUserList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.api.enrichr.EnrichrUserList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Object oriented access to Enrichr results.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.api</span> <span class="kn">import</span> <span class="n">EnrichrUserList</span>
+<span class="n">mylist</span> <span class="o">=</span> <span class="n">EnrichrUserList</span><span class="p">([</span>
+  <span class="s1">&#39;STAT1&#39;</span><span class="p">,</span> <span class="s1">&#39;ACE2&#39;</span><span class="p">,</span> <span class="c1">#...</span>
+<span class="p">],</span> <span class="s1">&#39;mylist&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mylist</span><span class="o">.</span><span class="n">link</span><span class="p">)</span>
+<span class="n">mylist</span><span class="p">[</span><span class="s1">&#39;GO_Biological_Process_2021&#39;</span><span class="p">]</span> <span class="c1"># returns dataframe with enrichment results</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.api.enrichr.EnrichrUserList.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#maayanlab_bioinformatics.api.enrichr.EnrichrUserList.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.api.enrichr.EnrichrUserList.genes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">genes</span></span><a class="headerlink" href="#maayanlab_bioinformatics.api.enrichr.EnrichrUserList.genes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.api.enrichr.EnrichrUserList.link">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">link</span></span><a class="headerlink" href="#maayanlab_bioinformatics.api.enrichr.EnrichrUserList.link" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.api.enrichr.EnrichrUserList.shortId">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shortId</span></span><a class="headerlink" href="#maayanlab_bioinformatics.api.enrichr.EnrichrUserList.shortId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.api.enrichr.EnrichrUserList.userListId">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">userListId</span></span><a class="headerlink" href="#maayanlab_bioinformatics.api.enrichr.EnrichrUserList.userListId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="maayanlab_bioinformatics.api.enrichr.enrichr_get_top_results">
 <span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.api.enrichr.</span></span><span class="sig-name descname"><span class="pre">enrichr_get_top_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userListId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enrichr_link</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://maayanlab.cloud/Enrichr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/api/enrichr.html#enrichr_get_top_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.api.enrichr.enrichr_get_top_results" title="Permalink to this definition">¶</a></dt>
@@ -72,8 +113,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">maayanlab_bioinformatics.api package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.api.enrichr">maayanlab_bioinformatics.api.enrichr module</a></li>
@@ -82,6 +124,7 @@
 </li>
 </ul>
 
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -118,7 +161,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
 </html>

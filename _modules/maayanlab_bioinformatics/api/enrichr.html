@@ -83,6 +83,99 @@
       <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
     <span class="p">))</span>
   <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="EnrichrUserList"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.EnrichrUserList">[docs]</a><span class="k">class</span> <span class="nc">EnrichrUserList</span><span class="p">:</span>
+  <span class="sd">&#39;&#39;&#39; Object oriented access to Enrichr results.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">  ```python</span>
+<span class="sd">  from maayanlab_bioinformatics.api import EnrichrUserList</span>
+<span class="sd">  mylist = EnrichrUserList([</span>
+<span class="sd">    &#39;STAT1&#39;, &#39;ACE2&#39;, #...</span>
+<span class="sd">  ], &#39;mylist&#39;)</span>
+<span class="sd">  print(mylist.link)</span>
+<span class="sd">  mylist[&#39;GO_Biological_Process_2021&#39;] # returns dataframe with enrichment results</span>
+<span class="sd">  ```</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">genes</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_enrichr_link</span> <span class="o">=</span> <span class="n">enrichr_link</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_genes</span> <span class="o">=</span> <span class="n">genes</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_shortId</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="o">=</span> <span class="p">{}</span>
+
+  <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;EnrichrUserList(..., description=</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+  
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">genes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_genes</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">link</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/enrich?dataset=&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">shortId</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">shortId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shortId</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shortId</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">userListId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span>
+  
+  <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">library</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enrich</span><span class="p">(</span><span class="n">library</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">[</span><span class="n">library</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">_addList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/addList&#39;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="p">{</span>
+      <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genes</span><span class="p">)),</span>
+      <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
+    <span class="p">})</span>
+    <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Enrichr failed with status </span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+      <span class="p">))</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="c1"># wait a tinybit before returning link (backoff)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;userListId&#39;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_shortId</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;shortId&#39;</span><span class="p">]</span>
+  
+  <span class="k">def</span> <span class="nf">_enrich</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">):</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/enrich&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+      <span class="s1">&#39;userListId&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">userListId</span><span class="p">,</span>
+      <span class="s1">&#39;backgroundType&#39;</span><span class="p">:</span> <span class="n">library</span><span class="p">,</span>
+    <span class="p">})</span>
+    <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Enrichr failed with status </span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+      <span class="p">))</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="c1"># wait a tinybit before returning link (backoff)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">[</span><span class="n">library</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+      <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
+        <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span>
+        <span class="n">pvalue</span><span class="o">=</span><span class="n">pvalue</span><span class="p">,</span>
+        <span class="n">zscore</span><span class="o">=</span><span class="n">zscore</span><span class="p">,</span>
+        <span class="n">combinedscore</span><span class="o">=</span><span class="n">combinedscore</span><span class="p">,</span>
+        <span class="n">overlapping_genes</span><span class="o">=</span><span class="n">overlapping_genes</span><span class="p">,</span>
+        <span class="n">adjusted_pvalue</span><span class="o">=</span><span class="n">adjusted_pvalue</span><span class="p">,</span>
+      <span class="p">)</span>
+      <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">,</span> <span class="n">zscore</span><span class="p">,</span> <span class="n">combinedscore</span><span class="p">,</span> <span class="n">overlapping_genes</span><span class="p">,</span> <span class="n">adjusted_pvalue</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="n">library</span><span class="p">]</span>
+    <span class="p">])</span></div>
 </pre></div>
 
             <div class="clearer"></div>
@@ -121,7 +214,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
 </html>
