@@ -1,4 +1,3 @@
-fisher
 numpy
 pandas
 qnorm

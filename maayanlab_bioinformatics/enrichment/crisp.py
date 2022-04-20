@@ -1,4 +1,5 @@
-import fisher
+# import fisher
+import scipy.stats
 from typing import Union, Dict, Set, Iterable, Tuple, Hashable, Any, TypeVar, Optional
 from dataclasses import dataclass
 
@@ -81,7 +82,8 @@ def fisher_overlap(
   if d < 0:
     raise Exception('The total population cannot be smaller than the current overlap..')
   #
-  pvalue = fisher.pvalue(a, b, c, d).right_tail
+  # pvalue = fisher.pvalue(a, b, c, d).right_tail
+  _, pvalue = scipy.stats.fisher_exact([[a, b,] [c, d,]], 'greater')
   odds_ratio = safe_odds_ratio(a, b, c, d)
   #
   return FisherOverlap(
