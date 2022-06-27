@@ -67,9 +67,15 @@ def gmt_read_pd(fh, parse_gene=_parse_gene):
 
 
 def _serialize_gene_weight_pair(gene, weight):
-  if m.isclose(weight, 1.): return gene
+  if weight == 1 or m.isclose(weight, 1.): return gene
   elif m.isclose(weight, 0.) or m.isnan(weight): return None
   else: return '{},{}'.format(gene, weight)
+
+def _ensure_weight(gs):
+  if isinstance(gs, dict):
+    return gs.items()
+  else:
+    return ((g, 1) for g in gs)
 
 def gmt_write_dict(gmt, fh, serialize_gene_weight_pair=_serialize_gene_weight_pair):
   ''' Opposite of gmt_read_dict, write a dictionary to a file pointer
@@ -83,7 +89,7 @@ def gmt_write_dict(gmt, fh, serialize_gene_weight_pair=_serialize_gene_weight_pa
     else: serialized_term = term
     serialized_geneset = '\t'.join(filter(None, (
       serialize_gene_weight_pair(gene, weight)
-      for gene, weight in geneset.items()
+      for gene, weight in _ensure_weight(geneset.items())
     )))
     if not serialized_geneset:
       logging.warn('Ignoring term {} because its geneset seems empty'.format(term))
