@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -50,9 +51,9 @@
   <span class="n">lookup_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
   <span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">,</span>
 <span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Map genes to transcripts given a matrix with transcripts using `ncbi_genes_lookup`</span>
-<span class="sd">  We take a matrix with genes on the rows.</span>
-<span class="sd">  In the case of multiple transcript to gene mappings, we keep the one with the highest variance.</span>
+  <span class="sd">&#39;&#39;&#39; Map gene alternative ids/transcripts to gene symbols using `ncbi_genes_lookup`</span>
+<span class="sd">  We take a matrix with genes/transcripts on the rows and samples on the columns.</span>
+<span class="sd">  In the case of multiple gene/transcript to symbol mappings, we adopt the collision strategy specified.</span>
 <span class="sd">  If df_features is provided, we will use &#39;symbol&#39; column as the transcript names,</span>
 <span class="sd">   otherwise we will use the df_expression index column.</span>
 <span class="sd">  The resulting matrix will naturally have fewer samples, corresponding to gene symbols in the</span>
@@ -109,7 +110,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -130,7 +131,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

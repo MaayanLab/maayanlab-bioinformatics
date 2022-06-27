@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>maayanlab_bioinformatics.harmonization package &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,6 +12,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -36,12 +37,12 @@
           <div class="body" role="main">
             
   <section id="maayanlab-bioinformatics-harmonization-package">
-<h1>maayanlab_bioinformatics.harmonization package<a class="headerlink" href="#maayanlab-bioinformatics-harmonization-package" title="Permalink to this headline">¶</a></h1>
+<h1>maayanlab_bioinformatics.harmonization package<a class="headerlink" href="#maayanlab-bioinformatics-harmonization-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-maayanlab_bioinformatics.harmonization.ncbi_genes">
-<span id="maayanlab-bioinformatics-harmonization-ncbi-genes-module"></span><h2>maayanlab_bioinformatics.harmonization.ncbi_genes module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.ncbi_genes" title="Permalink to this headline">¶</a></h2>
+<span id="maayanlab-bioinformatics-harmonization-ncbi-genes-module"></span><h2>maayanlab_bioinformatics.harmonization.ncbi_genes module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.ncbi_genes" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch">
 <span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.ncbi_genes.</span></span><span class="sig-name descname"><span class="pre">ncbi_genes_fetch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">organism='Mammalia/Homo_sapiens'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/ncbi_genes.html#ncbi_genes_fetch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch" title="Permalink to this definition">¶</a></dt>
@@ -62,19 +63,19 @@ Usage:</p>
 
 </section>
 <section id="module-maayanlab_bioinformatics.harmonization.transcripts">
-<span id="maayanlab-bioinformatics-harmonization-transcripts-module"></span><h2>maayanlab_bioinformatics.harmonization.transcripts module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.transcripts" title="Permalink to this headline">¶</a></h2>
+<span id="maayanlab-bioinformatics-harmonization-transcripts-module"></span><h2>maayanlab_bioinformatics.harmonization.transcripts module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.transcripts" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.transcripts.</span></span><span class="sig-name descname"><span class="pre">transcripts_to_genes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_expression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'var'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uppercasegenes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookup_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">organism</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Mammalia/Homo_sapiens'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/transcripts.html#transcripts_to_genes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Map genes to transcripts given a matrix with transcripts using <code class="docutils literal notranslate"><span class="pre">ncbi_genes_lookup</span></code>
-We take a matrix with genes on the rows.
-In the case of multiple transcript to gene mappings, we keep the one with the highest variance.
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.transcripts.</span></span><span class="sig-name descname"><span class="pre">transcripts_to_genes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_expression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'var'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uppercasegenes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookup_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">organism</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Mammalia/Homo_sapiens'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/transcripts.html#transcripts_to_genes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map gene alternative ids/transcripts to gene symbols using <code class="docutils literal notranslate"><span class="pre">ncbi_genes_lookup</span></code>
+We take a matrix with genes/transcripts on the rows and samples on the columns.
+In the case of multiple gene/transcript to symbol mappings, we adopt the collision strategy specified.
 If df_features is provided, we will use ‘symbol’ column as the transcript names,
 otherwise we will use the df_expression index column.
 The resulting matrix will naturally have fewer samples, corresponding to gene symbols in the
 <code class="docutils literal notranslate"><span class="pre">lookup_dict</span></code> which defaults to official ncbi_gene symbols for homo sapiens.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>strategy</strong> – (‘var’|’sum’) collision strategy (select one with highest variance, or sum counts)</p>
 </dd>
 </dl>
@@ -82,7 +83,7 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
 
 </section>
 <section id="module-maayanlab_bioinformatics.harmonization">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization" title="Permalink to this heading">¶</a></h2>
 <p>This module contains functions relating to data harmonization.</p>
 </section>
 </section>
@@ -123,7 +124,7 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -143,7 +144,7 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>
