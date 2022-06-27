@@ -46,3 +46,17 @@ def sp_hdf_load(hdf):
     columns=pd.Series(hdf['columns']).str.decode('utf8'),
   )
 
+def sp_std(X_ij, ddof=1):
+  ''' Standard deviation for a matrix compatible with sparse matrices.
+  i is the row index, j is the column index.
+
+  \sigma_j = \sqrt{\frac{\sum(x_ij - \mu_j)^2}{N_j - ddof}}}
+  '''
+  N_j = X_ij.shape[-1]
+  mu_j = X_ij.sum(axis=0) / N_j
+  num_j = ((X_ij - mu_j)**2).sum(axis=0)
+  denom_j = N_j - ddof
+  if sp_sparse.isspmatrix(X_ij):
+    return (num_j / denom_j).A.squeeze()**(1/2)
+  else:
+    return (num_j / denom_j)**(1/2)
