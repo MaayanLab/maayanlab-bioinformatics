@@ -1,3 +1,4 @@
+import numpy as np
 import scipy.sparse as sp_sparse
 
 def sp_hdf_dump(hdf, sdf, **kwargs):
@@ -60,3 +61,22 @@ def sp_std(X_ij, ddof=1):
     return (num_j / denom_j).A.squeeze()**(1/2)
   else:
     return (num_j / denom_j)**(1/2)
+
+def sp_nanpercentile(sp, q, axis=None, method='linear'):
+  ''' nanpercentile for a sparse matrix, basically we use np.percentile on the underlying data.
+  '''
+  coo = sp_sparse.coo_array(sp)
+  if axis is None:
+    return np.percentile(coo.data, q, method=method)
+  elif axis == 0:
+    return np.array([
+      np.percentile(coo.data[coo.col == c], q, method=method)
+      for c in range(coo.shape[1])
+    ])
+  elif axis == 1:
+    return np.array([
+      np.percentile(coo.data[coo.row == r], q, method=method)
+      for r in range(coo.shape[0])
+    ])
+  else:
+    raise NotImplementedError
