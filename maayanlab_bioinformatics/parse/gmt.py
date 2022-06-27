@@ -27,13 +27,14 @@ def gmt_read_iter(fh, parse_gene=_parse_gene):
   for n, line in enumerate(fh):
     try:
       term1, term2, genes_str = line.strip().split('\t', maxsplit=2)
-    except:
+    except ValueError:
       logging.warn('Ignoring line {}:{} because it seems empty'.format(n, line))
       continue
     term = '\t'.join(filter(None, map(str.strip, (term1, term2))))
     geneset = {
       k: v
       for k, v in map(parse_gene, genes_str.split('\t'))
+      if k
     }
     yield term, geneset
 
