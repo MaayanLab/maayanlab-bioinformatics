@@ -12,9 +12,9 @@ def transcripts_to_genes(
   lookup_dict: Optional[Dict[str, str]]=None,
   organism='Mammalia/Homo_sapiens',
 ):
-  ''' Map genes to transcripts given a matrix with transcripts using `ncbi_genes_lookup`
-  We take a matrix with genes on the rows.
-  In the case of multiple transcript to gene mappings, we keep the one with the highest variance.
+  ''' Map gene alternative ids/transcripts to gene symbols using `ncbi_genes_lookup`
+  We take a matrix with genes/transcripts on the rows and samples on the columns.
+  In the case of multiple gene/transcript to symbol mappings, we adopt the collision strategy specified.
   If df_features is provided, we will use 'symbol' column as the transcript names,
    otherwise we will use the df_expression index column.
   The resulting matrix will naturally have fewer samples, corresponding to gene symbols in the
