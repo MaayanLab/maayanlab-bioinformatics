@@ -89,7 +89,7 @@ def gmt_write_dict(gmt, fh, serialize_gene_weight_pair=_serialize_gene_weight_pa
     else: serialized_term = term
     serialized_geneset = '\t'.join(filter(None, (
       serialize_gene_weight_pair(gene, weight)
-      for gene, weight in _ensure_weight(geneset.items())
+      for gene, weight in _ensure_weight(geneset)
     )))
     if not serialized_geneset:
       logging.warn('Ignoring term {} because its geneset seems empty'.format(term))
