@@ -41,6 +41,109 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
+<section id="module-maayanlab_bioinformatics.utils.chunked">
+<span id="maayanlab-bioinformatics-utils-chunked-module"></span><h2>maayanlab_bioinformatics.utils.chunked module<a class="headerlink" href="#module-maayanlab_bioinformatics.utils.chunked" title="Permalink to this heading">¶</a></h2>
+<p>Chunked module has useful helper functions for manipulating ndarrays in chunks, this is
+especially useful when working with h5py matrices since operations which respect chunk boundaries
+avoid excessive disk random access.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.chunked.chunk_applymap">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.chunked.</span></span><span class="sig-name descname"><span class="pre">chunk_applymap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/chunked.html#chunk_applymap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.chunked.chunk_applymap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply function to all elements in a matrix in chunks</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> – The function to apply to each chunk</p></li>
+<li><p><strong>x</strong> – The matrix to apply it to</p></li>
+<li><p><strong>out</strong> – The matrix to write to (pass variable to out for inplace)</p></li>
+<li><p><strong>chunks</strong> – The shape of the chunks in each dimension,</p></li>
+</ul>
+</dd>
+</dl>
+<p>can be inferred for h5py arrays based on actual chunks on disk,
+can be a multiple of an integer value of chunks.
+:param progress: Show tqdm progress bar or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The augmented matrix (or the original matrix, augmented)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.chunked.chunk_infer">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.chunked.</span></span><span class="sig-name descname"><span class="pre">chunk_infer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/chunked.html#chunk_infer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.chunked.chunk_infer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for interpreting the chunks param with respect to a matrix x</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – The matrix (ndarray)</p></li>
+<li><p><strong>chunks</strong> – The chunks parameter,</p></li>
+</ul>
+</dd>
+</dl>
+<p>if None (default): Try to infer from chunks attribute (h5py)
+if int: Use a multiple of the inferred chunks attribute, or alternatively that size in each dimension
+if tuple: Use the explicit chunks provided for slicing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple chunks parameter</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.chunked.chunk_slices">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.chunked.</span></span><span class="sig-name descname"><span class="pre">chunk_slices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/chunked.html#chunk_slices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.chunked.chunk_slices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return slices to chunk through an ndarray.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> – The shape of the ndarray or size in 1d.</p></li>
+<li><p><strong>chunks</strong> – The shape of the chunks or size in all dimensions.</p></li>
+<li><p><strong>progress</strong> – Show tqdm progress bar or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Iterator[slice(start, stop) for each dimension in shape]</p>
+</dd>
+</dl>
+<p>Usage:
+N = np.arange(10)
+[N[s] for s in chunk_slices(len(N), 3)]</p>
+<p>I = np.eye(10)
+[I[i, j] for i, j in chunk_slices(I.shape, 3)]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.chunked.tqdm">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.chunked.</span></span><span class="sig-name descname"><span class="pre">tqdm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">it</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maayanlab_bioinformatics.utils.chunked.tqdm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-maayanlab_bioinformatics.utils.describe">
+<span id="maayanlab-bioinformatics-utils-describe-module"></span><h2>maayanlab_bioinformatics.utils.describe module<a class="headerlink" href="#module-maayanlab_bioinformatics.utils.describe" title="Permalink to this heading">¶</a></h2>
+<p>Descriptive statistics on things that aren’t pandas data frames.
+This can often be a lot more efficient.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.describe.np_describe">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.describe.</span></span><span class="sig-name descname"><span class="pre">np_describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[25,</span> <span class="pre">50,</span> <span class="pre">75]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/describe.html#np_describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.describe.np_describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like pandas Series.describe() but operating on numpy arrays / matrices.
+This can be a lot faster especially when working with h5py or sparse data frames.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params x<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The numpy array to describe</p>
+</dd>
+<dt class="field-even">Params axis<span class="colon">:</span></dt>
+<dd class="field-even"><p>The axis for which to perform describe against</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, np.array] A dictionary mapping metric name to results</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-maayanlab_bioinformatics.utils.fetch_save_read">
 <span id="maayanlab-bioinformatics-utils-fetch-save-read-module"></span><h2>maayanlab_bioinformatics.utils.fetch_save_read module<a class="headerlink" href="#module-maayanlab_bioinformatics.utils.fetch_save_read" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
@@ -57,6 +160,58 @@
 <span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.merge.</span></span><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">dfs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/merge.html#merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.merge.merge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper function for many trivial (index based) joins
 Deprecated: Use <code class="docutils literal notranslate"><span class="pre">pd.concat([dfs],</span> <span class="pre">axis=1)</span></code> instead</p>
+</dd></dl>
+
+</section>
+<section id="module-maayanlab_bioinformatics.utils.sparse">
+<span id="maayanlab-bioinformatics-utils-sparse-module"></span><h2>maayanlab_bioinformatics.utils.sparse module<a class="headerlink" href="#module-maayanlab_bioinformatics.utils.sparse" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.sparse.sp_hdf_dump">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.sparse.</span></span><span class="sig-name descname"><span class="pre">sp_hdf_dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hdf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdf</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/sparse.html#sp_hdf_dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.sparse.sp_hdf_dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump Sparse Pandas DataFrame to h5py object.</p>
+<p>Usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp_sparse</span>
+
+<span class="c1"># write</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;sparse.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">sdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">from_spmatrix</span><span class="p">(</span><span class="n">sp_sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">sp_hdf_dump</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sdf</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.sparse.sp_hdf_load">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.sparse.</span></span><span class="sig-name descname"><span class="pre">sp_hdf_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hdf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/sparse.html#sp_hdf_load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.sparse.sp_hdf_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load Sparse Pandas DataFrame from h5py object.</p>
+<p>Usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp_sparse</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;sparse.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">sdf</span> <span class="o">=</span> <span class="n">sp_hdf_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.sparse.sp_nanpercentile">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.sparse.</span></span><span class="sig-name descname"><span class="pre">sp_nanpercentile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/sparse.html#sp_nanpercentile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.sparse.sp_nanpercentile" title="Permalink to this definition">¶</a></dt>
+<dd><p>nanpercentile for a sparse matrix, basically we use np.percentile on the underlying data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.sparse.sp_std">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.sparse.</span></span><span class="sig-name descname"><span class="pre">sp_std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_ij</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/sparse.html#sp_std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.sparse.sp_std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard deviation for a matrix compatible with sparse matrices.
+i is the row index, j is the column index.</p>
+<p>sigma_j = sqrt{
+rac{sum(x_ij - mu_j)^2}{N_j - ddof}}}</p>
 </dd></dl>
 
 </section>
@@ -78,8 +233,11 @@ Deprecated: Use <code class="docutils literal notranslate"><span class="pre">pd.
     <ul>
 <li><a class="reference internal" href="#">maayanlab_bioinformatics.utils package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.chunked">maayanlab_bioinformatics.utils.chunked module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.describe">maayanlab_bioinformatics.utils.describe module</a></li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.fetch_save_read">maayanlab_bioinformatics.utils.fetch_save_read module</a></li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.merge">maayanlab_bioinformatics.utils.merge module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.sparse">maayanlab_bioinformatics.utils.sparse module</a></li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils">Module contents</a></li>
 </ul>
 </li>

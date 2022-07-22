@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>maayanlab_bioinformatics.utils.sparse &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">maayanlab_bioinformatics.utils.sparse</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for maayanlab_bioinformatics.utils.sparse</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp_sparse</span>
+
+<div class="viewcode-block" id="sp_hdf_dump"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.sparse.sp_hdf_dump">[docs]</a><span class="k">def</span> <span class="nf">sp_hdf_dump</span><span class="p">(</span><span class="n">hdf</span><span class="p">,</span> <span class="n">sdf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+  <span class="sd">&#39;&#39;&#39; Dump Sparse Pandas DataFrame to h5py object.</span>
+
+<span class="sd">  Usage:</span>
+<span class="sd">  ```python</span>
+<span class="sd">  import h5py</span>
+<span class="sd">  import pandas as pd</span>
+<span class="sd">  import scipy.sparse as sp_sparse</span>
+
+<span class="sd">  # write</span>
+<span class="sd">  f = h5py.File(&#39;sparse.h5&#39;, &#39;w&#39;)</span>
+<span class="sd">  sdf = pd.DataFrame.sparse.from_spmatrix(sp_sparse.eye(3))</span>
+<span class="sd">  sp_hdf_dump(f, sdf)</span>
+<span class="sd">  f.close()</span>
+<span class="sd">  ```</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">to_coo</span><span class="p">()</span>
+  <span class="n">hdf</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">hdf</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;row&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">hdf</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;col&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">hdf</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">sdf</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">hdf</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;columns&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">sdf</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">hdf</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+  <span class="k">return</span> <span class="n">hdf</span></div>
+
+<div class="viewcode-block" id="sp_hdf_load"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.sparse.sp_hdf_load">[docs]</a><span class="k">def</span> <span class="nf">sp_hdf_load</span><span class="p">(</span><span class="n">hdf</span><span class="p">):</span>
+  <span class="sd">&#39;&#39;&#39; Load Sparse Pandas DataFrame from h5py object.</span>
+
+<span class="sd">  Usage:</span>
+<span class="sd">  ```python</span>
+<span class="sd">  import h5py</span>
+<span class="sd">  import pandas as pd</span>
+<span class="sd">  import scipy.sparse as sp_sparse</span>
+
+<span class="sd">  f = h5py.File(&#39;sparse.h5&#39;, &#39;r&#39;)</span>
+<span class="sd">  sdf = sp_hdf_load(f)</span>
+<span class="sd">  f.close()</span>
+<span class="sd">  ```</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+  <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">from_spmatrix</span><span class="p">(</span>
+    <span class="n">sp_sparse</span><span class="o">.</span><span class="n">coo_array</span><span class="p">((</span><span class="n">hdf</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="p">(</span><span class="n">hdf</span><span class="p">[</span><span class="s1">&#39;row&#39;</span><span class="p">],</span> <span class="n">hdf</span><span class="p">[</span><span class="s1">&#39;col&#39;</span><span class="p">])),</span> <span class="n">shape</span><span class="o">=</span><span class="n">hdf</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">]),</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">hdf</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">),</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">hdf</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">),</span>
+  <span class="p">)</span></div>
+
+<div class="viewcode-block" id="sp_std"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.sparse.sp_std">[docs]</a><span class="k">def</span> <span class="nf">sp_std</span><span class="p">(</span><span class="n">X_ij</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+  <span class="sd">&#39;&#39;&#39; Standard deviation for a matrix compatible with sparse matrices.</span>
+<span class="sd">  i is the row index, j is the column index.</span>
+
+<span class="sd">  \sigma_j = \sqrt{\frac{\sum(x_ij - \mu_j)^2}{N_j - ddof}}}</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="n">N_j</span> <span class="o">=</span> <span class="n">X_ij</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="n">mu_j</span> <span class="o">=</span> <span class="n">X_ij</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_j</span>
+  <span class="n">num_j</span> <span class="o">=</span> <span class="p">((</span><span class="n">X_ij</span> <span class="o">-</span> <span class="n">mu_j</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">denom_j</span> <span class="o">=</span> <span class="n">N_j</span> <span class="o">-</span> <span class="n">ddof</span>
+  <span class="k">if</span> <span class="n">sp_sparse</span><span class="o">.</span><span class="n">isspmatrix</span><span class="p">(</span><span class="n">X_ij</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">num_j</span> <span class="o">/</span> <span class="n">denom_j</span><span class="p">)</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">num_j</span> <span class="o">/</span> <span class="n">denom_j</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="sp_nanpercentile"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.sparse.sp_nanpercentile">[docs]</a><span class="k">def</span> <span class="nf">sp_nanpercentile</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">):</span>
+  <span class="sd">&#39;&#39;&#39; nanpercentile for a sparse matrix, basically we use np.percentile on the underlying data.</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="n">coo</span> <span class="o">=</span> <span class="n">sp_sparse</span><span class="o">.</span><span class="n">coo_array</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">coo</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">coo</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">coo</span><span class="o">.</span><span class="n">col</span> <span class="o">==</span> <span class="n">c</span><span class="p">],</span> <span class="n">q</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">coo</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">])</span>
+  <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">coo</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">coo</span><span class="o">.</span><span class="n">row</span> <span class="o">==</span> <span class="n">r</span><span class="p">],</span> <span class="n">q</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">coo</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="p">])</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">maayanlab_bioinformatics.utils.sparse</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Ma&#39;ayanlab.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>

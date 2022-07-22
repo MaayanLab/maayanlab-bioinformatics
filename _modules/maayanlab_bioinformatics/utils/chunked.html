@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>maayanlab_bioinformatics.utils.chunked &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">maayanlab_bioinformatics.utils.chunked</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for maayanlab_bioinformatics.utils.chunked</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39; Chunked module has useful helper functions for manipulating ndarrays in chunks, this is</span>
+<span class="sd">especially useful when working with h5py matrices since operations which respect chunk boundaries</span>
+<span class="sd">avoid excessive disk random access.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+  <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;install tqdm for progress bar&#39;</span><span class="p">)</span>
+  <span class="n">tqdm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">it</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">it</span>
+
+<div class="viewcode-block" id="chunk_slices"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.chunked.chunk_slices">[docs]</a><span class="k">def</span> <span class="nf">chunk_slices</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">  Return slices to chunk through an ndarray.</span>
+
+<span class="sd">  :param shape:    The shape of the ndarray or size in 1d.</span>
+<span class="sd">  :param chunks:   The shape of the chunks or size in all dimensions.</span>
+<span class="sd">  :param progress: Show tqdm progress bar or not</span>
+
+<span class="sd">  :returns: Iterator[slice(start, stop) for each dimension in shape]</span>
+
+<span class="sd">  Usage:</span>
+<span class="sd">  N = np.arange(10)</span>
+<span class="sd">  [N[s] for s in chunk_slices(len(N), 3)]</span>
+
+<span class="sd">  I = np.eye(10)</span>
+<span class="sd">  [I[i, j] for i, j in chunk_slices(I.shape, 3)]</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">progress</span><span class="p">:</span>
+    <span class="n">tqdm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">it</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">it</span>
+  <span class="c1"># ensure shape is a tuple (we&#39;ll flatten it when we&#39;re done if not)</span>
+  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">shape</span><span class="p">,)</span>
+    <span class="n">flatten</span> <span class="o">=</span> <span class="kc">True</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">flatten</span> <span class="o">=</span> <span class="kc">False</span>
+  <span class="c1"># spread chunks to length of shape</span>
+  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">(</span><span class="n">chunks</span><span class="p">,)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+  <span class="c1"># ensure shape and chunks are the same dimensions</span>
+  <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">indices</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+    <span class="c1"># we take the iterable cartesian product, equivalent to a nested for loop on each dimension</span>
+    <span class="n">it</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[</span>
+      <span class="c1"># for each dimension, shape / chunks + 1 when chunks are not divisible by shape</span>
+      <span class="nb">range</span><span class="p">((</span><span class="n">s</span><span class="o">//</span><span class="n">cs</span><span class="p">)</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="o">%</span><span class="n">cs</span><span class="o">!=</span><span class="mi">0</span><span class="p">))</span>
+      <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">cs</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span>
+    <span class="p">]),</span>
+    <span class="c1"># the total (for progress bar) is just the actual product of steps in each dimension</span>
+    <span class="n">total</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">([(</span><span class="n">s</span><span class="o">//</span><span class="n">cs</span><span class="p">)</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="o">%</span><span class="n">cs</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">cs</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)]),</span>
+  <span class="p">):</span>
+    <span class="c1"># indices have the chunk start index, we can then get the slice (start, end) for each dimension</span>
+    <span class="n">slices</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="nb">slice</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">cs</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cs</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">cs</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)])</span>
+    <span class="c1"># if not multiple dimensions, we&#39;ll flatten the slice</span>
+    <span class="k">if</span> <span class="n">flatten</span><span class="p">:</span>
+      <span class="n">slices</span><span class="p">,</span> <span class="o">=</span> <span class="n">slices</span>
+    <span class="k">yield</span> <span class="n">slices</span></div>
+
+<div class="viewcode-block" id="chunk_infer"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.chunked.chunk_infer">[docs]</a><span class="k">def</span> <span class="nf">chunk_infer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  <span class="sd">&#39;&#39;&#39; Helper function for interpreting the chunks param with respect to a matrix x</span>
+
+<span class="sd">  :param x:      The matrix (ndarray)</span>
+<span class="sd">  :param chunks: The chunks parameter,</span>
+<span class="sd">                 if None (default): Try to infer from chunks attribute (h5py)</span>
+<span class="sd">                 if int: Use a multiple of the inferred chunks attribute, or alternatively that size in each dimension</span>
+<span class="sd">                 if tuple: Use the explicit chunks provided for slicing</span>
+
+<span class="sd">  :returns: tuple chunks parameter</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Matrix has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2"> dimensions but chunks has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">chunks</span>
+  <span class="n">inferred_chunks</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;chunks&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">inferred_chunks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">chunks</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">chunks</span> <span class="o">=</span> <span class="n">inferred_chunks</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+      <span class="n">chunks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inferred_chunks</span><span class="p">)</span><span class="o">*</span><span class="n">chunks</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;chunks should be int or tuple&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">(</span><span class="n">chunks</span><span class="p">,)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;chunks should be int or tuple&#39;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="chunk_applymap"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.chunked.chunk_applymap">[docs]</a><span class="k">def</span> <span class="nf">chunk_applymap</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="sd">&#39;&#39;&#39; Apply function to all elements in a matrix in chunks</span>
+
+<span class="sd">  :param func:     The function to apply to each chunk</span>
+<span class="sd">  :param x:        The matrix to apply it to</span>
+<span class="sd">  :param out:      The matrix to write to (pass variable to out for inplace)</span>
+<span class="sd">  :param chunks:   The shape of the chunks in each dimension,</span>
+<span class="sd">                   can be inferred for h5py arrays based on actual chunks on disk,</span>
+<span class="sd">                   can be a multiple of an integer value of chunks.</span>
+<span class="sd">  :param progress: Show tqdm progress bar or not</span>
+
+<span class="sd">  :returns:        The augmented matrix (or the original matrix, augmented)</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">out</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span> <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;x and out shape do not match, is this what you wanted?&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">out</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span> <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;x and out dtype do not match, is this what you wanted?&#39;</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">chunk_slices</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="n">chunk_infer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chunks</span><span class="p">),</span> <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">):</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+  <span class="k">return</span> <span class="n">out</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">maayanlab_bioinformatics.utils.chunked</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Ma&#39;ayanlab.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>

@@ -4,6 +4,22 @@ maayanlab\_bioinformatics.utils package
 Submodules
 ----------
 
+maayanlab\_bioinformatics.utils.chunked module
+----------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.utils.chunked
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+maayanlab\_bioinformatics.utils.describe module
+-----------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.utils.describe
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 maayanlab\_bioinformatics.utils.fetch\_save\_read module
 --------------------------------------------------------
 
@@ -16,6 +32,14 @@ maayanlab\_bioinformatics.utils.merge module
 --------------------------------------------
 
 .. automodule:: maayanlab_bioinformatics.utils.merge
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+maayanlab\_bioinformatics.utils.sparse module
+---------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.utils.sparse
    :members:
    :undoc-members:
    :show-inheritance:

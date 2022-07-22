@@ -4,6 +4,14 @@ maayanlab\_bioinformatics.harmonization package
 Submodules
 ----------
 
+maayanlab\_bioinformatics.harmonization.id\_mapper module
+---------------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.harmonization.id_mapper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 maayanlab\_bioinformatics.harmonization.ncbi\_genes module
 ----------------------------------------------------------
 

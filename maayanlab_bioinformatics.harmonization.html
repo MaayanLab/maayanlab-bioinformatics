@@ -41,6 +41,46 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
+<section id="module-maayanlab_bioinformatics.harmonization.id_mapper">
+<span id="maayanlab-bioinformatics-harmonization-id-mapper-module"></span><h2>maayanlab_bioinformatics.harmonization.id_mapper module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.id_mapper" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.id_mapper.</span></span><span class="sig-name descname"><span class="pre">IDMapper</span></span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Stores id mappings and makes it easy to use many of them in tandem.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapper</span> <span class="o">=</span> <span class="n">IDMapper</span><span class="p">()</span>
+
+<span class="n">mapper</span><span class="o">.</span><span class="n">update</span><span class="p">({</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">}</span> <span class="p">},</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;source_1&#39;</span><span class="p">)</span>
+<span class="n">mapper</span><span class="o">.</span><span class="n">update</span><span class="p">({</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">}</span> <span class="p">},</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;source_2&#39;</span><span class="p">)</span>
+<span class="n">mapper</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;source_2&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span>
+
+<span class="c1"># Because of the overlap in synonyms it is inferred that source_1&#39;s &#39;a&#39; and source_2&#39;s &#39;b&#39; correspond to the same</span>
+<span class="c1">#  id, we can get using any of the synyonyms to retreive the id in a given namespace.</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a term corresponding to some synonym, find the corresponding identifier in the provided namespace
+(or in all namespaces if not provided).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return summaries about all namespaces, and specifically id overlap counts between them.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mappings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add mappings of the form for a specific namespace:
+{ identifier: { synonyms, … }, … }</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-maayanlab_bioinformatics.harmonization.ncbi_genes">
 <span id="maayanlab-bioinformatics-harmonization-ncbi-genes-module"></span><h2>maayanlab_bioinformatics.harmonization.ncbi_genes module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.ncbi_genes" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
@@ -100,6 +140,7 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
     <ul>
 <li><a class="reference internal" href="#">maayanlab_bioinformatics.harmonization package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.harmonization.id_mapper">maayanlab_bioinformatics.harmonization.id_mapper module</a></li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.harmonization.ncbi_genes">maayanlab_bioinformatics.harmonization.ncbi_genes module</a></li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.harmonization.transcripts">maayanlab_bioinformatics.harmonization.transcripts module</a></li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.harmonization">Module contents</a></li>
