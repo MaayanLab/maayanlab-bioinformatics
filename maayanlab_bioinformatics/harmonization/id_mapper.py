@@ -1,4 +1,5 @@
 import uuid
+from collections import Counter
 
 class IDMapper:
   ''' Stores id mappings and makes it easy to use many of them in tandem.
@@ -10,74 +11,104 @@ class IDMapper:
   mapper.update({ 'b': {'A', 'B'} }, namespace='source_2')
   mapper.get('C', namespace='source_2') == 'b'
 
-  # Because of the overlap in synonyms it is inferred that source_1's 'a' and source_2's 'b' correspond to the same
-  #  id, we can get using any of the synyonyms to retreive the id in a given namespace.
+  Because of the overlap in synonyms it is inferred that source_1's 'a' and source_2's 'b' correspond to the same
+    id, we can get using any of the synyonyms to retreive the id in a given namespace.
+  Since this can be problematic when synonyms are malformed, mapper.conflicts_summary() and mapper.conflicts_counts()
+    provide ways of debugging excess synonym applications.
   ```
   '''
   def __init__(self):
+    # { uuid1: {id1: 1, id2: 1, ...} }
     self._forward = {}
+    # { id1: uuid1, id2, uuid1, ... }
     self._reverse = {}
+    # { uuid1: { ns1: id1 }, ... }
     self._namespaces = {}
-    self._counts = {}
+    # { ns1: { shared_synonym: { conflictid1: origid1 }, ... } } }
+    self._conflicts = {}
 
   def summary(self):
-    ''' Return summaries about all namespaces, and specifically id overlap counts between them.
+    ''' Return counts of overlapping namespaces (like a venn diagram)
     '''
-    summary = {}
-    for synonyms in self._forward.values():
-      ns = frozenset(
-        ns
-        for synonym in synonyms
-        for ns in self._namespaces[synonym]
-      )
-      if ns not in summary:
-        summary[ns] = 0
-      summary[ns] += 1
-    return summary
+    return Counter(
+      frozenset(ns_ids.keys())
+      for ns_ids in self._namespaces.values()
+    )
     
-  def get(self, term, namespace=None):
-    ''' Given a term corresponding to some synonym, find the corresponding identifier in the provided namespace
-    (or in all namespaces if not provided).
+  def conflicts_summary(self):
+    ''' Return counts of conflicts in each namespace
     '''
-    id = self._reverse.get(term)
+    return Counter({
+      ns: len(conflicts)
+      for ns, conflicts in self._conflicts.items()
+    })
+
+  def top_conflicts(self):
+    ''' Return conflicting synonym counts
+    '''
+    return Counter({
+      (ns, conflict): len(cases)
+      for ns, cc in self._conflicts.items()
+      for conflict, cases in cc.items()
+    })
+
+  def get_id(self, id, namespace=None):
     if id is None: return None
-    refs = {
-      namespace: keys
-      for synonym in self._forward[id]
-      for namespace, keys in self._namespaces[synonym].items()
+    if namespace is None:
+      return dict(
+        id=id,
+        refs=self._namespaces[id],
+        synonyms=self._forward[id],
+      )
+    else:
+      return self._namespaces[id].get(namespace)
+
+  def get(self, term, namespace=None):
+    id = self._reverse.get(term)
+    return self.get_id(id, namespace=namespace)
+
+  def find(self, term):
+    potential_ids = {
+      id
+      for k, id in self._reverse.items()
+      if str(term).lower().strip() in str(k).lower().strip() or str(k).lower().strip() in str(term).lower().strip()
     }
-    return dict(
-      id=id,
-      refs=refs,
-      synonyms=self._forward[id],
-    ) if namespace is None else refs.get(namespace)
+    return {
+      id: self.get_id(id)
+      for id in potential_ids
+    }
 
   def update(self, mappings, namespace=None):
-    ''' Add mappings of the form for a specific namespace:
-    { identifier: { synonyms, ... }, ... }
+    ''' Add mappings of the form:
+    { identifier: { synonyms } }
     '''
-    for key, synonyms in mappings.items():
+    for key, synonyms in (mappings.items() if type(mappings) == dict else mappings):
       id = uuid.uuid4()
-      self._forward[id] = set()
-      for synonym in (key, *synonyms):
+      self._forward[id] = Counter()
+      self._namespaces[id] = {namespace: key}
+      for synonym in {key, *synonyms}:
         if synonym not in self._reverse:
-          self._forward[id].add(synonym)
+          self._forward[id].update([synonym])
           self._reverse[synonym] = id
-          if synonym not in self._namespaces:
-            self._namespaces[synonym] = {}
-          if namespace not in self._namespaces[synonym]:
-            self._namespaces[synonym][namespace] = set()
-          self._namespaces[synonym][namespace].add(key)
         else:
           orig_id = self._reverse[synonym]
-          if orig_id != id:
-            for s in self._forward[id]:
-              self._forward[orig_id].add(s)
-              self._reverse[s] = orig_id
-            if synonym not in self._namespaces:
-              self._namespaces[synonym] = {}
-            if namespace not in self._namespaces[synonym]:
-              self._namespaces[synonym][namespace] = set()
-            self._namespaces[synonym][namespace].add(key)
-            del self._forward[id]
+          if orig_id == id:
+            self._forward[id].update([synonym])
+          else:
+            for ns, k in self._namespaces.pop(id, {}).items():
+              if orig_id not in self._namespaces:
+                self._namespaces[orig_id] = {}
+              orig_k = self._namespaces[orig_id].get(ns)
+              if orig_k is not None:
+                if orig_k != k:
+                  if ns not in self._conflicts:
+                    self._conflicts[ns] = {}
+                  if synonym not in self._conflicts[ns]:
+                    self._conflicts[ns][synonym] = {}
+                  self._conflicts[ns][synonym][k] = orig_k
+              else:
+                self._namespaces[orig_id][ns] = k
+            new_cnt = self._forward.pop(id)
+            self._forward[orig_id] += new_cnt
+            self._reverse.update({s: orig_id for s in new_cnt.keys()})
             id = orig_id
