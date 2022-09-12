@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>maayanlab_bioinformatics.harmonization package &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -54,28 +54,50 @@
 <span class="n">mapper</span><span class="o">.</span><span class="n">update</span><span class="p">({</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">}</span> <span class="p">},</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;source_2&#39;</span><span class="p">)</span>
 <span class="n">mapper</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;source_2&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span>
 
-<span class="c1"># Because of the overlap in synonyms it is inferred that source_1&#39;s &#39;a&#39; and source_2&#39;s &#39;b&#39; correspond to the same</span>
-<span class="c1">#  id, we can get using any of the synyonyms to retreive the id in a given namespace.</span>
+<span class="n">Because</span> <span class="n">of</span> <span class="n">the</span> <span class="n">overlap</span> <span class="ow">in</span> <span class="n">synonyms</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">inferred</span> <span class="n">that</span> <span class="n">source_1</span><span class="s1">&#39;s &#39;</span><span class="n">a</span><span class="s1">&#39; and source_2&#39;</span><span class="n">s</span> <span class="s1">&#39;b&#39;</span> <span class="n">correspond</span> <span class="n">to</span> <span class="n">the</span> <span class="n">same</span>
+  <span class="nb">id</span><span class="p">,</span> <span class="n">we</span> <span class="n">can</span> <span class="n">get</span> <span class="n">using</span> <span class="nb">any</span> <span class="n">of</span> <span class="n">the</span> <span class="n">synyonyms</span> <span class="n">to</span> <span class="n">retreive</span> <span class="n">the</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">given</span> <span class="n">namespace</span><span class="o">.</span>
+<span class="n">Since</span> <span class="n">this</span> <span class="n">can</span> <span class="n">be</span> <span class="n">problematic</span> <span class="n">when</span> <span class="n">synonyms</span> <span class="n">are</span> <span class="n">malformed</span><span class="p">,</span> <span class="n">mapper</span><span class="o">.</span><span class="n">conflicts_summary</span><span class="p">()</span> <span class="ow">and</span> <span class="n">mapper</span><span class="o">.</span><span class="n">conflicts_counts</span><span class="p">()</span>
+  <span class="n">provide</span> <span class="n">ways</span> <span class="n">of</span> <span class="n">debugging</span> <span class="n">excess</span> <span class="n">synonym</span> <span class="n">applications</span><span class="o">.</span>
 </pre></div>
 </div>
 <dl class="py method">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.conflicts_summary">
+<span class="sig-name descname"><span class="pre">conflicts_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.conflicts_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.conflicts_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return counts of conflicts in each namespace</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.find">
+<span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">term</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.find" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a term corresponding to some synonym, find the corresponding identifier in the provided namespace
-(or in all namespaces if not provided).</p>
-</dd></dl>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.summary">
 <span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.summary" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return summaries about all namespaces, and specifically id overlap counts between them.</p>
+<dd><p>Return counts of overlapping namespaces (like a venn diagram)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.top_conflicts">
+<span class="sig-name descname"><span class="pre">top_conflicts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.top_conflicts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.top_conflicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return conflicting synonym counts</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mappings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add mappings of the form for a specific namespace:
-{ identifier: { synonyms, … }, … }</p>
+<dd><p>Add mappings of the form:
+{ identifier: { synonyms } }</p>
 </dd></dl>
 
 </dd></dl>
@@ -185,7 +207,7 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
     </div>
   </body>
 </html>
