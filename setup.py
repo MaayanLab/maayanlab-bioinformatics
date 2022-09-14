@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
   name='maayanlab_bioinformatics',
   python_requires='>=3.8.0',
-  version='0.5.0',
+  version='0.5.1',
   url='https://github.com/maayanLab/maayanlab-bioinformatics/',
   author='Daniel J. B. Clarke',
   author_email='u8sand@gmail.com',
@@ -14,6 +14,7 @@ setup(
     'h5py': ["h5py"],
     'limma_voom': ["rpy2==3.3.6"],
     'progress': ["tqdm"],
+    'enrichr_user_list': ['bs4', 'lxml'],
   },
   packages=find_packages(),
   include_package_data=True,

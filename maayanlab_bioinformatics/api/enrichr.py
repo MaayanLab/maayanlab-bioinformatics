@@ -59,17 +59,38 @@ class EnrichrUserList:
   mylist['GO_Biological_Process_2021'] # returns dataframe with enrichment results
   ```
   '''
-  def __init__(self, genes, description='', enrichr_link='https://maayanlab.cloud/Enrichr'):
+  def __init__(self, genes, description='', shortId=None, userListId=None, enrichr_link='https://maayanlab.cloud/Enrichr'):
     self._enrichr_link = enrichr_link
     self._genes = genes
     self._description = description
-    self._shortId = None
-    self._userListId = None
+    self._shortId = shortId
+    self._userListId = userListId
     self._results = {}
 
   def __repr__(self):
-    return f"EnrichrUserList(..., description={repr(self.description)})"
+    return f"EnrichrUserList(..., description={repr(self._description)}, userListId={repr(self._userListId)}, shortId={repr(self._shortId)})"
   
+  @staticmethod
+  def from_url(enrichrUrl):
+    ''' Build object from an existing enrichr share url,
+    e.g.
+    userlist = EnrichrUserList.from_url('https://maayanlab.cloud/Enrichr/enrich?dataset=285c88882ac50767f2a452c1e93632fd')
+    '''
+    import requests
+    import urllib.parse
+    from bs4 import BeautifulSoup
+    enrichrUrl_parsed = urllib.parse.urlparse(enrichrUrl)
+    enrichr_link = f"{enrichrUrl_parsed.scheme}://{enrichrUrl_parsed.netloc}{'/'.join(enrichrUrl_parsed.path.split('/')[:-1])}"
+    shortId = dict(urllib.parse.parse_qsl(enrichrUrl_parsed.query))['dataset']
+    time.sleep(0.5)
+    root = BeautifulSoup(requests.get(enrichrUrl).content, features='lxml')
+    userListId = root.select_one('#userListId').get('value')
+    time.sleep(0.5)
+    res = requests.get(enrichr_link + '/view', params=dict(userListId=userListId)).json()
+    genes = res['genes']
+    description = res['description']
+    return EnrichrUserList(genes, description=description, shortId=shortId, userListId=userListId, enrichr_link=enrichr_link)
+
   @property
   def genes(self):
     return self._genes
@@ -108,7 +129,7 @@ class EnrichrUserList:
       ))
     results = resp.json()
     # wait a tinybit before returning link (backoff)
-    time.sleep(1)
+    time.sleep(0.5)
     #
     self._userListId = results['userListId']
     self._shortId = results['shortId']
@@ -125,7 +146,7 @@ class EnrichrUserList:
       ))
     results = resp.json()
     # wait a tinybit before returning link (backoff)
-    time.sleep(1)
+    time.sleep(0.5)
     self._results[library] = pd.DataFrame([
       dict(
         rank=rank,
