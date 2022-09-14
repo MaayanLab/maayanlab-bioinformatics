@@ -80,7 +80,7 @@ class EnrichrUserList:
 
   @property
   def link(self):
-    return enrichr_link + '/enrich?dataset=' + self.shortId
+    return self._enrichr_link + '/enrich?dataset=' + self.shortId
 
   @property
   def shortId(self):
