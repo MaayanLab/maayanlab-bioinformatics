@@ -63,5 +63,8 @@ def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncb
   })
   ncbi_lookup = pd.Series(symbols, index=synonyms)
   index_values = ncbi_lookup.index.value_counts()
-  ncbi_lookup_disambiguated = ncbi_lookup.drop(index_values[index_values > 1].index)
+  ambiguous = index_values[index_values > 1].index
+  ncbi_lookup_disambiguated = ncbi_lookup[(
+    (ncbi_lookup.index == ncbi_lookup) | (~ncbi_lookup.index.isin(ambiguous))
+  )]
   return ncbi_lookup_disambiguated.to_dict().get
