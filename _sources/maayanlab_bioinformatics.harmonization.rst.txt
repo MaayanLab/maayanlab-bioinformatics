@@ -4,6 +4,14 @@ maayanlab\_bioinformatics.harmonization package
 Submodules
 ----------
 
+maayanlab\_bioinformatics.harmonization.homologs module
+-------------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.harmonization.homologs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 maayanlab\_bioinformatics.harmonization.id\_mapper module
 ---------------------------------------------------------
 

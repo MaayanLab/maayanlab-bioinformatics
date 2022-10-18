@@ -14,6 +14,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
@@ -208,12 +209,40 @@ In the case of a pd.DataFrame, preserve the index on the output frame.</p>
     <ul>
 <li><a class="reference internal" href="#">maayanlab_bioinformatics.normalization package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.cpm">maayanlab_bioinformatics.normalization.cpm module</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.filter">maayanlab_bioinformatics.normalization.filter module</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.log">maayanlab_bioinformatics.normalization.log module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.cpm">maayanlab_bioinformatics.normalization.cpm module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.cpm.cpm_normalize"><code class="docutils literal notranslate"><span class="pre">cpm_normalize()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.cpm.cpm_normalize_np"><code class="docutils literal notranslate"><span class="pre">cpm_normalize_np()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.cpm.cpm_normalize_pd"><code class="docutils literal notranslate"><span class="pre">cpm_normalize_pd()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.filter">maayanlab_bioinformatics.normalization.filter module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.filter.filter_by_expr"><code class="docutils literal notranslate"><span class="pre">filter_by_expr()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.filter.filter_by_var"><code class="docutils literal notranslate"><span class="pre">filter_by_var()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.log">maayanlab_bioinformatics.normalization.log module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.log.log10_normalize"><code class="docutils literal notranslate"><span class="pre">log10_normalize()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.log.log10_normalize_np"><code class="docutils literal notranslate"><span class="pre">log10_normalize_np()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.log.log10_normalize_pd"><code class="docutils literal notranslate"><span class="pre">log10_normalize_pd()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.log.log2_normalize"><code class="docutils literal notranslate"><span class="pre">log2_normalize()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.log.log2_normalize_np"><code class="docutils literal notranslate"><span class="pre">log2_normalize_np()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.log.log2_normalize_pd"><code class="docutils literal notranslate"><span class="pre">log2_normalize_pd()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.quantile">maayanlab_bioinformatics.normalization.quantile module</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.quantile_legacy">maayanlab_bioinformatics.normalization.quantile_legacy module</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.zscore">maayanlab_bioinformatics.normalization.zscore module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.quantile_legacy">maayanlab_bioinformatics.normalization.quantile_legacy module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.quantile_legacy.quantile_normalize"><code class="docutils literal notranslate"><span class="pre">quantile_normalize()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.quantile_legacy.quantile_normalize_h5"><code class="docutils literal notranslate"><span class="pre">quantile_normalize_h5()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.quantile_legacy.quantile_normalize_np"><code class="docutils literal notranslate"><span class="pre">quantile_normalize_np()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.quantile_legacy.quantile_normalize_pd"><code class="docutils literal notranslate"><span class="pre">quantile_normalize_pd()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization.zscore">maayanlab_bioinformatics.normalization.zscore module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.zscore.zscore_normalize"><code class="docutils literal notranslate"><span class="pre">zscore_normalize()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.zscore.zscore_normalize_np"><code class="docutils literal notranslate"><span class="pre">zscore_normalize_np()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.normalization.zscore.zscore_normalize_pd"><code class="docutils literal notranslate"><span class="pre">zscore_normalize_pd()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.normalization">Module contents</a></li>
 </ul>
 </li>
@@ -256,7 +285,7 @@ In the case of a pd.DataFrame, preserve the index on the output frame.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

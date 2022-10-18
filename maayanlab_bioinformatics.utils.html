@@ -14,6 +14,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
@@ -233,11 +234,32 @@ rac{sum(x_ij - mu_j)^2}{N_j - ddof}}}</p>
     <ul>
 <li><a class="reference internal" href="#">maayanlab_bioinformatics.utils package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.chunked">maayanlab_bioinformatics.utils.chunked module</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.describe">maayanlab_bioinformatics.utils.describe module</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.fetch_save_read">maayanlab_bioinformatics.utils.fetch_save_read module</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.merge">maayanlab_bioinformatics.utils.merge module</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.sparse">maayanlab_bioinformatics.utils.sparse module</a></li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.chunked">maayanlab_bioinformatics.utils.chunked module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.chunked.chunk_applymap"><code class="docutils literal notranslate"><span class="pre">chunk_applymap()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.chunked.chunk_infer"><code class="docutils literal notranslate"><span class="pre">chunk_infer()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.chunked.chunk_slices"><code class="docutils literal notranslate"><span class="pre">chunk_slices()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.chunked.tqdm"><code class="docutils literal notranslate"><span class="pre">tqdm()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.describe">maayanlab_bioinformatics.utils.describe module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.describe.np_describe"><code class="docutils literal notranslate"><span class="pre">np_describe()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.fetch_save_read">maayanlab_bioinformatics.utils.fetch_save_read module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.fetch_save_read.fetch_save_read"><code class="docutils literal notranslate"><span class="pre">fetch_save_read()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.merge">maayanlab_bioinformatics.utils.merge module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.merge.merge"><code class="docutils literal notranslate"><span class="pre">merge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils.sparse">maayanlab_bioinformatics.utils.sparse module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.sparse.sp_hdf_dump"><code class="docutils literal notranslate"><span class="pre">sp_hdf_dump()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.sparse.sp_hdf_load"><code class="docutils literal notranslate"><span class="pre">sp_hdf_load()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.sparse.sp_nanpercentile"><code class="docutils literal notranslate"><span class="pre">sp_nanpercentile()</span></code></a></li>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.utils.sparse.sp_std"><code class="docutils literal notranslate"><span class="pre">sp_std()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.utils">Module contents</a></li>
 </ul>
 </li>
@@ -280,7 +302,7 @@ rac{sum(x_ij - mu_j)^2}{N_j - ddof}}}</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>
