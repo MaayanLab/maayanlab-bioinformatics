@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/nature.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -79,7 +76,7 @@
     <span class="k">yield</span> <span class="n">term</span><span class="p">,</span> <span class="n">geneset</span></div>
 
 <div class="viewcode-block" id="gmt_read_dict"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_read_dict">[docs]</a><span class="k">def</span> <span class="nf">gmt_read_dict</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">_parse_gene</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Read .gmt files into a dictionary of the form:</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Read .gmt files into a dictionary of the form:</span>
 <span class="sd">  {</span>
 <span class="sd">    &#39;term_1\tterm_2&#39;: {</span>
 <span class="sd">      gene_1: weight or 1,</span>
@@ -101,7 +98,7 @@
   <span class="k">return</span> <span class="n">gmt</span></div>
 
 <div class="viewcode-block" id="gmt_read_pd"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_read_pd">[docs]</a><span class="k">def</span> <span class="nf">gmt_read_pd</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">_parse_gene</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Read .gmt files directly into a data frame.</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Read .gmt files directly into a data frame.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gmt_read_dict</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">parse_gene</span><span class="p">))</span></div>
 
@@ -118,7 +115,7 @@
     <span class="k">return</span> <span class="p">((</span><span class="n">g</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="gmt_write_dict"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_write_dict">[docs]</a><span class="k">def</span> <span class="nf">gmt_write_dict</span><span class="p">(</span><span class="n">gmt</span><span class="p">,</span> <span class="n">fh</span><span class="p">,</span> <span class="n">serialize_gene_weight_pair</span><span class="o">=</span><span class="n">_serialize_gene_weight_pair</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Opposite of gmt_read_dict, write a dictionary to a file pointer</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Opposite of gmt_read_dict, write a dictionary to a file pointer</span>
 <span class="sd">  serialize_gene_weight_pair can be used to customize serialization when dealing with weights.</span>
 <span class="sd">    - it should return the serialized gene,weight pair or None if it should be removed</span>
 <span class="sd">  By default, 0/nans are dropped, 1s result in a gene (crisp), and everything else uses gene,weight.</span>
@@ -137,7 +134,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">serialized_term</span><span class="p">,</span> <span class="n">serialized_geneset</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">fh</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="gmt_write_pd"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_write_pd">[docs]</a><span class="k">def</span> <span class="nf">gmt_write_pd</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fh</span><span class="p">,</span> <span class="n">serialize_gene_weight_pair</span><span class="o">=</span><span class="n">_serialize_gene_weight_pair</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Write a pandas dataframe as a gmt, where rows are genes and columns are terms.</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Write a pandas dataframe as a gmt, where rows are genes and columns are terms.</span>
 <span class="sd">  See gmt_write_dict for more information.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="n">gmt_write_dict</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">fh</span><span class="p">,</span> <span class="n">serialize_gene_weight_pair</span><span class="o">=</span><span class="n">serialize_gene_weight_pair</span><span class="p">)</span></div>
@@ -179,7 +176,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

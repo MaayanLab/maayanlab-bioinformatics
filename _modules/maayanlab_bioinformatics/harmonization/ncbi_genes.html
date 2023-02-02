@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/nature.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -44,18 +41,18 @@
 
 <div class="viewcode-block" id="ncbi_genes_fetch"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch">[docs]</a><span class="nd">@lru_cache</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">ncbi_genes_fetch</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ncbi</span><span class="p">:</span> <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;type_of_gene&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;protein-coding&#39;</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Fetch the current NCBI Human Gene Info database.</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Fetch the current NCBI Human Gene Info database.</span>
 <span class="sd">  See ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/ for the directory/file of the organism of interest.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="k">def</span> <span class="nf">maybe_split</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; NCBI Stores Nulls as &#39;-&#39; and lists &#39;|&#39; delimited</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; NCBI Stores Nulls as &#39;-&#39; and lists &#39;|&#39; delimited</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="n">record</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">}:</span>
       <span class="k">return</span> <span class="nb">set</span><span class="p">()</span>
     <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">))</span>
   <span class="c1">#</span>
   <span class="k">def</span> <span class="nf">supplement_dbXref_prefix_omitted</span><span class="p">(</span><span class="n">ids</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; NCBI Stores external IDS with Foreign:ID while most datasets just use the ID</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; NCBI Stores external IDS with Foreign:ID while most datasets just use the ID</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
       <span class="c1"># add original id</span>
@@ -88,7 +85,7 @@
 
 <div class="viewcode-block" id="ncbi_genes_lookup"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_lookup">[docs]</a><span class="nd">@lru_cache</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">ncbi_genes_lookup</span><span class="p">(</span><span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ncbi</span><span class="p">:</span> <span class="n">ncbi</span><span class="p">[</span><span class="s1">&#39;type_of_gene&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;protein-coding&#39;</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Return a lookup dictionary with synonyms as the keys, and official symbols as the values</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Return a lookup dictionary with synonyms as the keys, and official symbols as the values</span>
 <span class="sd">  Usage:</span>
 <span class="sd">  ```python</span>
 <span class="sd">  ncbi_lookup = ncbi_genes_lookup(&#39;Mammalia/Homo_sapiens&#39;)</span>
@@ -146,7 +143,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/nature.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -44,7 +41,7 @@
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.utils</span> <span class="kn">import</span> <span class="n">merge</span>
 
 <div class="viewcode-block" id="suerat_load"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.suerat.suerat_load">[docs]</a><span class="k">def</span> <span class="nf">suerat_load</span><span class="p">(</span><span class="n">base_dir</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Files prepared for suerat are quite common, this function will load them</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Files prepared for suerat are quite common, this function will load them</span>
 <span class="sd">  given the directory that contains `barcodes.tsv.gz`, `features.tsv.gz`, and `matrix.tsv.gz`.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="n">df_barcodes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
@@ -82,7 +79,7 @@
   <span class="k">return</span> <span class="n">df_features</span><span class="p">,</span> <span class="n">df_barcodes</span><span class="p">,</span> <span class="n">df_expression</span></div>
 
 <div class="viewcode-block" id="suerat_load_multiple"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.suerat.suerat_load_multiple">[docs]</a><span class="k">def</span> <span class="nf">suerat_load_multiple</span><span class="p">(</span><span class="n">base_dirs</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Sets of suerat directories that are meant to be analyzed together are quite common,</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Sets of suerat directories that are meant to be analyzed together are quite common,</span>
 <span class="sd">  providing all those directories to this function (much like load_suerat_files) will load</span>
 <span class="sd">  each individually and return a merged version that captures the filename in the barcodes.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
@@ -143,7 +140,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

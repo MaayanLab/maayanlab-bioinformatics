@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/nature.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -42,7 +39,7 @@
 <span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp_sparse</span>
 
 <div class="viewcode-block" id="sp_hdf_dump"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.sparse.sp_hdf_dump">[docs]</a><span class="k">def</span> <span class="nf">sp_hdf_dump</span><span class="p">(</span><span class="n">hdf</span><span class="p">,</span> <span class="n">sdf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Dump Sparse Pandas DataFrame to h5py object.</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Dump Sparse Pandas DataFrame to h5py object.</span>
 
 <span class="sd">  Usage:</span>
 <span class="sd">  ```python</span>
@@ -67,7 +64,7 @@
   <span class="k">return</span> <span class="n">hdf</span></div>
 
 <div class="viewcode-block" id="sp_hdf_load"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.sparse.sp_hdf_load">[docs]</a><span class="k">def</span> <span class="nf">sp_hdf_load</span><span class="p">(</span><span class="n">hdf</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Load Sparse Pandas DataFrame from h5py object.</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Load Sparse Pandas DataFrame from h5py object.</span>
 
 <span class="sd">  Usage:</span>
 <span class="sd">  ```python</span>
@@ -88,7 +85,7 @@
   <span class="p">)</span></div>
 
 <div class="viewcode-block" id="sp_std"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.sparse.sp_std">[docs]</a><span class="k">def</span> <span class="nf">sp_std</span><span class="p">(</span><span class="n">X_ij</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Standard deviation for a matrix compatible with sparse matrices.</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Standard deviation for a matrix compatible with sparse matrices.</span>
 <span class="sd">  i is the row index, j is the column index.</span>
 
 <span class="sd">  \sigma_j = \sqrt{\frac{\sum(x_ij - \mu_j)^2}{N_j - ddof}}}</span>
@@ -103,7 +100,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">num_j</span> <span class="o">/</span> <span class="n">denom_j</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="sp_nanpercentile"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.sparse.sp_nanpercentile">[docs]</a><span class="k">def</span> <span class="nf">sp_nanpercentile</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; nanpercentile for a sparse matrix, basically we use np.percentile on the underlying data.</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; nanpercentile for a sparse matrix, basically we use np.percentile on the underlying data.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="n">coo</span> <span class="o">=</span> <span class="n">sp_sparse</span><span class="o">.</span><span class="n">coo_array</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -158,7 +155,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

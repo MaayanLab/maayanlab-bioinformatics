@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/nature.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -46,7 +43,7 @@
 
 
 <div class="viewcode-block" id="filter_by_var"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.normalization.html#maayanlab_bioinformatics.normalization.filter.filter_by_var">[docs]</a><span class="k">def</span> <span class="nf">filter_by_var</span><span class="p">(</span><span class="n">mat</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Select rows with the most variable expression accross all samples.</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Select rows with the most variable expression accross all samples.</span>
 <span class="sd">  Takes a dataframe and returns a filtered dataframe in the same orientation.</span>
 <span class="sd">  e.g.</span>
 <span class="sd">        |condition_1|condition_2|</span>
@@ -62,7 +59,7 @@
 
 
 <div class="viewcode-block" id="filter_by_expr"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.normalization.html#maayanlab_bioinformatics.normalization.filter.filter_by_expr">[docs]</a><span class="k">def</span> <span class="nf">filter_by_expr</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">design</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_total_count</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">large_n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_prop</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Ported from R https://rdrr.io/bioc/edgeR/src/R/filterByExpr.R</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Ported from R https://rdrr.io/bioc/edgeR/src/R/filterByExpr.R</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="n">lib_size</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
   <span class="c1">#  Minimum effect sample sample size for any of the coefficients</span>
@@ -124,7 +121,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>
