@@ -2,5 +2,5 @@ numpy
 pandas
 qnorm
 requests
+scikit-learn
 scipy
-sklearn
