@@ -12,6 +12,14 @@ maayanlab\_bioinformatics.api.enrichr module
    :undoc-members:
    :show-inheritance:
 
+maayanlab\_bioinformatics.api.speedrichr module
+-----------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.api.speedrichr
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

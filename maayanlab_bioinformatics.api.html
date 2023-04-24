@@ -107,6 +107,28 @@ userlist = EnrichrUserList.from_url(’<a class="reference external" href="https
 <dd></dd></dl>
 
 </section>
+<section id="module-maayanlab_bioinformatics.api.speedrichr">
+<span id="maayanlab-bioinformatics-api-speedrichr-module"></span><h2>maayanlab_bioinformatics.api.speedrichr module<a class="headerlink" href="#module-maayanlab_bioinformatics.api.speedrichr" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.api.speedrichr.speedenrich">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.api.speedrichr.</span></span><span class="sig-name descname"><span class="pre">speedenrich</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userlist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">libraries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Example</span> <span class="pre">gene</span> <span class="pre">list'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://maayanlab.cloud/speedrichr'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/api/speedrichr.html#speedenrich"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.api.speedrichr.speedenrich" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform enrichment analysis using speedrichr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userlist</strong> – A list of genes (e.g. [‘PHF14’, ‘RBM3’, ‘MSL1’, …])</p></li>
+<li><p><strong>libraries</strong> – One or more Enrichr Libraries (<a class="reference external" href="https://maayanlab.cloud/Enrichr/#libraries">https://maayanlab.cloud/Enrichr/#libraries</a>) (e.g. [“TRANSFAC_and_JASPAR_PWMs”])</p></li>
+<li><p><strong>background</strong> – An optional background geneset for background correction (e.g. [‘PHF14’, ‘RBM3’, ‘MSL1’, …])</p></li>
+<li><p><strong>base_url</strong> – If using a different enrichr instance than the public one, specify the base prefix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A pandas dataframe with enrichment results</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-maayanlab_bioinformatics.api">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maayanlab_bioinformatics.api" title="Permalink to this heading">¶</a></h2>
 <p>This module contains API wrappers for some commonly used tool APIs</p>
@@ -138,6 +160,10 @@ userlist = EnrichrUserList.from_url(’<a class="reference external" href="https
 <li><a class="reference internal" href="#maayanlab_bioinformatics.api.enrichr.enrichr_get_top_results"><code class="docutils literal notranslate"><span class="pre">enrichr_get_top_results()</span></code></a></li>
 <li><a class="reference internal" href="#maayanlab_bioinformatics.api.enrichr.enrichr_link_from_genes"><code class="docutils literal notranslate"><span class="pre">enrichr_link_from_genes()</span></code></a></li>
 <li><a class="reference internal" href="#maayanlab_bioinformatics.api.enrichr.enrichr_term_genes"><code class="docutils literal notranslate"><span class="pre">enrichr_term_genes()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.api.speedrichr">maayanlab_bioinformatics.api.speedrichr module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.api.speedrichr.speedenrich"><code class="docutils literal notranslate"><span class="pre">speedenrich()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.api">Module contents</a></li>
@@ -182,7 +208,7 @@ userlist = EnrichrUserList.from_url(’<a class="reference external" href="https
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.0.
     </div>
   </body>
 </html>
