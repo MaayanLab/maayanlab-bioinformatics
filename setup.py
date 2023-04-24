@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
   name='maayanlab_bioinformatics',
   python_requires='>=3.8.0',
-  version='0.5.5',
+  version='0.5.6',
   url='https://github.com/maayanLab/maayanlab-bioinformatics/',
   author='Daniel J. B. Clarke',
   author_email='danieljbclarkemssm@gmail.com',
