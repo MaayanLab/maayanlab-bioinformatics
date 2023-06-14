@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>maayanlab_bioinformatics.utils package &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -125,7 +124,7 @@ N = np.arange(10)
 This can often be a lot more efficient.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="maayanlab_bioinformatics.utils.describe.np_describe">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.describe.</span></span><span class="sig-name descname"><span class="pre">np_describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[25,</span> <span class="pre">50,</span> <span class="pre">75]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/describe.html#np_describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.describe.np_describe" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.utils.describe.</span></span><span class="sig-name descname"><span class="pre">np_describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[25,</span> <span class="pre">50,</span> <span class="pre">75]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">array</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/maayanlab_bioinformatics/utils/describe.html#np_describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.utils.describe.np_describe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Like pandas Series.describe() but operating on numpy arrays / matrices.
 This can be a lot faster especially when working with h5py or sparse data frames.</p>
 <dl class="field-list simple">
@@ -136,7 +135,7 @@ This can be a lot faster especially when working with h5py or sparse data frames
 <dd class="field-even"><p>The axis for which to perform describe against</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict[str, np.array] A dictionary mapping metric name to results</p>
+<dd class="field-odd"><p>A dictionary mapping metric name to results</p>
 </dd>
 </dl>
 </dd></dl>
@@ -299,7 +298,7 @@ rac{sum(x_ij - mu_j)^2}{N_j - ddof}}}</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
     </div>
   </body>
 </html>
