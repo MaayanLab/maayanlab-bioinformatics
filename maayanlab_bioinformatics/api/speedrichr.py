@@ -1,7 +1,8 @@
 import requests
+import typing as t
 import pandas as pd
 
-def speedenrich(userlist: list[str], libraries: list[str]=None, background: list[str]=None, description='Example gene list', base_url='https://maayanlab.cloud/speedrichr'):
+def speedenrich(userlist: t.List[str], libraries: t.List[str]=None, background: t.List[str]=None, description='Example gene list', base_url='https://maayanlab.cloud/speedrichr'):
   ''' Perform enrichment analysis using speedrichr.
 
   :param userlist: A list of genes (e.g. ['PHF14', 'RBM3', 'MSL1', ...])

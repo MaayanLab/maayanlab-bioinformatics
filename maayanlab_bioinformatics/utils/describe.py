@@ -2,14 +2,15 @@
 This can often be a lot more efficient.
 '''
 import numpy as np
+import typing as t
 
-def np_describe(x, axis=0, *, percentiles=[25, 50, 75]):
+def np_describe(x, axis=0, *, percentiles=[25, 50, 75]) -> t.Dict[str, np.array]:
   ''' Like pandas Series.describe() but operating on numpy arrays / matrices.
   This can be a lot faster especially when working with h5py or sparse data frames.
 
   :params x: The numpy array to describe
   :params axis: The axis for which to perform describe against
-  :returns: dict[str, np.array] A dictionary mapping metric name to results
+  :returns: A dictionary mapping metric name to results
   '''
   results = {
     'count': (~np.isnan(x)).sum(axis=axis),
