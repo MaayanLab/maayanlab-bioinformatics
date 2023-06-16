@@ -18,7 +18,8 @@ def _lazy_load():
   library("limma")
   library("statmod")
   library("edgeR")
-  diffExpression <- function(expression_dataframe, design_dataframe, filter_genes=FALSE, voom_design=FALSE, adjust="BH") {
+  diffExpression <- function(expression_dataframe, design_dataframe, filter_genes=FALSE, voom_design=FALSE, adjust="BH", random_state=42) {
+    set.seed(random_state)
     expression <- as.matrix(expression_dataframe)
     design <- as.matrix(design_dataframe)
     # turn count matrix into a expression object compatible with edgeR
@@ -63,7 +64,13 @@ def _control_case_data_to_expression_design(controls_mat, cases_mat, all_data_ma
   all_cols = set(all_data_mat.columns) if all_data_mat is not None else (control_cols | case_cols)
   assert all_cols >= (control_cols | case_cols), 'All data does not contain all columns'
   assert control_cols & case_cols == set(), 'Controls & Cases share a column!'
-  all_cols_ordered = list(all_cols)
+  all_cols_ordered = sorted(list(all_cols))
+  control_ind = set(controls_mat.index)
+  case_ind = set(cases_mat.index)
+  all_ind = set(all_data_mat.index) if all_data_mat is not None else (control_ind | case_ind)
+  assert all_ind >= (control_ind | case_ind), 'All data does not contain all index'
+  assert control_ind & case_ind != set(), 'Controls & Cases genes are not the same!'
+  all_inds_ordered = sorted(list(all_ind))
   design = pd.DataFrame({
     col: {
       'A': 1 if col in control_cols else 0,
@@ -73,9 +80,9 @@ def _control_case_data_to_expression_design(controls_mat, cases_mat, all_data_ma
   }).T
   # prepare expression matrix
   if all_data_mat is not None:
-    expression = all_data_mat.loc[:, all_cols_ordered]
+    expression = all_data_mat.loc[all_inds_ordered, all_cols_ordered]
   else:
-    expression = pd.concat([controls_mat, cases_mat], axis=1).loc[:, all_cols_ordered]
+    expression = pd.concat([controls_mat, cases_mat], axis=1).loc[all_inds_ordered, all_cols_ordered]
   #
   return expression, design
 
@@ -85,6 +92,7 @@ def limma_voom_differential_expression(
   all_data_mat: Optional[pd.DataFrame] = None,
   filter_genes: bool = False,
   voom_design: bool = False,
+  random_state: int = 42,
 ):
   ''' Use R's voom and limma for differential expression.
 
@@ -104,10 +112,6 @@ def limma_voom_differential_expression(
   from rpy2.robjects import pandas2ri
   from rpy2.robjects.conversion import localconverter
   r = _lazy_load()
-  # ensure genes match
-  assert (controls_mat.index == cases_mat.index).all(), 'Index between controls and cases must be the same'
-  if all_data_mat is not None:
-    assert (controls_mat.index == all_data_mat.index).all(), 'Index between controls, cases, and all_data_mat must be the same'
   # transform input into expression/design ready for R functions
   expression, design = _control_case_data_to_expression_design(controls_mat, cases_mat, all_data_mat=all_data_mat)
   # genes on rows, samples on cols
@@ -118,6 +122,7 @@ def limma_voom_differential_expression(
         ro.conversion.py2rpy(design),
         filter_genes=filter_genes,
         voom_design=voom_design,
+        random_state=random_state,
       )
     )
 
