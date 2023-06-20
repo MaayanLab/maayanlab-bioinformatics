@@ -36,7 +36,7 @@
   <h1>Source code for maayanlab_bioinformatics.dge.limma_voom</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="n">R</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -54,8 +54,7 @@
 <span class="s1">  suppressMessages(library(&quot;limma&quot;))</span>
 <span class="s1">  suppressMessages(library(&quot;statmod&quot;))</span>
 <span class="s1">  suppressMessages(library(&quot;edgeR&quot;))</span>
-<span class="s1">  diffExpression &lt;- function(expression, design_dataframe, filter_genes=FALSE, voom_design=FALSE, adjust=&quot;BH&quot;, random_state=42) {</span>
-<span class="s1">    set.seed(random_state)</span>
+<span class="s1">  diffExpression &lt;- function(expression, design_dataframe, filter_genes=FALSE, voom_design=FALSE, adjust=&quot;BH&quot;) {</span>
 <span class="s1">    design &lt;- as.matrix(design_dataframe)</span>
 <span class="s1">    # turn count matrix into a expression object compatible with edgeR</span>
 <span class="s1">    dge &lt;- DGEList(counts=expression)</span>
@@ -93,7 +92,47 @@
   <span class="n">R</span> <span class="o">=</span> <span class="n">r</span>
   <span class="k">return</span> <span class="n">R</span>
 
+<div class="viewcode-block" id="limma_voom_differential_expression_design"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.dge.html#maayanlab_bioinformatics.dge.limma_voom.limma_voom_differential_expression_design">[docs]</a><span class="k">def</span> <span class="nf">limma_voom_differential_expression_design</span><span class="p">(</span>
+  <span class="n">expression</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+  <span class="n">design</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+  <span class="n">de</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+  <span class="n">filter_genes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+  <span class="n">voom_design</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; Use R&#39;s voom and limma for differential expression.</span>
+
+<span class="sd">  Note that this function expects the original raw gene counts.</span>
+
+<span class="sd">  alex version: voom_design=True, filter_genes=False</span>
+<span class="sd">  biojupies version: voom_design=False, filter_genes=True</span>
+
+<span class="sd">  :param expression: (pd.DataFrame) the samples</span>
+<span class="sd">  :param design: (pd.DataFrame) the design dataframe</span>
+<span class="sd">  :param de: (Tuple[str, str]) (&#39;control_column_name&#39;, &#39;case_column_name&#39;)</span>
+<span class="sd">  :param filter_genes: (bool) Whether to perform R&#39;s `filterByExpr` during normalization</span>
+<span class="sd">  :param voom_design: (bool) Whether to give R&#39;s voom function the design matrix (supervised)</span>
+<span class="sd">  :return: A data frame with the results</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="n">design</span> <span class="o">=</span> <span class="n">design</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">expression</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+  <span class="n">design</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="n">de</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">de</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="s1">&#39;B&#39;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">design</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+  <span class="p">]</span>
+  <span class="k">assert</span> <span class="s1">&#39;A&#39;</span> <span class="ow">in</span> <span class="n">design</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;B&#39;</span> <span class="ow">in</span> <span class="n">design</span><span class="o">.</span><span class="n">columns</span>
+  <span class="kn">import</span> <span class="nn">rpy2.robjects</span> <span class="k">as</span> <span class="nn">ro</span>
+  <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">pandas2ri</span>
+  <span class="kn">from</span> <span class="nn">rpy2.robjects.conversion</span> <span class="kn">import</span> <span class="n">localconverter</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">_lazy_load</span><span class="p">()</span>
+  <span class="k">with</span> <span class="n">localconverter</span><span class="p">(</span><span class="n">ro</span><span class="o">.</span><span class="n">default_converter</span> <span class="o">+</span> <span class="n">pandas2ri</span><span class="o">.</span><span class="n">converter</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">diffExpression</span><span class="p">(</span>
+      <span class="n">expression</span><span class="p">,</span>
+      <span class="n">design</span><span class="p">,</span>
+      <span class="n">filter_genes</span><span class="o">=</span><span class="n">filter_genes</span><span class="p">,</span>
+      <span class="n">voom_design</span><span class="o">=</span><span class="n">voom_design</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;gene_symbol&#39;</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="make_design_matrix"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.dge.html#maayanlab_bioinformatics.dge.limma_voom.make_design_matrix">[docs]</a><span class="k">def</span> <span class="nf">make_design_matrix</span><span class="p">(</span><span class="n">expression_df</span><span class="p">,</span> <span class="n">controls</span><span class="p">,</span> <span class="n">cases</span><span class="p">):</span>
+  <span class="n">expression_df</span> <span class="o">=</span> <span class="n">expression_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
   <span class="n">expression_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;index&#39;</span>
   <span class="n">expression_df</span> <span class="o">=</span> <span class="n">expression_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
   <span class="n">design_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">controls</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">cases</span><span class="p">)}</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">expression_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)])</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
@@ -106,7 +145,6 @@
   <span class="n">all_data_mat</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
   <span class="n">filter_genes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
   <span class="n">voom_design</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-  <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Use R&#39;s voom and limma for differential expression.</span>
 
@@ -122,24 +160,21 @@
 <span class="sd">  :param voom_design: (bool) Whether to give R&#39;s voom function the design matrix (supervised)</span>
 <span class="sd">  :return: A data frame with the results</span>
 <span class="sd">  &#39;&#39;&#39;</span>
+  <span class="k">if</span> <span class="n">all_data_mat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">all_data_mat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">controls_mat</span><span class="p">,</span> <span class="n">cases_mat</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">all_data_mat</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">all_data_mat</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()</span>
+  <span class="c1"># transform input into expression/design ready for R functions</span>
+  <span class="n">expression</span><span class="p">,</span> <span class="n">design</span> <span class="o">=</span> <span class="n">make_design_matrix</span><span class="p">(</span><span class="n">all_data_mat</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">controls_mat</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()),</span> <span class="nb">set</span><span class="p">(</span><span class="n">cases_mat</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()))</span>
   <span class="kn">import</span> <span class="nn">rpy2.robjects</span> <span class="k">as</span> <span class="nn">ro</span>
   <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">pandas2ri</span>
   <span class="kn">from</span> <span class="nn">rpy2.robjects.conversion</span> <span class="kn">import</span> <span class="n">localconverter</span>
   <span class="n">r</span> <span class="o">=</span> <span class="n">_lazy_load</span><span class="p">()</span>
-  <span class="k">if</span> <span class="n">all_data_mat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">all_data_mat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">controls_mat</span><span class="p">,</span> <span class="n">cases_mat</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-  <span class="k">else</span><span class="p">:</span>
-    <span class="n">all_data_mat</span> <span class="o">=</span> <span class="n">all_data_mat</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-  <span class="n">all_data_mat</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">all_data_mat</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()</span>
-  <span class="c1"># transform input into expression/design ready for R functions</span>
-  <span class="n">expression</span><span class="p">,</span> <span class="n">design</span> <span class="o">=</span> <span class="n">make_design_matrix</span><span class="p">(</span><span class="n">all_data_mat</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">controls_mat</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()),</span> <span class="nb">set</span><span class="p">(</span><span class="n">cases_mat</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_flat_index</span><span class="p">()))</span>
   <span class="k">with</span> <span class="n">localconverter</span><span class="p">(</span><span class="n">ro</span><span class="o">.</span><span class="n">default_converter</span> <span class="o">+</span> <span class="n">pandas2ri</span><span class="o">.</span><span class="n">converter</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">diffExpression</span><span class="p">(</span>
       <span class="n">expression</span><span class="p">,</span>
       <span class="n">design</span><span class="p">,</span>
       <span class="n">filter_genes</span><span class="o">=</span><span class="n">filter_genes</span><span class="p">,</span>
       <span class="n">voom_design</span><span class="o">=</span><span class="n">voom_design</span><span class="p">,</span>
-      <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span>
     <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;gene_symbol&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="up_down_from_limma_voom"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.dge.html#maayanlab_bioinformatics.dge.limma_voom.up_down_from_limma_voom">[docs]</a><span class="k">def</span> <span class="nf">up_down_from_limma_voom</span><span class="p">(</span><span class="n">expr</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">top_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">):</span>
