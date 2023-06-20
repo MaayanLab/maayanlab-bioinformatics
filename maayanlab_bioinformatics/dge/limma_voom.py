@@ -90,10 +90,13 @@ def limma_voom_differential_expression(
   from rpy2.robjects import pandas2ri
   from rpy2.robjects.conversion import localconverter
   r = _lazy_load()
+  if all_data_mat is None:
+    all_data_mat = pd.concat([controls_mat, cases_mat], axis=1)
+  else:
+    all_data_mat = all_data_mat.copy()
+  all_data_mat.columns = all_data_mat.columns.to_flat_index()
   # transform input into expression/design ready for R functions
-  if all_data_mat is None: all_data_mat = pd.concat([controls_mat, cases_mat], axis=1)
-  else: all_data_mat = all_data_mat.copy()
-  expression, design = make_design_matrix(all_data_mat, controls_mat.columns, cases_mat.columns)
+  expression, design = make_design_matrix(all_data_mat, set(controls_mat.columns.to_flat_index()), set(cases_mat.columns.to_flat_index()))
   with localconverter(ro.default_converter + pandas2ri.converter):
     return r.diffExpression(
       expression,
