@@ -77,9 +77,11 @@ def limma_voom_differential_expression_design(
   :param voom_design: (bool) Whether to give R's voom function the design matrix (supervised)
   :return: A data frame with the results
   '''
+  expression = expression.copy()
   design = design.copy().loc[expression.columns]
+  expression.columns = design.index = ['s'+str(i) for i, _ in enumerate(expression.columns)]
   design.columns = [
-    {de[0]: 'A', de[1]: 'B'}.get(col, str(i))
+    {de[0]: 'A', de[1]: 'B'}.get(col, 'c'+str(i))
     for i, col in enumerate(design.columns)
   ]
   assert 'A' in design.columns and 'B' in design.columns
@@ -99,8 +101,8 @@ def make_design_matrix(expression_df, controls, cases):
   expression_df = expression_df.copy()
   expression_df.index.name = 'index'
   expression_df = expression_df.reset_index().groupby('index').sum()
-  design_df = pd.DataFrame([{'index': str(i), 'A': int(x in controls), 'B': int(x in cases)} for i, x in enumerate(expression_df.columns)]).set_index('index')
-  expression_df.columns = [str(i) for i, _ in enumerate(expression_df.columns)]
+  design_df = pd.DataFrame([{'index': 's'+str(i), 'A': int(x in controls), 'B': int(x in cases)} for i, x in enumerate(expression_df.columns)]).set_index('index')
+  expression_df.columns = ['s'+str(i) for i, _ in enumerate(expression_df.columns)]
   return expression_df, design_df
 
 def limma_voom_differential_expression(
