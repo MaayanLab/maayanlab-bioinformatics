@@ -12,15 +12,14 @@ def _lazy_load():
   from rpy2.robjects import r
   #
   r('''
-  library("R.utils")
-  library("RCurl")
-  library("DESeq2")
-  library("limma")
-  library("statmod")
-  library("edgeR")
-  diffExpression <- function(expression_dataframe, design_dataframe, filter_genes=FALSE, voom_design=FALSE, adjust="BH", random_state=42) {
+  suppressMessages(library("R.utils"))
+  suppressMessages(library("RCurl"))
+  suppressMessages(library("DESeq2"))
+  suppressMessages(library("limma"))
+  suppressMessages(library("statmod"))
+  suppressMessages(library("edgeR"))
+  diffExpression <- function(expression, design_dataframe, filter_genes=FALSE, voom_design=FALSE, adjust="BH", random_state=42) {
     set.seed(random_state)
-    expression <- as.matrix(expression_dataframe)
     design <- as.matrix(design_dataframe)
     # turn count matrix into a expression object compatible with edgeR
     dge <- DGEList(counts=expression)
@@ -50,6 +49,7 @@ def _lazy_load():
     fit <- eBayes(fit)
     # Get results
     limma_dataframe <- topTable(fit, adjust=adjust, number=nrow(expression))
+    limma_dataframe$gene_symbol <- rownames(limma_dataframe)
     #
     return (limma_dataframe)
   }
@@ -57,34 +57,12 @@ def _lazy_load():
   R = r
   return R
 
-def _control_case_data_to_expression_design(controls_mat, cases_mat, all_data_mat=None):
-  # prepare design matrix
-  control_cols = set(controls_mat.columns)
-  case_cols = set(cases_mat.columns)
-  all_cols = set(all_data_mat.columns) if all_data_mat is not None else (control_cols | case_cols)
-  assert all_cols >= (control_cols | case_cols), 'All data does not contain all columns'
-  assert control_cols & case_cols == set(), 'Controls & Cases share a column!'
-  all_cols_ordered = sorted(list(all_cols))
-  control_ind = set(controls_mat.index)
-  case_ind = set(cases_mat.index)
-  all_ind = set(all_data_mat.index) if all_data_mat is not None else (control_ind | case_ind)
-  assert all_ind >= (control_ind | case_ind), 'All data does not contain all index'
-  assert control_ind & case_ind != set(), 'Controls & Cases genes are not the same!'
-  all_inds_ordered = sorted(list(all_ind))
-  design = pd.DataFrame({
-    col: {
-      'A': 1 if col in control_cols else 0,
-      'B': 1 if col in case_cols else 0,
-    }
-    for col in all_cols_ordered
-  }).T
-  # prepare expression matrix
-  if all_data_mat is not None:
-    expression = all_data_mat.loc[all_inds_ordered, all_cols_ordered]
-  else:
-    expression = pd.concat([controls_mat, cases_mat], axis=1).loc[all_inds_ordered, all_cols_ordered]
-  #
-  return expression, design
+def make_design_matrix(expression_df, controls, cases):
+  expression_df.index.name = 'index'
+  expression_df = expression_df.reset_index().groupby('index').sum()
+  design_df = pd.DataFrame([{'index': str(i), 'A': int(x in controls), 'B': int(x in cases)} for i, x in enumerate(expression_df.columns)]).set_index('index')
+  expression_df.columns = [str(i) for i, _ in enumerate(expression_df.columns)]
+  return expression_df, design_df
 
 def limma_voom_differential_expression(
   controls_mat: pd.DataFrame,
@@ -113,18 +91,17 @@ def limma_voom_differential_expression(
   from rpy2.robjects.conversion import localconverter
   r = _lazy_load()
   # transform input into expression/design ready for R functions
-  expression, design = _control_case_data_to_expression_design(controls_mat, cases_mat, all_data_mat=all_data_mat)
-  # genes on rows, samples on cols
+  if all_data_mat is None: all_data_mat = pd.concat([controls_mat, cases_mat], axis=1)
+  else: all_data_mat = all_data_mat.copy()
+  expression, design = make_design_matrix(all_data_mat, controls_mat.columns, cases_mat.columns)
   with localconverter(ro.default_converter + pandas2ri.converter):
-    return ro.conversion.rpy2py(
-      r['diffExpression'](
-        ro.conversion.py2rpy(expression),
-        ro.conversion.py2rpy(design),
-        filter_genes=filter_genes,
-        voom_design=voom_design,
-        random_state=random_state,
-      )
-    )
+    return r.diffExpression(
+      expression,
+      design,
+      filter_genes=filter_genes,
+      voom_design=voom_design,
+      random_state=random_state,
+    ).sort_values('t', ascending=False).set_index('gene_symbol')
 
 def up_down_from_limma_voom(expr: pd.DataFrame, top_n: int = 600):
   ''' Given limma_voom_differential_expression output, produce a discrete up/down geneset
