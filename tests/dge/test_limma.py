@@ -1,7 +1,7 @@
 import pathlib
 import numpy as np
 import pandas as pd
-from maayanlab_bioinformatics.dge import limma_voom_differential_expression
+from maayanlab_bioinformatics.dge import limma_voom_differential_expression, limma_voom_differential_expression_design
 
 def test_limma():
   df = pd.read_csv(pathlib.Path(__file__).parent.parent/'test_example_matrix.txt', sep='\t', index_col=0)
@@ -9,6 +9,24 @@ def test_limma():
   df_results = limma_voom_differential_expression(
     df.iloc[:, :3],
     df.iloc[:, 3:],
+    filter_genes=True,
+  )
+  print(df_expected)
+  print(df_results)
+  isclose = pd.DataFrame(np.isclose(df_expected, df_results), index=df_results.index, columns=df_results.columns)
+  print(isclose.value_counts())
+  assert isclose.all().all()
+
+def test_limma_design():
+  df = pd.read_csv(pathlib.Path(__file__).parent.parent/'test_example_matrix.txt', sep='\t', index_col=0)
+  df_meta = pd.read_csv(pathlib.Path(__file__).parent.parent/'test_example_metadata.txt', sep='\t', index_col=0)
+  df_expected = pd.read_csv(pathlib.Path(__file__).parent.parent/'test_example_matrix_dge_results.txt', sep='\t', index_col=0)
+  design = pd.get_dummies(df_meta['Stage']).astype(int)
+  print(design)
+  df_results = limma_voom_differential_expression_design(
+    df,
+    design,
+    ('primary melanocytes', 'metastatic'),
     filter_genes=True,
   )
   print(df_expected)
