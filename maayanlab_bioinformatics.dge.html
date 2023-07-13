@@ -63,6 +63,30 @@ with the highest absolute characteristic direction coefficients and split them i
 </dd></dl>
 
 </section>
+<section id="module-maayanlab_bioinformatics.dge.deseq2">
+<span id="maayanlab-bioinformatics-dge-deseq2-module"></span><h2>maayanlab_bioinformatics.dge.deseq2 module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.deseq2" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.dge.deseq2.deseq2_differential_expression">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.dge.deseq2.</span></span><span class="sig-name descname"><span class="pre">deseq2_differential_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">controls_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_na</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sorted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/deseq2.html#deseq2_differential_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.deseq2.deseq2_differential_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use pydeseq2 for differential expression.</p>
+<p>Note that this function expects the original raw gene counts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>controls_mat</strong> – (pd.DataFrame) the control samples (samples as columns and genes as rows)</p></li>
+<li><p><strong>cases_mat</strong> – (pd.DataFrame) the case samples (samples as columns and genes as rows)</p></li>
+<li><p><strong>n_cpus</strong> – (int) number of CPUs used (default: number of cpus)</p></li>
+<li><p><strong>remove_na</strong> – (bool) remove genes with NAN values (default: True)</p></li>
+<li><p><strong>sorted</strong> – (bool) sort genes from most significant to least significant (default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A data frame with the results</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-maayanlab_bioinformatics.dge.limma_voom">
 <span id="maayanlab-bioinformatics-dge-limma-voom-module"></span><h2>maayanlab_bioinformatics.dge.limma_voom module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.limma_voom" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
@@ -152,6 +176,10 @@ biojupies version: voom_design=False, filter_genes=True</p>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.characteristic_direction">maayanlab_bioinformatics.dge.characteristic_direction module</a><ul>
 <li><a class="reference internal" href="#maayanlab_bioinformatics.dge.characteristic_direction.characteristic_direction"><code class="docutils literal notranslate"><span class="pre">characteristic_direction()</span></code></a></li>
 <li><a class="reference internal" href="#maayanlab_bioinformatics.dge.characteristic_direction.up_down_from_characteristic_direction"><code class="docutils literal notranslate"><span class="pre">up_down_from_characteristic_direction()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.deseq2">maayanlab_bioinformatics.dge.deseq2 module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.dge.deseq2.deseq2_differential_expression"><code class="docutils literal notranslate"><span class="pre">deseq2_differential_expression()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.limma_voom">maayanlab_bioinformatics.dge.limma_voom module</a><ul>

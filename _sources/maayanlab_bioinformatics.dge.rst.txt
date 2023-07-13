@@ -12,6 +12,14 @@ maayanlab\_bioinformatics.dge.characteristic\_direction module
    :undoc-members:
    :show-inheritance:
 
+maayanlab\_bioinformatics.dge.deseq2 module
+-------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.dge.deseq2
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 maayanlab\_bioinformatics.dge.limma\_voom module
 ------------------------------------------------
 
