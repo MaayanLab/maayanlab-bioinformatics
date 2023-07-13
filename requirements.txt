@@ -4,3 +4,4 @@ qnorm
 requests
 scikit-learn
 scipy
+pydeseq2
