@@ -7,7 +7,7 @@ import sys
 def deseq2_differential_expression(
   controls_mat: pd.DataFrame,
   cases_mat: pd.DataFrame,
-  n_cpus=8,
+  n_cpus=os.cpu_count() or 1,
   remove_na=True,
   sorted=True
 ):
@@ -17,7 +17,7 @@ def deseq2_differential_expression(
 
     :param controls_mat: (pd.DataFrame) the control samples (samples as columns and genes as rows)
     :param cases_mat: (pd.DataFrame) the case samples (samples as columns and genes as rows)
-    :param n_cpus: (int) number of CPUs used (default: 8)
+    :param n_cpus: (int) number of CPUs used (default: number of cpus)
     :param remove_na: (bool) remove genes with NAN values (default: True)
     :param sorted: (bool) sort genes from most significant to least significant (default: True)
     :return: A data frame with the results
