@@ -56,6 +56,10 @@
 <span class="k">def</span> <span class="nf">log2_normalize_pd</span><span class="p">(</span><span class="n">mat</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="log2_normalize_pds"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.normalization.html#maayanlab_bioinformatics.normalization.log.log2_normalize_pds">[docs]</a><span class="nd">@log2_normalize</span><span class="o">.</span><span class="n">register</span>
+<span class="k">def</span> <span class="nf">log2_normalize_pds</span><span class="p">(</span><span class="n">mat</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="log10_normalize"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.normalization.html#maayanlab_bioinformatics.normalization.log.log10_normalize">[docs]</a><span class="nd">@singledispatch</span>
 <span class="k">def</span> <span class="nf">log10_normalize</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
@@ -71,6 +75,10 @@
 
 <div class="viewcode-block" id="log10_normalize_pd"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.normalization.html#maayanlab_bioinformatics.normalization.log.log10_normalize_pd">[docs]</a><span class="nd">@log10_normalize</span><span class="o">.</span><span class="n">register</span>
 <span class="k">def</span> <span class="nf">log10_normalize_pd</span><span class="p">(</span><span class="n">mat</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="log10_normalize_pds"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.normalization.html#maayanlab_bioinformatics.normalization.log.log10_normalize_pds">[docs]</a><span class="nd">@log10_normalize</span><span class="o">.</span><span class="n">register</span>
+<span class="k">def</span> <span class="nf">log10_normalize_pds</span><span class="p">(</span><span class="n">mat</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span></div>
 </pre></div>
 
