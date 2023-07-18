@@ -5,3 +5,4 @@ from maayanlab_bioinformatics.dge.characteristic_direction import characteristic
 from maayanlab_bioinformatics.dge.limma_voom import limma_voom_differential_expression, limma_voom_differential_expression_design, up_down_from_limma_voom
 from maayanlab_bioinformatics.dge.deseq2 import deseq2_differential_expression
 from maayanlab_bioinformatics.dge.ttest import ttest_differential_expression
+from maayanlab_bioinformatics.dge.logfc import logfc_differential_expression
