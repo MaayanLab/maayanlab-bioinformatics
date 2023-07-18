@@ -20,6 +20,10 @@ def log2_normalize_np(mat: np.ndarray, offset=1.):
 def log2_normalize_pd(mat: pd.DataFrame, offset=1.):
   return np.log2(mat + offset)
 
+@log2_normalize.register
+def log2_normalize_pds(mat: pd.Series, offset=1.):
+  return np.log2(mat + offset)
+
 
 @singledispatch
 def log10_normalize(mat, offset=1.):
@@ -35,4 +39,8 @@ def log10_normalize_np(mat: np.ndarray, offset=1.):
 
 @log10_normalize.register
 def log10_normalize_pd(mat: pd.DataFrame, offset=1.):
+  return np.log10(mat + offset)
+
+@log10_normalize.register
+def log10_normalize_pds(mat: pd.Series, offset=1.):
   return np.log10(mat + offset)

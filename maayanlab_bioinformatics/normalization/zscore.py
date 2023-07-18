@@ -20,3 +20,7 @@ def zscore_normalize_np(mat: np.ndarray, ddof=0):
 @zscore_normalize.register
 def zscore_normalize_pd(mat: pd.DataFrame, ddof=0):
   return pd.DataFrame(zscore_normalize_np(mat, ddof=ddof), index=mat.index, columns=mat.columns)
+
+@zscore_normalize.register
+def zscore_normalize_pds(mat: pd.Series, ddof=0):
+  return pd.DataFrame(zscore_normalize_np(mat, ddof=ddof), index=mat.index)
