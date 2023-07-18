@@ -156,6 +156,51 @@ biojupies version: voom_design=False, filter_genes=True</p>
 </dd></dl>
 
 </section>
+<section id="module-maayanlab_bioinformatics.dge.logfc">
+<span id="maayanlab-bioinformatics-dge-logfc-module"></span><h2>maayanlab_bioinformatics.dge.logfc module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.logfc" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.dge.logfc.logfc_differential_expression">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.dge.logfc.</span></span><span class="sig-name descname"><span class="pre">logfc_differential_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">controls_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/logfc.html#logfc_differential_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.logfc.logfc_differential_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>NOT RECOMMENDED. Given two separate dataframes (controls, cases) with a shared index (genes),
+we compute the logFC differential expression for all genes, also the average expression.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>controls_mat</strong> – (pd.DataFrame) the control samples (samples as columns and genes as rows)</p></li>
+<li><p><strong>cases_mat</strong> – (pd.DataFrame) the case samples (samples as columns and genes as rows)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A data frame with the results</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-maayanlab_bioinformatics.dge.ttest">
+<span id="maayanlab-bioinformatics-dge-ttest-module"></span><h2>maayanlab_bioinformatics.dge.ttest module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.ttest" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="maayanlab_bioinformatics.dge.ttest.ttest_differential_expression">
+<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.dge.ttest.</span></span><span class="sig-name descname"><span class="pre">ttest_differential_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">controls_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equal_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two-sided'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log2norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/ttest.html#ttest_differential_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.ttest.ttest_differential_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given two separate dataframes (controls, cases) with a shared index (genes),
+we compute the ttest differential expression for all genes. Benjamini-Hochberg Adjusted p-value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>controls_mat</strong> – (pd.DataFrame) the control samples (samples as columns and genes as rows)</p></li>
+<li><p><strong>cases_mat</strong> – (pd.DataFrame) the case samples (samples as columns and genes as rows)</p></li>
+<li><p><strong>equal_var</strong> – (bool) Should t-test assume equal variance (default: False)</p></li>
+<li><p><strong>alternative</strong> – (str) Alternative hypothesis (see scipy.stats.ttest_ind) (default: two-sided)</p></li>
+<li><p><strong>log2norm</strong> – (bool) Apply log2norm, typically keep with raw counts but disable if you have normalized data (default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A data frame with the results</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-maayanlab_bioinformatics.dge">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maayanlab_bioinformatics.dge" title="Permalink to this heading">¶</a></h2>
 <p>This module contains functions for differential expression analysis</p>
@@ -188,6 +233,14 @@ biojupies version: voom_design=False, filter_genes=True</p>
 <li><a class="reference internal" href="#maayanlab_bioinformatics.dge.limma_voom.limma_voom_differential_expression_design"><code class="docutils literal notranslate"><span class="pre">limma_voom_differential_expression_design()</span></code></a></li>
 <li><a class="reference internal" href="#maayanlab_bioinformatics.dge.limma_voom.make_design_matrix"><code class="docutils literal notranslate"><span class="pre">make_design_matrix()</span></code></a></li>
 <li><a class="reference internal" href="#maayanlab_bioinformatics.dge.limma_voom.up_down_from_limma_voom"><code class="docutils literal notranslate"><span class="pre">up_down_from_limma_voom()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.logfc">maayanlab_bioinformatics.dge.logfc module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.dge.logfc.logfc_differential_expression"><code class="docutils literal notranslate"><span class="pre">logfc_differential_expression()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.ttest">maayanlab_bioinformatics.dge.ttest module</a><ul>
+<li><a class="reference internal" href="#maayanlab_bioinformatics.dge.ttest.ttest_differential_expression"><code class="docutils literal notranslate"><span class="pre">ttest_differential_expression()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge">Module contents</a></li>

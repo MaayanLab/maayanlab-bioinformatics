@@ -28,6 +28,22 @@ maayanlab\_bioinformatics.dge.limma\_voom module
    :undoc-members:
    :show-inheritance:
 
+maayanlab\_bioinformatics.dge.logfc module
+------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.dge.logfc
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+maayanlab\_bioinformatics.dge.ttest module
+------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.dge.ttest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
