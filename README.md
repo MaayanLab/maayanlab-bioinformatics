@@ -15,6 +15,7 @@ This library contains many functions and methods I use again and again in differ
 ## Installation
 ```
 pip install git+https://github.com/Maayanlab/maayanlab-bioinformatics.git
-```
 
-If you want to use limma_voom, or some other R only functions, you'll need to install the relevant R dependencies as well.. see setup.R.
+# [OPTIONAL] for some functionality like limma_voom & filter_by_expr
+R -e "source('setup.R')"
+```
