@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>maayanlab_bioinformatics.parse.gmt &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=8fc2db88" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=f6245a2f"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -35,46 +35,68 @@
             
   <h1>Source code for maayanlab_bioinformatics.parse.gmt</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="nn">m</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">contextlib</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="k">def</span> <span class="nf">_try_json_loads</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_try_load_number</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
   <span class="k">try</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-  <span class="k">except</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">s</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+  <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="k">pass</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+  <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="k">pass</span>
+  <span class="k">return</span> <span class="n">s</span>
 
+<span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">_ensure_fp</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
-  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span> <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
-  <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">fp</span>
-
-<span class="n">_gene_parser</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.+?)([,:;](.+))?$&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_parse_gene</span><span class="p">(</span><span class="n">gene</span><span class="p">):</span>
-  <span class="n">match</span> <span class="o">=</span> <span class="n">_gene_parser</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">gene</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-  <span class="k">if</span> <span class="n">match</span> <span class="ow">and</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">_try_json_loads</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+      <span class="k">yield</span> <span class="n">fh</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">gene</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="n">fp</span>
 
-<div class="viewcode-block" id="gmt_read_iter"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_read_iter">[docs]</a><span class="k">def</span> <span class="nf">gmt_read_iter</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">_parse_gene</span><span class="p">):</span>
-  <span class="n">fh</span> <span class="o">=</span> <span class="n">_ensure_fp</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-  <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fh</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-      <span class="n">term1</span><span class="p">,</span> <span class="n">term2</span><span class="p">,</span> <span class="n">genes_str</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-      <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Ignoring line </span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1"> because it seems empty&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
-      <span class="k">continue</span>
-    <span class="n">term</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="p">(</span><span class="n">term1</span><span class="p">,</span> <span class="n">term2</span><span class="p">))))</span>
-    <span class="n">geneset</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="n">k</span><span class="p">:</span> <span class="n">v</span>
-      <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">parse_gene</span><span class="p">,</span> <span class="n">genes_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">))</span>
-      <span class="k">if</span> <span class="n">k</span>
-    <span class="p">}</span>
-    <span class="k">yield</span> <span class="n">term</span><span class="p">,</span> <span class="n">geneset</span></div>
+<div class="viewcode-block" id="parse_gene_weight"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.parse_gene_weight">[docs]</a><span class="k">def</span> <span class="nf">parse_gene_weight</span><span class="p">(</span><span class="n">gene</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; A helper to parse the gmt potentially with numeric weights</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="n">gene</span><span class="p">,</span> <span class="o">*</span><span class="n">_weight</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[,:;]&#39;</span><span class="p">,</span> <span class="n">gene</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">_weight</span><span class="p">:</span>
+    <span class="n">_weight</span><span class="p">,</span> <span class="o">=</span> <span class="n">_weight</span>
+    <span class="n">_weight</span> <span class="o">=</span> <span class="n">_try_load_number</span><span class="p">(</span><span class="n">_weight</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">_weight</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+      <span class="n">gene</span> <span class="o">+=</span> <span class="n">_weight</span>
+      <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">weight</span> <span class="o">=</span> <span class="n">_weight</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="n">gene</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">weight</span></div>
 
-<div class="viewcode-block" id="gmt_read_dict"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_read_dict">[docs]</a><span class="k">def</span> <span class="nf">gmt_read_dict</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">_parse_gene</span><span class="p">):</span>
+<div class="viewcode-block" id="parse_gene_unweighted"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.parse_gene_unweighted">[docs]</a><span class="k">def</span> <span class="nf">parse_gene_unweighted</span><span class="p">(</span><span class="n">gene</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39; A helper to parse the gmt unweighted</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="k">return</span> <span class="n">gene</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="gmt_read_iter"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_read_iter">[docs]</a><span class="k">def</span> <span class="nf">gmt_read_iter</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">parse_gene_weight</span><span class="p">):</span>
+  <span class="k">with</span> <span class="n">_ensure_fp</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fh</span><span class="p">):</span>
+      <span class="k">try</span><span class="p">:</span>
+        <span class="n">term1</span><span class="p">,</span> <span class="n">term2</span><span class="p">,</span> <span class="n">genes_str</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+      <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Ignoring line </span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1"> because it seems empty&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
+        <span class="k">continue</span>
+      <span class="n">term</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="p">(</span><span class="n">term1</span><span class="p">,</span> <span class="n">term2</span><span class="p">))))</span>
+      <span class="n">geneset</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">k</span><span class="p">:</span> <span class="n">v</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">parse_gene</span><span class="p">,</span> <span class="n">genes_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">k</span>
+      <span class="p">}</span>
+      <span class="k">yield</span> <span class="n">term</span><span class="p">,</span> <span class="n">geneset</span></div>
+
+<div class="viewcode-block" id="gmt_read_dict"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_read_dict">[docs]</a><span class="k">def</span> <span class="nf">gmt_read_dict</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">parse_gene_weight</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Read .gmt files into a dictionary of the form:</span>
 <span class="sd">  {</span>
 <span class="sd">    &#39;term_1\tterm_2&#39;: {</span>
@@ -96,7 +118,7 @@
     <span class="n">gmt</span><span class="p">[</span><span class="n">term</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">geneset</span><span class="p">)</span>
   <span class="k">return</span> <span class="n">gmt</span></div>
 
-<div class="viewcode-block" id="gmt_read_pd"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_read_pd">[docs]</a><span class="k">def</span> <span class="nf">gmt_read_pd</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">_parse_gene</span><span class="p">):</span>
+<div class="viewcode-block" id="gmt_read_pd"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_read_pd">[docs]</a><span class="k">def</span> <span class="nf">gmt_read_pd</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">parse_gene_weight</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Read .gmt files directly into a data frame.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gmt_read_dict</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">parse_gene</span><span class="o">=</span><span class="n">parse_gene</span><span class="p">))</span></div>
@@ -119,18 +141,18 @@
 <span class="sd">    - it should return the serialized gene,weight pair or None if it should be removed</span>
 <span class="sd">  By default, 0/nans are dropped, 1s result in a gene (crisp), and everything else uses gene,weight.</span>
 <span class="sd">  &#39;&#39;&#39;</span>
-  <span class="n">fh</span> <span class="o">=</span> <span class="n">_ensure_fp</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-  <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">geneset</span> <span class="ow">in</span> <span class="n">gmt</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">if</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">term</span><span class="p">:</span> <span class="n">serialized_term</span> <span class="o">=</span> <span class="n">term</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span>
-    <span class="k">else</span><span class="p">:</span> <span class="n">serialized_term</span> <span class="o">=</span> <span class="n">term</span>
-    <span class="n">serialized_geneset</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">(</span>
-      <span class="n">serialize_gene_weight_pair</span><span class="p">(</span><span class="n">gene</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
-      <span class="k">for</span> <span class="n">gene</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">_ensure_weight</span><span class="p">(</span><span class="n">geneset</span><span class="p">)</span>
-    <span class="p">)))</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">serialized_geneset</span><span class="p">:</span>
-      <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Ignoring term </span><span class="si">{}</span><span class="s1"> because its geneset seems empty&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">term</span><span class="p">))</span>
-      <span class="k">continue</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">serialized_term</span><span class="p">,</span> <span class="n">serialized_geneset</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">fh</span><span class="p">)</span></div>
+  <span class="k">with</span> <span class="n">_ensure_fp</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">geneset</span> <span class="ow">in</span> <span class="n">gmt</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="k">if</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">term</span><span class="p">:</span> <span class="n">serialized_term</span> <span class="o">=</span> <span class="n">term</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span>
+      <span class="k">else</span><span class="p">:</span> <span class="n">serialized_term</span> <span class="o">=</span> <span class="n">term</span>
+      <span class="n">serialized_geneset</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">(</span>
+        <span class="n">serialize_gene_weight_pair</span><span class="p">(</span><span class="n">gene</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">gene</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">_ensure_weight</span><span class="p">(</span><span class="n">geneset</span><span class="p">)</span>
+      <span class="p">)))</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">serialized_geneset</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Ignoring term </span><span class="si">{}</span><span class="s1"> because its geneset seems empty&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">term</span><span class="p">))</span>
+        <span class="k">continue</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">serialized_term</span><span class="p">,</span> <span class="n">serialized_geneset</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">fh</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="gmt_write_pd"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.parse.html#maayanlab_bioinformatics.parse.gmt.gmt_write_pd">[docs]</a><span class="k">def</span> <span class="nf">gmt_write_pd</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fh</span><span class="p">,</span> <span class="n">serialize_gene_weight_pair</span><span class="o">=</span><span class="n">_serialize_gene_weight_pair</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Write a pandas dataframe as a gmt, where rows are genes and columns are terms.</span>
@@ -174,8 +196,8 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    &#169; Copyright 2020, Ma&#39;ayanlab.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.0.
     </div>
   </body>
 </html>
