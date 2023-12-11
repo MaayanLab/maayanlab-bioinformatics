@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>maayanlab_bioinformatics.utils.chunked &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=8fc2db88" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=f6245a2f"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=601dbdee" />
+    <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -49,7 +49,9 @@
   <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;install tqdm for progress bar&#39;</span><span class="p">)</span>
   <span class="n">tqdm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">it</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">it</span>
 
-<div class="viewcode-block" id="chunk_slices"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.chunked.chunk_slices">[docs]</a><span class="k">def</span> <span class="nf">chunk_slices</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="chunk_slices">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.chunked.chunk_slices">[docs]</a>
+<span class="k">def</span> <span class="nf">chunk_slices</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">  Return slices to chunk through an ndarray.</span>
 
@@ -96,7 +98,10 @@
       <span class="n">slices</span><span class="p">,</span> <span class="o">=</span> <span class="n">slices</span>
     <span class="k">yield</span> <span class="n">slices</span></div>
 
-<div class="viewcode-block" id="chunk_infer"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.chunked.chunk_infer">[docs]</a><span class="k">def</span> <span class="nf">chunk_infer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="chunk_infer">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.chunked.chunk_infer">[docs]</a>
+<span class="k">def</span> <span class="nf">chunk_infer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Helper function for interpreting the chunks param with respect to a matrix x</span>
 
 <span class="sd">  :param x:      The matrix (ndarray)</span>
@@ -124,7 +129,10 @@
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;chunks should be int or tuple&#39;</span><span class="p">)</span>
   <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="chunk_applymap"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.chunked.chunk_applymap">[docs]</a><span class="k">def</span> <span class="nf">chunk_applymap</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="chunk_applymap">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.utils.html#maayanlab_bioinformatics.utils.chunked.chunk_applymap">[docs]</a>
+<span class="k">def</span> <span class="nf">chunk_applymap</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Apply function to all elements in a matrix in chunks</span>
 
 <span class="sd">  :param func:     The function to apply to each chunk</span>
@@ -143,6 +151,7 @@
   <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">chunk_slices</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="n">chunk_infer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chunks</span><span class="p">),</span> <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">):</span>
     <span class="n">out</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
   <span class="k">return</span> <span class="n">out</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -181,7 +190,7 @@
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

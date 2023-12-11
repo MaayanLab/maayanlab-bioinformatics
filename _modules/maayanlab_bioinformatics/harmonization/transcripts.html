@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>maayanlab_bioinformatics.harmonization.transcripts &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=8fc2db88" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=f6245a2f"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=601dbdee" />
+    <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -40,7 +40,9 @@
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.harmonization.ncbi_genes</span> <span class="kn">import</span> <span class="n">ncbi_genes_lookup</span>
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.utils.merge</span> <span class="kn">import</span> <span class="n">merge</span>
 
-<div class="viewcode-block" id="transcripts_to_genes"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes">[docs]</a><span class="k">def</span> <span class="nf">transcripts_to_genes</span><span class="p">(</span>
+<div class="viewcode-block" id="transcripts_to_genes">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes">[docs]</a>
+<span class="k">def</span> <span class="nf">transcripts_to_genes</span><span class="p">(</span>
   <span class="n">df_expression</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
   <span class="n">df_features</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
   <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;var&#39;</span><span class="p">,</span>
@@ -90,6 +92,7 @@
   <span class="k">else</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
   <span class="k">return</span> <span class="n">df_gene_expression</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -128,7 +131,7 @@
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

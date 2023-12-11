@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>maayanlab_bioinformatics.api.enrichr &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=8fc2db88" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=f6245a2f"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=601dbdee" />
+    <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -38,7 +38,9 @@
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<div class="viewcode-block" id="enrichr_link_from_genes"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.enrichr_link_from_genes">[docs]</a><span class="k">def</span> <span class="nf">enrichr_link_from_genes</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="enrichr_link_from_genes">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.enrichr_link_from_genes">[docs]</a>
+<span class="k">def</span> <span class="nf">enrichr_link_from_genes</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Functional access to Enrichr API</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="k">if</span> <span class="n">sleep</span><span class="p">:</span>
@@ -55,7 +57,10 @@
   <span class="n">result</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
   <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">link</span><span class="o">=</span><span class="n">enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/enrich?dataset=&#39;</span> <span class="o">+</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;shortId&#39;</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="enrichr_get_top_results"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.enrichr_get_top_results">[docs]</a><span class="k">def</span> <span class="nf">enrichr_get_top_results</span><span class="p">(</span><span class="n">userListId</span><span class="p">,</span> <span class="n">bg</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+<div class="viewcode-block" id="enrichr_get_top_results">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.enrichr_get_top_results">[docs]</a>
+<span class="k">def</span> <span class="nf">enrichr_get_top_results</span><span class="p">(</span><span class="n">userListId</span><span class="p">,</span> <span class="n">bg</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">sleep</span><span class="p">:</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
   <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/enrich?userListId=</span><span class="si">{}</span><span class="s1">&amp;backgroundType=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userListId</span><span class="p">,</span> <span class="n">bg</span><span class="p">))</span>
@@ -68,7 +73,10 @@
     <span class="s1">&#39;rank&#39;</span><span class="p">,</span> <span class="s1">&#39;term&#39;</span><span class="p">,</span> <span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="s1">&#39;zscore&#39;</span><span class="p">,</span> <span class="s1">&#39;combinedscore&#39;</span><span class="p">,</span> <span class="s1">&#39;overlapping_genes&#39;</span><span class="p">,</span> <span class="s1">&#39;adjusted_pvalue&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
   <span class="p">])</span></div>
 
-<div class="viewcode-block" id="enrichr_term_genes"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.enrichr_term_genes">[docs]</a><span class="k">def</span> <span class="nf">enrichr_term_genes</span><span class="p">(</span><span class="n">bg</span><span class="p">,</span> <span class="n">terms</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+<div class="viewcode-block" id="enrichr_term_genes">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.enrichr_term_genes">[docs]</a>
+<span class="k">def</span> <span class="nf">enrichr_term_genes</span><span class="p">(</span><span class="n">bg</span><span class="p">,</span> <span class="n">terms</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">sleep</span><span class="p">:</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
   <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/geneSetLibrary?mode=json&amp;libraryName=</span><span class="si">{}</span><span class="s1">&amp;term=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -82,7 +90,10 @@
     <span class="p">))</span>
   <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="EnrichrUserList"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.EnrichrUserList">[docs]</a><span class="k">class</span> <span class="nc">EnrichrUserList</span><span class="p">:</span>
+
+<div class="viewcode-block" id="EnrichrUserList">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.EnrichrUserList">[docs]</a>
+<span class="k">class</span> <span class="nc">EnrichrUserList</span><span class="p">:</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Object oriented access to Enrichr results.</span>
 
 <span class="sd">  Example:</span>
@@ -106,7 +117,9 @@
   <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;EnrichrUserList(..., description=</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="p">)</span><span class="si">}</span><span class="s2">, userListId=</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span><span class="p">)</span><span class="si">}</span><span class="s2">, shortId=</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_shortId</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
   
-<div class="viewcode-block" id="EnrichrUserList.from_url"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.EnrichrUserList.from_url">[docs]</a>  <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="EnrichrUserList.from_url">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.EnrichrUserList.from_url">[docs]</a>
+  <span class="nd">@staticmethod</span>
   <span class="k">def</span> <span class="nf">from_url</span><span class="p">(</span><span class="n">enrichrUrl</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Build object from an existing enrichr share url,</span>
 <span class="sd">    e.g.</span>
@@ -126,6 +139,7 @@
     <span class="n">genes</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;genes&#39;</span><span class="p">]</span>
     <span class="n">description</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">EnrichrUserList</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">shortId</span><span class="o">=</span><span class="n">shortId</span><span class="p">,</span> <span class="n">userListId</span><span class="o">=</span><span class="n">userListId</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="n">enrichr_link</span><span class="p">)</span></div>
+
 
   <span class="nd">@property</span>
   <span class="k">def</span> <span class="nf">genes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -195,6 +209,7 @@
       <span class="p">)</span>
       <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">,</span> <span class="n">zscore</span><span class="p">,</span> <span class="n">combinedscore</span><span class="p">,</span> <span class="n">overlapping_genes</span><span class="p">,</span> <span class="n">adjusted_pvalue</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="n">library</span><span class="p">]</span>
     <span class="p">])</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -233,7 +248,7 @@
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>maayanlab_bioinformatics.harmonization.homologs &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=8fc2db88" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=f6245a2f"></script>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=601dbdee" />
+    <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -38,7 +38,9 @@
 
 <span class="kn">from</span> <span class="nn">maayanlab_bioinformatics.utils.fetch_save_read</span> <span class="kn">import</span> <span class="n">fetch_save_read</span>
 
-<div class="viewcode-block" id="mouse_human_homologs"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.homologs.mouse_human_homologs">[docs]</a><span class="k">def</span> <span class="nf">mouse_human_homologs</span><span class="p">(</span><span class="n">uppercase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="mouse_human_homologs">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.homologs.mouse_human_homologs">[docs]</a>
+<span class="k">def</span> <span class="nf">mouse_human_homologs</span><span class="p">(</span><span class="n">uppercase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Returns a dataframe with mouse/human gene mappings based on MGI.</span>
 <span class="sd">  See: http://www.informatics.jax.org/homology.shtml</span>
 <span class="sd">  </span>
@@ -67,7 +69,10 @@
     <span class="n">mouse_human_sequence_simplified</span><span class="p">[</span><span class="s1">&#39;human&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mouse_human_sequence_simplified</span><span class="p">[</span><span class="s1">&#39;human&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
   <span class="k">return</span> <span class="n">mouse_human_sequence_simplified</span></div>
 
-<div class="viewcode-block" id="human_expression_to_mouse"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.homologs.human_expression_to_mouse">[docs]</a><span class="k">def</span> <span class="nf">human_expression_to_mouse</span><span class="p">(</span><span class="n">human_expression</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">uppercase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="human_expression_to_mouse">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.homologs.human_expression_to_mouse">[docs]</a>
+<span class="k">def</span> <span class="nf">human_expression_to_mouse</span><span class="p">(</span><span class="n">human_expression</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">uppercase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Given a human expression matrix, produce a mouse-compatible expression matrix by mapping</span>
 <span class="sd">  homologs.</span>
 
@@ -84,7 +89,10 @@
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
   <span class="k">return</span> <span class="n">mouse_expression</span></div>
 
-<div class="viewcode-block" id="mouse_expression_to_human"><a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.homologs.mouse_expression_to_human">[docs]</a><span class="k">def</span> <span class="nf">mouse_expression_to_human</span><span class="p">(</span><span class="n">mouse_expression</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">uppercase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="mouse_expression_to_human">
+<a class="viewcode-back" href="../../../maayanlab_bioinformatics.harmonization.html#maayanlab_bioinformatics.harmonization.homologs.mouse_expression_to_human">[docs]</a>
+<span class="k">def</span> <span class="nf">mouse_expression_to_human</span><span class="p">(</span><span class="n">mouse_expression</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">uppercase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Given a mouse expression matrix, produce a human-compatible expression matrix by mapping</span>
 <span class="sd">  homologs.</span>
 <span class="sd">  </span>
@@ -100,6 +108,7 @@
   <span class="k">else</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
   <span class="k">return</span> <span class="n">human_expression</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -138,7 +147,7 @@
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>
