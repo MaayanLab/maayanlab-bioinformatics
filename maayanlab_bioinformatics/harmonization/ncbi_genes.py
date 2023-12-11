@@ -1,6 +1,6 @@
 import pandas as pd
 from functools import lru_cache
-from maayanlab_bioinformatics.utils import fetch_save_read, merge
+from maayanlab_bioinformatics.utils import fetch_save_read
 
 @lru_cache()
 def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncbi['type_of_gene']=='protein-coding'):
@@ -55,7 +55,7 @@ def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncb
   print(ncbi_lookup('STAT3')) # any alias will get converted into the official symbol
   ```
   '''
-  ncbi_genes = ncbi_genes_fetch(organism=organism)
+  ncbi_genes = ncbi_genes_fetch(organism=organism, filters=filters)
   synonyms, symbols = zip(*{
     (synonym, gene_info['Symbol'])
     for _, gene_info in ncbi_genes.iterrows()
