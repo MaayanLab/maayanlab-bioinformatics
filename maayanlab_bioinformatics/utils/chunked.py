@@ -5,13 +5,8 @@ avoid excessive disk random access.
 import numpy as np
 import itertools as it
 import logging
+from maayanlab_bioinformatics.utils.maybe_tqdm import maybe_tqdm
 logger = logging.getLogger(__name__)
-
-try:
-  from tqdm import tqdm
-except ImportError:
-  logger.warning('install tqdm for progress bar')
-  tqdm = lambda it, **kwargs: it
 
 def chunk_slices(shape, chunks, progress=False):
   '''
@@ -30,8 +25,7 @@ def chunk_slices(shape, chunks, progress=False):
   I = np.eye(10)
   [I[i, j] for i, j in chunk_slices(I.shape, 3)]
   '''
-  if not progress:
-    tqdm = lambda it, **kwargs: it
+  tqdm = maybe_tqdm if progress else lambda it, **kwargs: it
   # ensure shape is a tuple (we'll flatten it when we're done if not)
   if type(shape) == int:
     shape = (shape,)
