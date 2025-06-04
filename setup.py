@@ -15,6 +15,7 @@ setup(
     'limma_voom': ["rpy2==3.3.6"],
     'progress': ["tqdm"],
     'enrichr_user_list': ['bs4', 'lxml'],
+    'deseq2': ["pydeseq2==0.4.12"]
   },
   packages=find_packages(),
   include_package_data=True,

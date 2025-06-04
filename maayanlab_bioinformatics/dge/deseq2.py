@@ -2,6 +2,7 @@ import os
 import contextlib
 import pandas as pd
 from pydeseq2.dds import DeseqDataSet
+from pydeseq2.default_inference import DefaultInference
 from pydeseq2.ds import DeseqStats
 
 class _DevNull:
@@ -38,9 +39,9 @@ def deseq2_differential_expression(
         condition_labels = ['C'] * controls_mat.shape[1] + ['RS'] * cases_mat.shape[1]
         sample_names = controls_mat.columns.tolist() + cases_mat.columns.tolist()
         metadata = pd.DataFrame({'Sample': sample_names, 'Condition': condition_labels}).set_index("Sample")
-        dds = DeseqDataSet(counts=exp.T, clinical=metadata, design_factors="Condition")
+        dds = DeseqDataSet(counts=exp.T.astype(int), metadata=metadata, design_factors="Condition")
         dds.deseq2()
-        stat_res = DeseqStats(dds, n_cpus=n_cpus, contrast = ('Condition', 'RS', 'C'))
+        stat_res = DeseqStats(dds, contrast = ('Condition', 'RS', 'C'), inference=DefaultInference(n_cpus=n_cpus))
         stat_res.summary()
         if sorted:
             stat_res.results_df = stat_res.results_df.sort_values("pvalue")
