@@ -10,12 +10,15 @@ This library contains many functions and methods I use again and again in differ
 - single-cell sparse matrix parsing
 - transcript to gene conversions
 - ...
-- various dge including chdir, lima_voom, etc..
+- various dge including chdir, lima_voom, deseq2, etc..
 
 ## Installation
 ```
-pip install git+https://github.com/Maayanlab/maayanlab-bioinformatics.git
+# minimal
+pip install "maayanlab_bioinformatics@git+https://github.com/Maayanlab/maayanlab-bioinformatics.git"
 
-# [OPTIONAL] for some functionality like limma_voom & filter_by_expr
-R -e "source('setup.R')"
+# complete
+pip install "maayanlab_bioinformatics[all]@git+https://github.com/Maayanlab/maayanlab-bioinformatics.git"
+# [OPTIONAL] for some R functionality like limma_voom & filter_by_expr
+python -m maayanlab_bioinformatics.setup.R
 ```

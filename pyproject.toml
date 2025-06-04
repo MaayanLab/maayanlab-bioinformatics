@@ -1,0 +1,30 @@
+[project]
+name = "maayanlab-bioinformatics"
+version = "0.8.0"
+description = "A collection of useful functions for bioinformatics data analysis."
+authors = [
+    {name = "Daniel J. B. Clarke",email = "danieljbclarkemssm@gmail.com"}
+]
+license = {text = "Apache-2.0"}
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy (<2)",
+    "pandas (<2)",
+    "qnorm",
+    "requests",
+    "scikit-learn",
+    "scipy"
+]
+
+[project.optional-dependencies]
+h5py = ["h5py"]
+limma_voom = ["rpy2"]
+progress = ["tqdm"]
+enrichr_user_list = ["bs4", "lxml"]
+deseq2 = ["pydeseq2"]
+all = ["h5py", "rpy2", "tqdm", "bs4", "lxml", "pydeseq2"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
