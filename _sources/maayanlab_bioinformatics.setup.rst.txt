@@ -1,0 +1,21 @@
+maayanlab\_bioinformatics.setup package
+=======================================
+
+Submodules
+----------
+
+maayanlab\_bioinformatics.setup.R module
+----------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.setup.R
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: maayanlab_bioinformatics.setup
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -15,6 +15,7 @@ Subpackages
    maayanlab_bioinformatics.normalization
    maayanlab_bioinformatics.parse
    maayanlab_bioinformatics.plotting
+   maayanlab_bioinformatics.setup
    maayanlab_bioinformatics.utils
 
 Module contents

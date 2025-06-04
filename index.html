@@ -58,14 +58,17 @@
 <li><p>single-cell sparse matrix parsing</p></li>
 <li><p>transcript to gene conversions</p></li>
 <li><p>…</p></li>
-<li><p>various dge including chdir, lima_voom, etc..</p></li>
+<li><p>various dge including chdir, lima_voom, deseq2, etc..</p></li>
 </ul>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Maayanlab</span><span class="o">/</span><span class="n">maayanlab</span><span class="o">-</span><span class="n">bioinformatics</span><span class="o">.</span><span class="n">git</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># minimal</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;maayanlab_bioinformatics@git+https://github.com/Maayanlab/maayanlab-bioinformatics.git&quot;</span>
 
-<span class="c1"># [OPTIONAL] for some functionality like limma_voom &amp; filter_by_expr</span>
-<span class="n">R</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;source(&#39;setup.R&#39;)&quot;</span>
+<span class="c1"># complete</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;maayanlab_bioinformatics[all]@git+https://github.com/Maayanlab/maayanlab-bioinformatics.git&quot;</span>
+<span class="c1"># [OPTIONAL] for some R functionality like limma_voom &amp; filter_by_expr</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">maayanlab_bioinformatics</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">R</span>
 </pre></div>
 </div>
 </section>
