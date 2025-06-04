@@ -24,6 +24,7 @@ progress = ["tqdm"]
 enrichr_user_list = ["bs4", "lxml"]
 deseq2 = ["pydeseq2"]
 all = ["h5py", "rpy2", "tqdm", "bs4", "lxml", "pydeseq2"]
+docs = ["recommonmark","sphinx","m2r2"]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

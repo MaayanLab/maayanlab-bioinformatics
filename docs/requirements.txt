@@ -1,3 +1,0 @@
-recommonmark
-sphinx
-m2r2
