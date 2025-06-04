@@ -1,6 +1,6 @@
 [project]
 name = "maayanlab-bioinformatics"
-version = "0.8.0"
+version = "0.9.0"
 description = "A collection of useful functions for bioinformatics data analysis."
 authors = [
     {name = "Daniel J. B. Clarke",email = "danieljbclarkemssm@gmail.com"}
