@@ -15,10 +15,10 @@ This library contains many functions and methods I use again and again in differ
 ## Installation
 ```
 # minimal
-pip install "maayanlab_bioinformatics@git+https://github.com/Maayanlab/maayanlab-bioinformatics.git"
+pip install "maayanlab-bioinformatics@git+https://github.com/Maayanlab/maayanlab-bioinformatics.git"
 
 # complete
-pip install "maayanlab_bioinformatics[all]@git+https://github.com/Maayanlab/maayanlab-bioinformatics.git"
+pip install "maayanlab-bioinformatics[all]@git+https://github.com/Maayanlab/maayanlab-bioinformatics.git"
 # [OPTIONAL] for some R functionality like limma_voom & filter_by_expr
 python -m maayanlab_bioinformatics.setup.R
 ```
