@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>maayanlab_bioinformatics.dge package &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=0f882399" />
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -63,30 +63,8 @@ with the highest absolute characteristic direction coefficients and split them i
 </dd></dl>
 
 </section>
-<section id="module-maayanlab_bioinformatics.dge.deseq2">
-<span id="maayanlab-bioinformatics-dge-deseq2-module"></span><h2>maayanlab_bioinformatics.dge.deseq2 module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.deseq2" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.dge.deseq2.deseq2_differential_expression">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.dge.deseq2.</span></span><span class="sig-name descname"><span class="pre">deseq2_differential_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">controls_mat:</span> <span class="pre">~pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases_mat:</span> <span class="pre">~pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cpus=4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_na=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sorted=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout=&lt;maayanlab_bioinformatics.dge.deseq2._DevNull</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/deseq2.html#deseq2_differential_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.deseq2.deseq2_differential_expression" title="Link to this definition">¶</a></dt>
-<dd><p>Use pydeseq2 for differential expression.</p>
-<p>Note that this function expects the original raw gene counts.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>controls_mat</strong> – (pd.DataFrame) the control samples (samples as columns and genes as rows)</p></li>
-<li><p><strong>cases_mat</strong> – (pd.DataFrame) the case samples (samples as columns and genes as rows)</p></li>
-<li><p><strong>n_cpus</strong> – (int) number of CPUs used (default: number of cpus)</p></li>
-<li><p><strong>remove_na</strong> – (bool) remove genes with NAN values (default: True)</p></li>
-<li><p><strong>sorted</strong> – (bool) sort genes from most significant to least significant (default: True)</p></li>
-<li><p><strong>stdout</strong> – (writeable stream) direct deseq’s output, e.g. sys.stdout (default: suppress)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A data frame with the results</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="maayanlab-bioinformatics-dge-deseq2-module">
+<h2>maayanlab_bioinformatics.dge.deseq2 module<a class="headerlink" href="#maayanlab-bioinformatics-dge-deseq2-module" title="Link to this heading">¶</a></h2>
 </section>
 <section id="module-maayanlab_bioinformatics.dge.limma_voom">
 <span id="maayanlab-bioinformatics-dge-limma-voom-module"></span><h2>maayanlab_bioinformatics.dge.limma_voom module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.limma_voom" title="Link to this heading">¶</a></h2>
@@ -156,54 +134,14 @@ biojupies version: voom_design=False, filter_genes=True</p>
 </dd></dl>
 
 </section>
-<section id="module-maayanlab_bioinformatics.dge.logfc">
-<span id="maayanlab-bioinformatics-dge-logfc-module"></span><h2>maayanlab_bioinformatics.dge.logfc module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.logfc" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.dge.logfc.logfc_differential_expression">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.dge.logfc.</span></span><span class="sig-name descname"><span class="pre">logfc_differential_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">controls_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/logfc.html#logfc_differential_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.logfc.logfc_differential_expression" title="Link to this definition">¶</a></dt>
-<dd><p>NOT RECOMMENDED. Given two separate dataframes (controls, cases) with a shared index (genes),
-we compute the logFC differential expression for all genes, also the average expression.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>controls_mat</strong> – (pd.DataFrame) the control samples (samples as columns and genes as rows)</p></li>
-<li><p><strong>cases_mat</strong> – (pd.DataFrame) the case samples (samples as columns and genes as rows)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A data frame with the results</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="maayanlab-bioinformatics-dge-logfc-module">
+<h2>maayanlab_bioinformatics.dge.logfc module<a class="headerlink" href="#maayanlab-bioinformatics-dge-logfc-module" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.dge.ttest">
-<span id="maayanlab-bioinformatics-dge-ttest-module"></span><h2>maayanlab_bioinformatics.dge.ttest module<a class="headerlink" href="#module-maayanlab_bioinformatics.dge.ttest" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.dge.ttest.ttest_differential_expression">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.dge.ttest.</span></span><span class="sig-name descname"><span class="pre">ttest_differential_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">controls_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equal_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'two-sided'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log2norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/dge/ttest.html#ttest_differential_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.dge.ttest.ttest_differential_expression" title="Link to this definition">¶</a></dt>
-<dd><p>Given two separate dataframes (controls, cases) with a shared index (genes),
-we compute the ttest differential expression for all genes. Benjamini-Hochberg Adjusted p-value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>controls_mat</strong> – (pd.DataFrame) the control samples (samples as columns and genes as rows)</p></li>
-<li><p><strong>cases_mat</strong> – (pd.DataFrame) the case samples (samples as columns and genes as rows)</p></li>
-<li><p><strong>equal_var</strong> – (bool) Should t-test assume equal variance (default: False)</p></li>
-<li><p><strong>alternative</strong> – (str) Alternative hypothesis (see scipy.stats.ttest_ind) (default: two-sided)</p></li>
-<li><p><strong>log2norm</strong> – (bool) Apply log2norm, typically keep with raw counts but disable if you have normalized data (default: True)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A data frame with the results</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="maayanlab-bioinformatics-dge-ttest-module">
+<h2>maayanlab_bioinformatics.dge.ttest module<a class="headerlink" href="#maayanlab-bioinformatics-dge-ttest-module" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.dge">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maayanlab_bioinformatics.dge" title="Link to this heading">¶</a></h2>
-<p>This module contains functions for differential expression analysis</p>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -212,7 +150,7 @@ we compute the ttest differential expression for all genes. Benjamini-Hochberg A
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -224,10 +162,7 @@ we compute the ttest differential expression for all genes. Benjamini-Hochberg A
 <li><a class="reference internal" href="#maayanlab_bioinformatics.dge.characteristic_direction.up_down_from_characteristic_direction"><code class="docutils literal notranslate"><span class="pre">up_down_from_characteristic_direction()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.deseq2">maayanlab_bioinformatics.dge.deseq2 module</a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.dge.deseq2.deseq2_differential_expression"><code class="docutils literal notranslate"><span class="pre">deseq2_differential_expression()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#maayanlab-bioinformatics-dge-deseq2-module">maayanlab_bioinformatics.dge.deseq2 module</a></li>
 <li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.limma_voom">maayanlab_bioinformatics.dge.limma_voom module</a><ul>
 <li><a class="reference internal" href="#maayanlab_bioinformatics.dge.limma_voom.limma_voom_differential_expression"><code class="docutils literal notranslate"><span class="pre">limma_voom_differential_expression()</span></code></a></li>
 <li><a class="reference internal" href="#maayanlab_bioinformatics.dge.limma_voom.limma_voom_differential_expression_design"><code class="docutils literal notranslate"><span class="pre">limma_voom_differential_expression_design()</span></code></a></li>
@@ -235,15 +170,9 @@ we compute the ttest differential expression for all genes. Benjamini-Hochberg A
 <li><a class="reference internal" href="#maayanlab_bioinformatics.dge.limma_voom.up_down_from_limma_voom"><code class="docutils literal notranslate"><span class="pre">up_down_from_limma_voom()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.logfc">maayanlab_bioinformatics.dge.logfc module</a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.dge.logfc.logfc_differential_expression"><code class="docutils literal notranslate"><span class="pre">logfc_differential_expression()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge.ttest">maayanlab_bioinformatics.dge.ttest module</a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.dge.ttest.ttest_differential_expression"><code class="docutils literal notranslate"><span class="pre">ttest_differential_expression()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.dge">Module contents</a></li>
+<li><a class="reference internal" href="#maayanlab-bioinformatics-dge-logfc-module">maayanlab_bioinformatics.dge.logfc module</a></li>
+<li><a class="reference internal" href="#maayanlab-bioinformatics-dge-ttest-module">maayanlab_bioinformatics.dge.ttest module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -256,7 +185,7 @@ we compute the ttest differential expression for all genes. Benjamini-Hochberg A
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -264,13 +193,13 @@ we compute the ttest differential expression for all genes. Benjamini-Hochberg A
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -285,7 +214,7 @@ we compute the ttest differential expression for all genes. Benjamini-Hochberg A
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>

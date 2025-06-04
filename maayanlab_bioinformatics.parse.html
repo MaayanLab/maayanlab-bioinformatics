@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>maayanlab_bioinformatics.parse package &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=0f882399" />
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -38,86 +38,14 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.parse.gmt">
-<span id="maayanlab-bioinformatics-parse-gmt-module"></span><h2>maayanlab_bioinformatics.parse.gmt module<a class="headerlink" href="#module-maayanlab_bioinformatics.parse.gmt" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.parse.gmt.gmt_read_dict">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.parse.gmt.</span></span><span class="sig-name descname"><span class="pre">gmt_read_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_gene=&lt;function</span> <span class="pre">parse_gene_weight&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#gmt_read_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_dict" title="Link to this definition">¶</a></dt>
-<dd><p>Read .gmt files into a dictionary of the form:
-{
-‘term_1     term_2’: {
-gene_1: weight or 1,
-…
-},
-…
-}</p>
-<p>If your genes are encoded in a weird way you can also provide your own <code class="docutils literal notranslate"><span class="pre">parse_gene</span></code> function,
-the current one supports just gene names or gene names with weights separated by non-word/numeric characters.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.parse.gmt.gmt_read_iter">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.parse.gmt.</span></span><span class="sig-name descname"><span class="pre">gmt_read_iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_gene=&lt;function</span> <span class="pre">parse_gene_weight&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#gmt_read_iter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_iter" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.parse.gmt.gmt_read_pd">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.parse.gmt.</span></span><span class="sig-name descname"><span class="pre">gmt_read_pd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_gene=&lt;function</span> <span class="pre">parse_gene_weight&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#gmt_read_pd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_pd" title="Link to this definition">¶</a></dt>
-<dd><p>Read .gmt files directly into a data frame.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.parse.gmt.gmt_write_dict">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.parse.gmt.</span></span><span class="sig-name descname"><span class="pre">gmt_write_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serialize_gene_weight_pair=&lt;function</span> <span class="pre">_serialize_gene_weight_pair&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#gmt_write_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_write_dict" title="Link to this definition">¶</a></dt>
-<dd><p>Opposite of gmt_read_dict, write a dictionary to a file pointer
-serialize_gene_weight_pair can be used to customize serialization when dealing with weights.</p>
-<ul class="simple">
-<li><p>it should return the serialized gene,weight pair or None if it should be removed</p></li>
-</ul>
-<p>By default, 0/nans are dropped, 1s result in a gene (crisp), and everything else uses gene,weight.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.parse.gmt.gmt_write_pd">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.parse.gmt.</span></span><span class="sig-name descname"><span class="pre">gmt_write_pd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serialize_gene_weight_pair=&lt;function</span> <span class="pre">_serialize_gene_weight_pair&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#gmt_write_pd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.gmt_write_pd" title="Link to this definition">¶</a></dt>
-<dd><p>Write a pandas dataframe as a gmt, where rows are genes and columns are terms.
-See gmt_write_dict for more information.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.parse.gmt.parse_gene_unweighted">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.parse.gmt.</span></span><span class="sig-name descname"><span class="pre">parse_gene_unweighted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gene</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#parse_gene_unweighted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.parse_gene_unweighted" title="Link to this definition">¶</a></dt>
-<dd><p>A helper to parse the gmt unweighted</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.parse.gmt.parse_gene_weight">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.parse.gmt.</span></span><span class="sig-name descname"><span class="pre">parse_gene_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gene</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/gmt.html#parse_gene_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.gmt.parse_gene_weight" title="Link to this definition">¶</a></dt>
-<dd><p>A helper to parse the gmt potentially with numeric weights</p>
-</dd></dl>
-
+<section id="maayanlab-bioinformatics-parse-gmt-module">
+<h2>maayanlab_bioinformatics.parse.gmt module<a class="headerlink" href="#maayanlab-bioinformatics-parse-gmt-module" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.parse.suerat">
-<span id="maayanlab-bioinformatics-parse-suerat-module"></span><h2>maayanlab_bioinformatics.parse.suerat module<a class="headerlink" href="#module-maayanlab_bioinformatics.parse.suerat" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.parse.suerat.suerat_load">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.parse.suerat.</span></span><span class="sig-name descname"><span class="pre">suerat_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/suerat.html#suerat_load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.suerat.suerat_load" title="Link to this definition">¶</a></dt>
-<dd><p>Files prepared for suerat are quite common, this function will load them
-given the directory that contains <code class="docutils literal notranslate"><span class="pre">barcodes.tsv.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">features.tsv.gz</span></code>, and <code class="docutils literal notranslate"><span class="pre">matrix.tsv.gz</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.parse.suerat.suerat_load_multiple">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.parse.suerat.</span></span><span class="sig-name descname"><span class="pre">suerat_load_multiple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_dirs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/parse/suerat.html#suerat_load_multiple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.parse.suerat.suerat_load_multiple" title="Link to this definition">¶</a></dt>
-<dd><p>Sets of suerat directories that are meant to be analyzed together are quite common,
-providing all those directories to this function (much like load_suerat_files) will load
-each individually and return a merged version that captures the filename in the barcodes.</p>
-</dd></dl>
-
+<section id="maayanlab-bioinformatics-parse-suerat-module">
+<h2>maayanlab_bioinformatics.parse.suerat module<a class="headerlink" href="#maayanlab-bioinformatics-parse-suerat-module" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.parse">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maayanlab_bioinformatics.parse" title="Link to this heading">¶</a></h2>
-<p>This module contains functions relating to file parsing into easier to ready-to-go formats.</p>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -126,29 +54,16 @@ each individually and return a merged version that captures the filename in the 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">maayanlab_bioinformatics.parse package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.parse.gmt">maayanlab_bioinformatics.parse.gmt module</a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_dict"><code class="docutils literal notranslate"><span class="pre">gmt_read_dict()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_iter"><code class="docutils literal notranslate"><span class="pre">gmt_read_iter()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.parse.gmt.gmt_read_pd"><code class="docutils literal notranslate"><span class="pre">gmt_read_pd()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.parse.gmt.gmt_write_dict"><code class="docutils literal notranslate"><span class="pre">gmt_write_dict()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.parse.gmt.gmt_write_pd"><code class="docutils literal notranslate"><span class="pre">gmt_write_pd()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.parse.gmt.parse_gene_unweighted"><code class="docutils literal notranslate"><span class="pre">parse_gene_unweighted()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.parse.gmt.parse_gene_weight"><code class="docutils literal notranslate"><span class="pre">parse_gene_weight()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.parse.suerat">maayanlab_bioinformatics.parse.suerat module</a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.parse.suerat.suerat_load"><code class="docutils literal notranslate"><span class="pre">suerat_load()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.parse.suerat.suerat_load_multiple"><code class="docutils literal notranslate"><span class="pre">suerat_load_multiple()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.parse">Module contents</a></li>
+<li><a class="reference internal" href="#maayanlab-bioinformatics-parse-gmt-module">maayanlab_bioinformatics.parse.gmt module</a></li>
+<li><a class="reference internal" href="#maayanlab-bioinformatics-parse-suerat-module">maayanlab_bioinformatics.parse.suerat module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -161,7 +76,7 @@ each individually and return a merged version that captures the filename in the 
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -169,13 +84,13 @@ each individually and return a merged version that captures the filename in the 
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -190,7 +105,7 @@ each individually and return a merged version that captures the filename in the 
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>

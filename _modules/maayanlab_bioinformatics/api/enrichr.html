@@ -5,15 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>maayanlab_bioinformatics.api.enrichr &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=0f882399" />
     <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
-    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,13 +34,13 @@
           <div class="body" role="main">
             
   <h1>Source code for maayanlab_bioinformatics.api.enrichr</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <div class="viewcode-block" id="enrichr_link_from_genes">
 <a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.enrichr_link_from_genes">[docs]</a>
-<span class="k">def</span> <span class="nf">enrichr_link_from_genes</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">enrichr_link_from_genes</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Functional access to Enrichr API</span>
 <span class="sd">  &#39;&#39;&#39;</span>
   <span class="k">if</span> <span class="n">sleep</span><span class="p">:</span>
@@ -60,7 +60,7 @@
 
 <div class="viewcode-block" id="enrichr_get_top_results">
 <a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.enrichr_get_top_results">[docs]</a>
-<span class="k">def</span> <span class="nf">enrichr_get_top_results</span><span class="p">(</span><span class="n">userListId</span><span class="p">,</span> <span class="n">bg</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">enrichr_get_top_results</span><span class="p">(</span><span class="n">userListId</span><span class="p">,</span> <span class="n">bg</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">sleep</span><span class="p">:</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
   <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/enrich?userListId=</span><span class="si">{}</span><span class="s1">&amp;backgroundType=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userListId</span><span class="p">,</span> <span class="n">bg</span><span class="p">))</span>
@@ -76,7 +76,7 @@
 
 <div class="viewcode-block" id="enrichr_term_genes">
 <a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.enrichr_term_genes">[docs]</a>
-<span class="k">def</span> <span class="nf">enrichr_term_genes</span><span class="p">(</span><span class="n">bg</span><span class="p">,</span> <span class="n">terms</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">enrichr_term_genes</span><span class="p">(</span><span class="n">bg</span><span class="p">,</span> <span class="n">terms</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">sleep</span><span class="p">:</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
   <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/geneSetLibrary?mode=json&amp;libraryName=</span><span class="si">{}</span><span class="s1">&amp;term=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -93,7 +93,7 @@
 
 <div class="viewcode-block" id="EnrichrUserList">
 <a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.EnrichrUserList">[docs]</a>
-<span class="k">class</span> <span class="nc">EnrichrUserList</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EnrichrUserList</span><span class="p">:</span>
 <span class="w">  </span><span class="sd">&#39;&#39;&#39; Object oriented access to Enrichr results.</span>
 
 <span class="sd">  Example:</span>
@@ -106,7 +106,7 @@
 <span class="sd">  mylist[&#39;GO_Biological_Process_2021&#39;] # returns dataframe with enrichment results</span>
 <span class="sd">  ```</span>
 <span class="sd">  &#39;&#39;&#39;</span>
-  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">genes</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">shortId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">userListId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">genes</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">shortId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">userListId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enrichr_link</span><span class="o">=</span><span class="s1">&#39;https://maayanlab.cloud/Enrichr&#39;</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_enrichr_link</span> <span class="o">=</span> <span class="n">enrichr_link</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_genes</span> <span class="o">=</span> <span class="n">genes</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span>
@@ -114,20 +114,20 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span> <span class="o">=</span> <span class="n">userListId</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="o">=</span> <span class="p">{}</span>
 
-  <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;EnrichrUserList(..., description=</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="p">)</span><span class="si">}</span><span class="s2">, userListId=</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span><span class="p">)</span><span class="si">}</span><span class="s2">, shortId=</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_shortId</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
   
 <div class="viewcode-block" id="EnrichrUserList.from_url">
 <a class="viewcode-back" href="../../../maayanlab_bioinformatics.api.html#maayanlab_bioinformatics.api.enrichr.EnrichrUserList.from_url">[docs]</a>
   <span class="nd">@staticmethod</span>
-  <span class="k">def</span> <span class="nf">from_url</span><span class="p">(</span><span class="n">enrichrUrl</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">from_url</span><span class="p">(</span><span class="n">enrichrUrl</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Build object from an existing enrichr share url,</span>
 <span class="sd">    e.g.</span>
 <span class="sd">    userlist = EnrichrUserList.from_url(&#39;https://maayanlab.cloud/Enrichr/enrich?dataset=285c88882ac50767f2a452c1e93632fd&#39;)</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="kn">import</span> <span class="nn">requests</span>
-    <span class="kn">import</span> <span class="nn">urllib.parse</span>
-    <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.parse</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
     <span class="n">enrichrUrl_parsed</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">enrichrUrl</span><span class="p">)</span>
     <span class="n">enrichr_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">enrichrUrl_parsed</span><span class="o">.</span><span class="n">scheme</span><span class="si">}</span><span class="s2">://</span><span class="si">{</span><span class="n">enrichrUrl_parsed</span><span class="o">.</span><span class="n">netloc</span><span class="si">}{</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">enrichrUrl_parsed</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">shortId</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">parse_qsl</span><span class="p">(</span><span class="n">enrichrUrl_parsed</span><span class="o">.</span><span class="n">query</span><span class="p">))[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span>
@@ -142,32 +142,32 @@
 
 
   <span class="nd">@property</span>
-  <span class="k">def</span> <span class="nf">genes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">genes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_genes</span>
 
   <span class="nd">@property</span>
-  <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span>
 
   <span class="nd">@property</span>
-  <span class="k">def</span> <span class="nf">link</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">link</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/enrich?dataset=&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">shortId</span>
 
   <span class="nd">@property</span>
-  <span class="k">def</span> <span class="nf">shortId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">shortId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shortId</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addList</span><span class="p">()</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shortId</span>
 
   <span class="nd">@property</span>
-  <span class="k">def</span> <span class="nf">userListId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">userListId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addList</span><span class="p">()</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span>
   
-  <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">library</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enrich</span><span class="p">(</span><span class="n">library</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">[</span><span class="n">library</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-  <span class="k">def</span> <span class="nf">_addList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">_addList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/addList&#39;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="p">{</span>
       <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genes</span><span class="p">)),</span>
       <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">),</span>
@@ -184,7 +184,7 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">_userListId</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;userListId&#39;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_shortId</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;shortId&#39;</span><span class="p">]</span>
   
-  <span class="k">def</span> <span class="nf">_enrich</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">_enrich</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">):</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_enrichr_link</span> <span class="o">+</span> <span class="s1">&#39;/enrich&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
       <span class="s1">&#39;userListId&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">userListId</span><span class="p">,</span>
       <span class="s1">&#39;backgroundType&#39;</span><span class="p">:</span> <span class="n">library</span><span class="p">,</span>
@@ -216,9 +216,9 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
@@ -226,13 +226,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -248,7 +248,7 @@
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>

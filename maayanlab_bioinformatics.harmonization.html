@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>maayanlab_bioinformatics.harmonization package &#8212; Ma&#39;ayanlab Bioinformatics 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=0f882399" />
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -38,149 +38,20 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.harmonization.homologs">
-<span id="maayanlab-bioinformatics-harmonization-homologs-module"></span><h2>maayanlab_bioinformatics.harmonization.homologs module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.homologs" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.homologs.human_expression_to_mouse">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.homologs.</span></span><span class="sig-name descname"><span class="pre">human_expression_to_mouse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">human_expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uppercase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/homologs.html#human_expression_to_mouse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.homologs.human_expression_to_mouse" title="Link to this definition">¶</a></dt>
-<dd><p>Given a human expression matrix, produce a mouse-compatible expression matrix by mapping
-homologs.</p>
-<p>&#64;param human_expression: pd.DataFrame(columns=samples, index=human_genes, values=counts)
-&#64;param strategy: ‘sum’ – the strategy to use when aggregating duplicates
-&#64;returns pd.DataFrame(columns=samples, index=mouse_genes, values=counts)</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.homologs.mouse_expression_to_human">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.homologs.</span></span><span class="sig-name descname"><span class="pre">mouse_expression_to_human</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mouse_expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uppercase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/homologs.html#mouse_expression_to_human"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.homologs.mouse_expression_to_human" title="Link to this definition">¶</a></dt>
-<dd><p>Given a mouse expression matrix, produce a human-compatible expression matrix by mapping
-homologs.</p>
-<p>&#64;param mouse_expression: pd.DataFrame(columns=samples, index=mouse_genes, values=counts)
-&#64;param strategy: ‘sum’ – the strategy to use when aggregating duplicates
-&#64;returns pd.DataFrame(columns=samples, index=human_genes, values=counts)</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.homologs.mouse_human_homologs">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.homologs.</span></span><span class="sig-name descname"><span class="pre">mouse_human_homologs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uppercase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/homologs.html#mouse_human_homologs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.homologs.mouse_human_homologs" title="Link to this definition">¶</a></dt>
-<dd><p>Returns a dataframe with mouse/human gene mappings based on MGI.
-See: <a class="reference external" href="http://www.informatics.jax.org/homology.shtml">http://www.informatics.jax.org/homology.shtml</a></p>
-<p>&#64;param uppercase: bool should mappings be uppercase (i.e. for case insensitive mapping)
-&#64;returns pd.DataFrame</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span><span class="n">mouse</span><span class="o">|</span><span class="n">human</span><span class="o">|</span>
-<span class="o">|-----|-----|</span>
-<span class="o">|</span><span class="n">sp140</span><span class="o">|</span><span class="n">SP140</span><span class="o">|</span>
-</pre></div>
-</div>
-</dd></dl>
-
+<section id="maayanlab-bioinformatics-harmonization-homologs-module">
+<h2>maayanlab_bioinformatics.harmonization.homologs module<a class="headerlink" href="#maayanlab-bioinformatics-harmonization-homologs-module" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.harmonization.id_mapper">
-<span id="maayanlab-bioinformatics-harmonization-id-mapper-module"></span><h2>maayanlab_bioinformatics.harmonization.id_mapper module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.id_mapper" title="Link to this heading">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.id_mapper.</span></span><span class="sig-name descname"><span class="pre">IDMapper</span></span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Stores id mappings and makes it easy to use many of them in tandem.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapper</span> <span class="o">=</span> <span class="n">IDMapper</span><span class="p">()</span>
-
-<span class="n">mapper</span><span class="o">.</span><span class="n">update</span><span class="p">({</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">}</span> <span class="p">},</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;source_1&#39;</span><span class="p">)</span>
-<span class="n">mapper</span><span class="o">.</span><span class="n">update</span><span class="p">({</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">}</span> <span class="p">},</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;source_2&#39;</span><span class="p">)</span>
-<span class="n">mapper</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;source_2&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span>
-
-<span class="n">Because</span> <span class="n">of</span> <span class="n">the</span> <span class="n">overlap</span> <span class="ow">in</span> <span class="n">synonyms</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">inferred</span> <span class="n">that</span> <span class="n">source_1</span><span class="s1">&#39;s &#39;</span><span class="n">a</span><span class="s1">&#39; and source_2&#39;</span><span class="n">s</span> <span class="s1">&#39;b&#39;</span> <span class="n">correspond</span> <span class="n">to</span> <span class="n">the</span> <span class="n">same</span>
-  <span class="nb">id</span><span class="p">,</span> <span class="n">we</span> <span class="n">can</span> <span class="n">get</span> <span class="n">using</span> <span class="nb">any</span> <span class="n">of</span> <span class="n">the</span> <span class="n">synyonyms</span> <span class="n">to</span> <span class="n">retreive</span> <span class="n">the</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">given</span> <span class="n">namespace</span><span class="o">.</span>
-<span class="n">Since</span> <span class="n">this</span> <span class="n">can</span> <span class="n">be</span> <span class="n">problematic</span> <span class="n">when</span> <span class="n">synonyms</span> <span class="n">are</span> <span class="n">malformed</span><span class="p">,</span> <span class="n">mapper</span><span class="o">.</span><span class="n">conflicts_summary</span><span class="p">()</span> <span class="ow">and</span> <span class="n">mapper</span><span class="o">.</span><span class="n">conflicts_counts</span><span class="p">()</span>
-  <span class="n">provide</span> <span class="n">ways</span> <span class="n">of</span> <span class="n">debugging</span> <span class="n">excess</span> <span class="n">synonym</span> <span class="n">applications</span><span class="o">.</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.conflicts_summary">
-<span class="sig-name descname"><span class="pre">conflicts_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.conflicts_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.conflicts_summary" title="Link to this definition">¶</a></dt>
-<dd><p>Return counts of conflicts in each namespace</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.find">
-<span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">term</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.find" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get_id">
-<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get_id" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.summary">
-<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.summary" title="Link to this definition">¶</a></dt>
-<dd><p>Return counts of overlapping namespaces (like a venn diagram)</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.top_conflicts">
-<span class="sig-name descname"><span class="pre">top_conflicts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.top_conflicts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.top_conflicts" title="Link to this definition">¶</a></dt>
-<dd><p>Return conflicting synonym counts</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mappings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/id_mapper.html#IDMapper.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.update" title="Link to this definition">¶</a></dt>
-<dd><p>Add mappings of the form:
-{ identifier: { synonyms } }</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="maayanlab-bioinformatics-harmonization-id-mapper-module">
+<h2>maayanlab_bioinformatics.harmonization.id_mapper module<a class="headerlink" href="#maayanlab-bioinformatics-harmonization-id-mapper-module" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.harmonization.ncbi_genes">
-<span id="maayanlab-bioinformatics-harmonization-ncbi-genes-module"></span><h2>maayanlab_bioinformatics.harmonization.ncbi_genes module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.ncbi_genes" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.ncbi_genes.</span></span><span class="sig-name descname"><span class="pre">ncbi_genes_fetch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">organism='Mammalia/Homo_sapiens'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/ncbi_genes.html#ncbi_genes_fetch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch" title="Link to this definition">¶</a></dt>
-<dd><p>Fetch the current NCBI Human Gene Info database.
-See <a class="reference external" href="ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/">ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/</a> for the directory/file of the organism of interest.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_lookup">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.ncbi_genes.</span></span><span class="sig-name descname"><span class="pre">ncbi_genes_lookup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">organism='Mammalia/Homo_sapiens'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/ncbi_genes.html#ncbi_genes_lookup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_lookup" title="Link to this definition">¶</a></dt>
-<dd><p>Return a lookup dictionary with synonyms as the keys, and official symbols as the values
-Usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ncbi_lookup</span> <span class="o">=</span> <span class="n">ncbi_genes_lookup</span><span class="p">(</span><span class="s1">&#39;Mammalia/Homo_sapiens&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ncbi_lookup</span><span class="p">(</span><span class="s1">&#39;STAT3&#39;</span><span class="p">))</span> <span class="c1"># any alias will get converted into the official symbol</span>
-</pre></div>
-</div>
-</dd></dl>
-
+<section id="maayanlab-bioinformatics-harmonization-ncbi-genes-module">
+<h2>maayanlab_bioinformatics.harmonization.ncbi_genes module<a class="headerlink" href="#maayanlab-bioinformatics-harmonization-ncbi-genes-module" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.harmonization.transcripts">
-<span id="maayanlab-bioinformatics-harmonization-transcripts-module"></span><h2>maayanlab_bioinformatics.harmonization.transcripts module<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization.transcripts" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes">
-<span class="sig-prename descclassname"><span class="pre">maayanlab_bioinformatics.harmonization.transcripts.</span></span><span class="sig-name descname"><span class="pre">transcripts_to_genes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_expression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'var'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uppercasegenes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookup_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">organism</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Mammalia/Homo_sapiens'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maayanlab_bioinformatics/harmonization/transcripts.html#transcripts_to_genes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes" title="Link to this definition">¶</a></dt>
-<dd><p>Map gene alternative ids/transcripts to gene symbols using <code class="docutils literal notranslate"><span class="pre">ncbi_genes_lookup</span></code>
-We take a matrix with genes/transcripts on the rows and samples on the columns.
-In the case of multiple gene/transcript to symbol mappings, we adopt the collision strategy specified.
-If df_features is provided, we will use ‘symbol’ column as the transcript names,
-otherwise we will use the df_expression index column.
-The resulting matrix will naturally have fewer samples, corresponding to gene symbols in the
-<code class="docutils literal notranslate"><span class="pre">lookup_dict</span></code> which defaults to official ncbi_gene symbols for homo sapiens.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>strategy</strong> – (‘var’|’sum’) collision strategy (select one with highest variance, or sum counts)</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="maayanlab-bioinformatics-harmonization-transcripts-module">
+<h2>maayanlab_bioinformatics.harmonization.transcripts module<a class="headerlink" href="#maayanlab-bioinformatics-harmonization-transcripts-module" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-maayanlab_bioinformatics.harmonization">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maayanlab_bioinformatics.harmonization" title="Link to this heading">¶</a></h2>
-<p>This module contains functions relating to data harmonization.</p>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -189,42 +60,18 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">maayanlab_bioinformatics.harmonization package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.harmonization.homologs">maayanlab_bioinformatics.harmonization.homologs module</a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.homologs.human_expression_to_mouse"><code class="docutils literal notranslate"><span class="pre">human_expression_to_mouse()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.homologs.mouse_expression_to_human"><code class="docutils literal notranslate"><span class="pre">mouse_expression_to_human()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.homologs.mouse_human_homologs"><code class="docutils literal notranslate"><span class="pre">mouse_human_homologs()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.harmonization.id_mapper">maayanlab_bioinformatics.harmonization.id_mapper module</a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper"><code class="docutils literal notranslate"><span class="pre">IDMapper</span></code></a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.conflicts_summary"><code class="docutils literal notranslate"><span class="pre">IDMapper.conflicts_summary()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.find"><code class="docutils literal notranslate"><span class="pre">IDMapper.find()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get"><code class="docutils literal notranslate"><span class="pre">IDMapper.get()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.get_id"><code class="docutils literal notranslate"><span class="pre">IDMapper.get_id()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.summary"><code class="docutils literal notranslate"><span class="pre">IDMapper.summary()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.top_conflicts"><code class="docutils literal notranslate"><span class="pre">IDMapper.top_conflicts()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.id_mapper.IDMapper.update"><code class="docutils literal notranslate"><span class="pre">IDMapper.update()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.harmonization.ncbi_genes">maayanlab_bioinformatics.harmonization.ncbi_genes module</a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_fetch"><code class="docutils literal notranslate"><span class="pre">ncbi_genes_fetch()</span></code></a></li>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.ncbi_genes.ncbi_genes_lookup"><code class="docutils literal notranslate"><span class="pre">ncbi_genes_lookup()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.harmonization.transcripts">maayanlab_bioinformatics.harmonization.transcripts module</a><ul>
-<li><a class="reference internal" href="#maayanlab_bioinformatics.harmonization.transcripts.transcripts_to_genes"><code class="docutils literal notranslate"><span class="pre">transcripts_to_genes()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-maayanlab_bioinformatics.harmonization">Module contents</a></li>
+<li><a class="reference internal" href="#maayanlab-bioinformatics-harmonization-homologs-module">maayanlab_bioinformatics.harmonization.homologs module</a></li>
+<li><a class="reference internal" href="#maayanlab-bioinformatics-harmonization-id-mapper-module">maayanlab_bioinformatics.harmonization.id_mapper module</a></li>
+<li><a class="reference internal" href="#maayanlab-bioinformatics-harmonization-ncbi-genes-module">maayanlab_bioinformatics.harmonization.ncbi_genes module</a></li>
+<li><a class="reference internal" href="#maayanlab-bioinformatics-harmonization-transcripts-module">maayanlab_bioinformatics.harmonization.transcripts module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -237,7 +84,7 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -245,13 +92,13 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -266,7 +113,7 @@ The resulting matrix will naturally have fewer samples, corresponding to gene sy
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2020, Ma&#39;ayanlab.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>

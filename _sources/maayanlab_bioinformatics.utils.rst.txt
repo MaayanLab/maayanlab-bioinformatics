@@ -28,6 +28,14 @@ maayanlab\_bioinformatics.utils.fetch\_save\_read module
    :undoc-members:
    :show-inheritance:
 
+maayanlab\_bioinformatics.utils.maybe\_tqdm module
+--------------------------------------------------
+
+.. automodule:: maayanlab_bioinformatics.utils.maybe_tqdm
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 maayanlab\_bioinformatics.utils.merge module
 --------------------------------------------
 
