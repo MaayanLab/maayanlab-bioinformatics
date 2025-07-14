@@ -3,7 +3,7 @@ from functools import lru_cache
 from maayanlab_bioinformatics.utils import fetch_save_read
 
 @lru_cache()
-def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncbi['type_of_gene']=='protein-coding'):
+def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncbi['type_of_gene']=='protein-coding', cache_dir=''):
   ''' Fetch the current NCBI Human Gene Info database.
   See ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/ for the directory/file of the organism of interest.
   '''
@@ -28,6 +28,7 @@ def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncbi
     'ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/{}.gene_info.gz'.format(organism),
     '{}.gene_info.tsv'.format(organism),
     sep='\t',
+    cache_dir=cache_dir,
   )
   if filters and callable(filters):
     ncbi = ncbi[filters(ncbi)]
@@ -47,7 +48,7 @@ def ncbi_genes_fetch(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncbi
   return ncbi
 
 @lru_cache()
-def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncbi['type_of_gene']=='protein-coding'):
+def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncbi['type_of_gene']=='protein-coding', cache_dir=''):
   ''' Return a lookup dictionary with synonyms as the keys, and official symbols as the values
   Usage:
   ```python
@@ -55,7 +56,7 @@ def ncbi_genes_lookup(organism='Mammalia/Homo_sapiens', filters=lambda ncbi: ncb
   print(ncbi_lookup('STAT3')) # any alias will get converted into the official symbol
   ```
   '''
-  ncbi_genes = ncbi_genes_fetch(organism=organism, filters=filters)
+  ncbi_genes = ncbi_genes_fetch(organism=organism, filters=filters, cache_dir=cache_dir)
   synonyms, symbols = zip(*{
     (synonym, gene_info['Symbol'])
     for _, gene_info in ncbi_genes.iterrows()
