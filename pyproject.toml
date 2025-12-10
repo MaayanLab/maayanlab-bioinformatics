@@ -9,8 +9,10 @@ license = {text = "Apache-2.0"}
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
-    "numpy (<2)",
-    "pandas (<2)",
+    "numpy (<2) ; python_version <= '3.11'",
+    "pandas (<2) ; python_version <= '3.11'",
+    "numpy (>=2) ; python_version > '3.11'",
+    "pandas (>=2) ; python_version > '3.11'",
     "qnorm",
     "requests",
     "scikit-learn",
@@ -19,12 +21,16 @@ dependencies = [
 
 [project.optional-dependencies]
 h5py = ["h5py"]
-limma_voom = ["rpy2"]
+limma_voom = ["rpy2 (>=3.6.4,<4.0.0)"]
 progress = ["tqdm"]
 enrichr_user_list = ["bs4", "lxml"]
 deseq2 = ["pydeseq2"]
-all = ["h5py", "rpy2", "tqdm", "bs4", "lxml", "pydeseq2"]
+all = ["h5py", "rpy2 (>=3.6.4,<4.0.0)", "tqdm", "bs4", "lxml", "pydeseq2"]
 docs = ["recommonmark","sphinx","m2r2"]
+dev = [
+    "pytest (<9) ; python_version < '3.10'",
+    "pytest (>=9.0.2,<10.0.0) ; python_version >= '3.10'"
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
