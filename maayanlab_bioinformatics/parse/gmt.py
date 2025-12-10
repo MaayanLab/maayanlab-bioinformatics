@@ -141,7 +141,7 @@ class GMT:
   gene_lists: list[list[str]]
 
   @staticmethod
-  def reader(gmtfile: io.TextIOBase | str | pathlib.Path) -> typing.Iterator[tuple[tuple[str, str], list[str]]]:
+  def reader(gmtfile: typing.Union[io.TextIOBase, str, pathlib.Path]) -> typing.Iterator[tuple[tuple[str, str], list[str]]]:
     ''' read the .gmt format, a tab separated file with variable columns
     '''
     gene_expr = re.compile(r'^([^:;,]+?)([:;,].+)?$')
@@ -184,7 +184,7 @@ class GMT:
     return GMT(list(background), terms, gene_lists)
 
   @staticmethod
-  def from_file(gmtfile: io.TextIOBase | str | pathlib.Path):
+  def from_file(gmtfile: typing.Union[io.TextIOBase, str, pathlib.Path]):
     ''' initialze a GMT from a file
     '''
     return GMT.from_iter(GMT.reader(gmtfile))
