@@ -48,7 +48,7 @@ def sp_hdf_load(hdf):
   )
 
 def sp_std(X_ij, ddof=1):
-  ''' Standard deviation for a matrix compatible with sparse matrices.
+  r''' Standard deviation for a matrix compatible with sparse matrices.
   i is the row index, j is the column index.
 
   \sigma_j = \sqrt{\frac{\sum(x_ij - \mu_j)^2}{N_j - ddof}}}
