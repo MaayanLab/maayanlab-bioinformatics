@@ -3,33 +3,54 @@ name = "maayanlab-bioinformatics"
 version = "0.9.4"
 description = "A collection of useful functions for bioinformatics data analysis."
 authors = [
-    {name = "Daniel J. B. Clarke",email = "danieljbclarkemssm@gmail.com"}
+    {name = "Daniel J. B. Clarke", email = "danieljbclarkemssm@gmail.com"}
 ]
 license = {text = "Apache-2.0"}
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
 dependencies = [
+    "numba>=0.60.0",
     "numpy",
     "pandas",
     "qnorm",
     "requests",
     "scikit-learn",
-    "scipy"
+    "scipy",
 ]
 
 [project.optional-dependencies]
 h5py = ["h5py"]
-limma_voom = ["rpy2 (>=3.6.4,<4.0.0)"]
+limma_voom = ["rpy2>=3.6.4,<4.0.0"]
 progress = ["tqdm"]
 enrichr_user_list = ["bs4", "lxml"]
 deseq2 = ["pydeseq2"]
-all = ["h5py", "rpy2 (>=3.6.4,<4.0.0)", "tqdm", "bs4", "lxml", "pydeseq2"]
-docs = ["recommonmark","sphinx","m2r2"]
-dev = [
-    "pytest (<9) ; python_version < '3.10'",
-    "pytest (>=9.0.2,<10.0.0) ; python_version >= '3.10'"
-]
+all = ["h5py", "rpy2>=3.6.4,<4.0.0", "tqdm", "bs4", "lxml", "pydeseq2"]
+docs = ["recommonmark", "sphinx", "m2r2"]
+dev = ["pytest>=9.0.2,<10.0.0"]
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [
+    "maayanlab_bioinformatics",
+    "maayanlab_bioinformatics.api",
+    "maayanlab_bioinformatics.clustering",
+    "maayanlab_bioinformatics.dge",
+    "maayanlab_bioinformatics.enrichment",
+    "maayanlab_bioinformatics.harmonization",
+    "maayanlab_bioinformatics.normalization",
+    "maayanlab_bioinformatics.parse",
+    "maayanlab_bioinformatics.plotting",
+    "maayanlab_bioinformatics.setup",
+    "maayanlab_bioinformatics.utils",
+]
