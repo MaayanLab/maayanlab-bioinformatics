@@ -10,4 +10,10 @@ This library contains many functions and methods I use again and again in differ
 - utils: fetch_save_read, merge, ...
 '''
 
-from maayanlab_bioinformatics import api, clustering, dge, harmonization, normalization, parse, utils
+# Lazy loading submodules to defer optional dependency imports (https://peps.python.org/pep-0810/)
+import lazy_loader as lazy
+
+__getattr__, __dir__, __all__ = lazy.attach(
+    __name__,
+    submodules=['api', 'clustering', 'dge', 'harmonization', 'normalization', 'parse', 'plotting', 'setup', 'utils'],
+)

@@ -17,6 +17,7 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
+    "lazy_loader",
     "numba>=0.60.0",
     "numpy",
     "pandas",

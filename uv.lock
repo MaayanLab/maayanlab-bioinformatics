@@ -902,6 +902,18 @@ wheels = [
 ]
 
 [[package]]
+name = "lazy-loader"
+version = "0.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6f/6b/c875b30a1ba490860c93da4cabf479e03f584eba06fe5963f6f6644653d8/lazy_loader-0.4.tar.gz", hash = "sha256:47c75182589b91a4e1a85a136c074285a5ad4d9f39c63e0d7fb76391c4574cd1", size = 15431, upload-time = "2024-04-05T13:03:12.261Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/83/60/d497a310bde3f01cb805196ac61b7ad6dc5dcf8dce66634dc34364b20b4f/lazy_loader-0.4-py3-none-any.whl", hash = "sha256:342aa8e14d543a154047afb4ba8ef17f5563baad3fc610d7b15b213b0f119efc", size = 12097, upload-time = "2024-04-05T13:03:10.514Z" },
+]
+
+[[package]]
 name = "legacy-api-wrap"
 version = "1.5"
 source = { registry = "https://pypi.org/simple" }
@@ -1081,6 +1093,7 @@ name = "maayanlab-bioinformatics"
 version = "0.9.4"
 source = { editable = "." }
 dependencies = [
+    { name = "lazy-loader" },
     { name = "numba" },
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
@@ -1138,6 +1151,7 @@ requires-dist = [
     { name = "bs4", marker = "extra == 'enrichr-user-list'" },
     { name = "h5py", marker = "extra == 'all'" },
     { name = "h5py", marker = "extra == 'h5py'" },
+    { name = "lazy-loader" },
     { name = "lxml", marker = "extra == 'all'" },
     { name = "lxml", marker = "extra == 'enrichr-user-list'" },
     { name = "m2r2", marker = "extra == 'docs'" },
