@@ -2,8 +2,6 @@ import logging
 import numpy as np
 import pandas as pd
 from functools import singledispatch
-from scipy.stats import zscore
-
 
 @singledispatch
 def zscore_normalize(mat, ddof=0):
@@ -15,6 +13,7 @@ def zscore_normalize(mat, ddof=0):
 
 @zscore_normalize.register
 def zscore_normalize_np(mat: np.ndarray, ddof=0):
+  from scipy.stats import zscore
   return zscore(mat, axis=0, ddof=ddof)
 
 @zscore_normalize.register

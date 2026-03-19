@@ -1,12 +1,12 @@
 import os
 import pandas as pd
-import scipy.sparse as sp_sparse
 from maayanlab_bioinformatics.utils import merge
 
 def suerat_load(base_dir):
   ''' Files prepared for suerat are quite common, this function will load them
   given the directory that contains `barcodes.tsv.gz`, `features.tsv.gz`, and `matrix.tsv.gz`.
   '''
+  import scipy.sparse as sp_sparse
   df_barcodes = pd.read_csv(
     os.path.join(base_dir, 'barcodes.tsv.gz'),
     index_col=0,

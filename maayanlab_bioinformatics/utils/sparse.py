@@ -1,5 +1,5 @@
 import numpy as np
-import scipy.sparse as sp_sparse
+import pandas as pd
 
 def sp_hdf_dump(hdf, sdf, **kwargs):
   ''' Dump Sparse Pandas DataFrame to h5py object.
@@ -40,7 +40,7 @@ def sp_hdf_load(hdf):
   f.close()
   ```
   '''
-  import pandas as pd
+  import scipy.sparse as sp_sparse
   return pd.DataFrame.sparse.from_spmatrix(
     sp_sparse.coo_array((hdf['data'], (hdf['row'], hdf['col'])), shape=hdf.attrs['shape']),
     index=pd.Series(hdf['index']).str.decode('utf8'),
@@ -53,6 +53,7 @@ def sp_std(X_ij, ddof=1):
 
   \sigma_j = \sqrt{\frac{\sum(x_ij - \mu_j)^2}{N_j - ddof}}}
   '''
+  import scipy.sparse as sp_sparse
   N_j = X_ij.shape[-1]
   mu_j = X_ij.sum(axis=0) / N_j
   num_j = ((X_ij - mu_j)**2).sum(axis=0)
@@ -65,6 +66,7 @@ def sp_std(X_ij, ddof=1):
 def sp_nanpercentile(sp, q, axis=None, method='linear'):
   ''' nanpercentile for a sparse matrix, basically we use np.percentile on the underlying data.
   '''
+  import scipy.sparse as sp_sparse
   coo = sp_sparse.coo_array(sp)
   if axis is None:
     return np.percentile(coo.data, q, method=method)

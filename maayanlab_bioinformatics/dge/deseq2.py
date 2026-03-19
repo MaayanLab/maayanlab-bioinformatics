@@ -1,9 +1,6 @@
 import os
 import contextlib
 import pandas as pd
-from pydeseq2.dds import DeseqDataSet
-from pydeseq2.default_inference import DefaultInference
-from pydeseq2.ds import DeseqStats
 
 class _DevNull:
     def write(self, *args, **kwargs): pass
@@ -29,6 +26,9 @@ def deseq2_differential_expression(
     :param stdout: (writeable stream) direct deseq's output, e.g. sys.stdout (default: suppress)
     :return: A data frame with the results
     '''
+    from pydeseq2.dds import DeseqDataSet
+    from pydeseq2.default_inference import DefaultInference
+    from pydeseq2.ds import DeseqStats
     # Check if controls_mat and cases_mat have the same number of rows
     if controls_mat.shape[0] != cases_mat.shape[0]:
         raise ValueError("controls_mat and cases_mat must have the same number of rows.")

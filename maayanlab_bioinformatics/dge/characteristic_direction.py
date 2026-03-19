@@ -1,8 +1,5 @@
 import numpy as np
 import pandas as pd
-from scipy.stats import chi2
-from scipy.stats.mstats import zscore
-from sklearn.decomposition import PCA
 
 # TODO: revamp _chdir
 def _chdir(data, sampleclass, genes, gamma=1., sort=True, calculate_sig=False, nnull=10, sig_only=False, norm_vector=True):
@@ -25,6 +22,9 @@ def _chdir(data, sampleclass, genes, gamma=1., sort=True, calculate_sig=False, n
     A list of tuples sorted by the absolute value in descending order characteristic directions of genes.
       If calculate_sig is set to True, each tuple contains a third element which is the ratio of characteristic directions to null ChDir
   """
+  from scipy.stats import chi2
+  from scipy.stats.mstats import zscore
+  from sklearn.decomposition import PCA
   
   ## check input
   data.astype(float)

@@ -1,5 +1,4 @@
 import pandas as pd
-import scipy.stats
 from maayanlab_bioinformatics.normalization import log2_normalize
 
 def ttest_differential_expression(controls_mat: pd.DataFrame, cases_mat: pd.DataFrame, equal_var=False, alternative='two-sided', log2norm=True):
@@ -13,6 +12,7 @@ def ttest_differential_expression(controls_mat: pd.DataFrame, cases_mat: pd.Data
   :param log2norm: (bool) Apply log2norm, typically keep with raw counts but disable if you have normalized data (default: True)
   :return: A data frame with the results
   '''
+  import scipy.stats
   assert (controls_mat.index == cases_mat.index).all(), 'Index between controls and cases must be the same'
   if log2norm:
     cases_mat = log2_normalize(cases_mat)

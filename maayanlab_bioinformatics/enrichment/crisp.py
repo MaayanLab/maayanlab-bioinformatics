@@ -1,5 +1,4 @@
 # import fisher
-import scipy.stats
 from typing import Union, Dict, Set, Iterable, Tuple, Hashable, Any, TypeVar, Optional
 from dataclasses import dataclass
 
@@ -68,6 +67,7 @@ def fisher_overlap(
   ''' Given input and background set, compute the overlap, fisher significance, and odds ratio.
   In the case of no overlap, will return None.
   '''
+  import scipy.stats
   overlap = input_signature & background_signature
   n_overlap = len(overlap)
   n_input_signature = len(input_signature)

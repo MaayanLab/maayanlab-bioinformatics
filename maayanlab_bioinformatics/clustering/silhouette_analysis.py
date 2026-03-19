@@ -1,12 +1,12 @@
 import pandas as pd
-from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
 
 def silhouette_analysis(mat: pd.DataFrame, min_clusters=2, max_clusters=25, metric='cosine', random_state=None, **kwargs):
   ''' Compute KMeans repeatedly on the matrix with different cluster
   values between min_clusters and max_clusters, compute the silhouette_score,
   and return the best kmeans model/predictions.
   '''
+  from sklearn.cluster import KMeans
+  from sklearn.metrics import silhouette_score
   silhouette_scores = {}
   best = None
   for n in range(min_clusters, max_clusters+1):
